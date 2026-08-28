@@ -1,0 +1,21 @@
+# Operating system files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Editor settings
+.vscode/
+.idea/
+*.swp
+*~
+
+# Local logs and tooling
+*.log
+.netlify/
+
+# Future local configuration and build output
+.env
+.env.*
+!.env.example
+node_modules/
+dist/
