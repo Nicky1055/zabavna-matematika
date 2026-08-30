@@ -196,6 +196,185 @@ button, input, select { font: inherit; }
 }
 
 .hero__content { max-width: 1150px; margin: 0 auto; }
+.access-bar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, auto);
+  gap: 14px;
+  align-items: stretch;
+  margin-bottom: 26px;
+}
+.access-role-nav {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 9px;
+}
+.access-role-button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 68px;
+  padding: 10px 12px;
+  border: 2px solid rgba(255, 255, 255, .56);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, .16);
+  color: #fff;
+  text-align: left;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+}
+.access-role-button > span:first-child { flex: 0 0 auto; font-size: 1.45rem; }
+.access-role-button strong, .access-role-button small { display: block; }
+.access-role-button strong { font-size: .98rem; }
+.access-role-button small { margin-top: 2px; color: rgba(255, 255, 255, .86); font-size: .78rem; font-weight: 750; }
+.access-role-button:hover, .access-role-button:focus-visible {
+  border-color: #fff;
+  outline: none;
+  background: rgba(255, 255, 255, .24);
+}
+.access-role-button.active {
+  border-color: #ffe18b;
+  background: #fff4cf;
+  color: #3b2f86;
+  box-shadow: 0 8px 18px rgba(35, 21, 87, .2);
+}
+.access-role-button.active small { color: #655b98; }
+.access-status {
+  display: grid;
+  align-content: center;
+  gap: 5px;
+  min-width: 220px;
+  padding: 11px 14px;
+  border: 2px solid rgba(255, 255, 255, .62);
+  border-radius: 14px;
+  background: rgba(35, 21, 87, .3);
+  color: #fff;
+  text-align: right;
+  backdrop-filter: blur(8px);
+}
+.access-status-kicker { font-size: .72rem; font-weight: 900; text-transform: uppercase; }
+.access-status > strong { overflow-wrap: anywhere; }
+.access-status-actions {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.access-status-action {
+  min-height: 34px;
+  padding: 5px 9px;
+  border: 1px solid rgba(255, 255, 255, .7);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, .16);
+  color: #fff;
+  font-size: .78rem;
+  font-weight: 850;
+  cursor: pointer;
+}
+.access-status-action:hover, .access-status-action:focus-visible { background: rgba(255, 255, 255, .28); outline: none; }
+body.access-mode-student .student-row, body.access-mode-teacher .student-row { display: none; }
+
+.student-login-dialog {
+  width: min(650px, calc(100% - 24px));
+  max-height: calc(100vh - 28px);
+  padding: 0;
+  border: 0;
+  border-radius: 22px;
+  background: transparent;
+  box-shadow: 0 24px 70px rgba(31, 20, 75, .34);
+  overflow: auto;
+}
+.student-login-dialog::backdrop { background: rgba(31, 20, 75, .58); backdrop-filter: blur(4px); }
+.student-login-dialog.fallback-open { position: fixed; inset: 14px; z-index: 10000; display: block; margin: auto; }
+.student-login-shell { padding: 24px; background: #fff; color: var(--ink); }
+.student-login-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 18px;
+}
+.student-login-head h2 { margin: 4px 0 0; color: #3b2f86; }
+.student-login-kicker { color: #7257ff; font-size: .8rem; font-weight: 950; text-transform: uppercase; }
+.student-login-close {
+  flex: 0 0 auto;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 2px solid #d8d0ff;
+  border-radius: 12px;
+  background: #f4f1ff;
+  color: #3b2f86;
+  font-size: 1.45rem;
+  cursor: pointer;
+}
+.student-login-progress {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 7px;
+  margin: 20px 0;
+}
+.student-login-progress span {
+  padding: 8px;
+  border: 2px solid #e4dfff;
+  border-radius: 10px;
+  background: #faf9ff;
+  color: #655b98;
+  text-align: center;
+  font-size: .82rem;
+  font-weight: 900;
+}
+.student-login-progress span.active { border-color: #7257ff; background: #ece8ff; color: #3b2f86; }
+.student-login-form { display: grid; gap: 9px; }
+.student-login-form label, .student-login-prompt { color: #3b2f86; font-weight: 900; }
+.student-login-form label > span { display: block; color: #655b98; font-size: .9em; }
+.student-login-form input {
+  width: 100%;
+  min-height: 52px;
+  padding: 12px 14px;
+  border: 2px solid rgba(32, 33, 36, .14);
+  border-radius: 14px;
+  background: #fff;
+  outline: none;
+}
+.student-login-form input:focus { border-color: #7257ff; box-shadow: 0 0 0 3px rgba(114, 87, 255, .12); }
+.student-login-class, .student-selected-profile {
+  display: grid;
+  gap: 4px;
+  padding: 12px 14px;
+  border: 2px solid #bdefff;
+  border-radius: 14px;
+  background: #f2fcff;
+}
+.student-login-class span, .student-selected-profile span { color: var(--muted); font-size: .86rem; font-weight: 800; }
+.student-login-prompt { margin: 16px 0 9px; }
+.student-choice-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  max-height: 280px;
+  margin-bottom: 12px;
+  overflow-y: auto;
+}
+.student-choice-button {
+  min-height: 58px;
+  padding: 9px 11px;
+  border: 2px solid #e1dcf7;
+  border-radius: 12px;
+  background: #fff;
+  color: #3b2f86;
+  text-align: left;
+  font-weight: 900;
+  cursor: pointer;
+}
+.student-choice-button:hover, .student-choice-button:focus-visible { border-color: #7257ff; background: #f5f2ff; outline: none; }
+.student-login-pin-row {
+  display: grid;
+  grid-template-columns: 92px 44px;
+  align-items: center;
+  gap: 8px;
+  width: 144px;
+}
+.student-login-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 5px; }
+.student-login-message { min-height: 24px; margin-bottom: 0; }
 .eyebrow { margin: 0 0 10px; text-transform: uppercase; letter-spacing: .12em; font-weight: 800; opacity: .9; }
 h1 { margin: 0; font-size: clamp(2rem, 5vw, 4rem); line-height: 1; }
 .subtitle { font-size: 1.15rem; max-width: 760px; line-height: 1.5; }
@@ -1516,6 +1695,7 @@ fieldset label, .game-card label { display: block; margin: 8px 0; }
   box-shadow: 0 0 0 3px rgba(114, 87, 255, .12);
 }
 .teacher-form .btn { margin-top: 6px; }
+.teacher-form-help { margin-top: -4px; color: #655b98; font-weight: 750; }
 .teacher-dashboard { background: #fff; }
 .teacher-profile-bar {
   display: flex;
@@ -1687,10 +1867,58 @@ fieldset label, .game-card label { display: block; margin: 8px 0; }
   text-align: right !important;
 }
 .teacher-inline-form--student {
-  grid-template-columns: minmax(80px, .6fr) minmax(150px, 1.4fr) minmax(110px, .8fr);
+  grid-template-columns: minmax(80px, .55fr) minmax(180px, 1fr) 136px;
   align-items: start;
 }
 .teacher-field { display: grid; gap: 8px; align-content: start; }
+.teacher-inline-form--student .teacher-field > label { min-height: 2.4em; }
+.teacher-pin-caption {
+  display: block;
+  color: #655b98;
+  font-size: .9em;
+}
+.teacher-pin-input {
+  display: grid;
+  grid-template-columns: 84px 44px;
+  align-items: center;
+  gap: 8px;
+  width: 136px;
+  max-width: 100%;
+  justify-self: end;
+}
+.teacher-pin-input input {
+  min-width: 0;
+  padding-inline: 12px;
+  font-size: 1.1rem;
+  letter-spacing: 0;
+}
+.teacher-pin-reveal {
+  width: 44px;
+  min-width: 44px;
+  height: 44px;
+  min-height: 44px;
+  padding: 0;
+  border: 2px solid #d8d0ff;
+  border-radius: 14px;
+  background: #f4f1ff;
+  color: #3b2f86;
+  font-size: 1.15rem;
+  line-height: 1;
+  cursor: pointer;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.teacher-pin-reveal:hover, .teacher-pin-reveal:focus-visible {
+  border-color: var(--primary);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(114, 87, 255, .12);
+}
+.teacher-pin-reveal[aria-pressed="true"] {
+  background: var(--primary);
+  color: #fff;
+  transform: scale(.96);
+}
 .teacher-inline-form--student .teacher-form-actions { grid-column: 1 / -1; }
 .teacher-table-wrap {
   width: 100%;
@@ -1752,6 +1980,9 @@ fieldset label, .game-card label { display: block; margin: 8px 0; }
 }
 
 @media (max-width: 860px) {
+  .access-bar { grid-template-columns: 1fr; }
+  .access-status { min-width: 0; text-align: left; }
+  .access-status-actions { justify-content: flex-start; }
   .layout { grid-template-columns: 1fr; margin-top: 16px; }
   .side-card { position: static; }
   .tabs { grid-template-columns: repeat(2, 1fr); }
@@ -1761,11 +1992,19 @@ fieldset label, .game-card label { display: block; margin: 8px 0; }
   .balloon-field { grid-template-columns: repeat(3, 1fr); }
   .teacher-auth-panel, .teacher-workspace { grid-template-columns: 1fr; }
   .teacher-class-pane { border-right: 0; border-bottom: 1px solid #e7e2f7; }
+  .teacher-inline-form--student { grid-template-columns: 1fr; }
+  .teacher-inline-form--student .teacher-form-actions { grid-column: auto; }
+  .teacher-inline-form--student .teacher-field > label { min-height: 0; }
+  .teacher-pin-input { justify-self: start; }
   .admin-stat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 520px) {
   .hero { padding: 28px 16px; }
+  .access-role-nav, .student-choice-list { grid-template-columns: 1fr; }
+  .access-role-button { min-height: 58px; }
+  .student-login-shell { padding: 18px; }
+  .student-login-progress span { padding: 7px 3px; font-size: .74rem; }
   .layout { padding: 0 14px; }
   .panel { padding: 16px; border-radius: 20px; }
   .tabs { grid-template-columns: 1fr; }
@@ -1778,8 +2017,6 @@ fieldset label, .game-card label { display: block; margin: 8px 0; }
   .teacher-auth-panel { grid-template-columns: minmax(0, 1fr); }
   .teacher-profile-bar, .teacher-section-head, .online-journal-head, .class-summary { align-items: stretch; flex-direction: column; }
   .teacher-profile-bar .btn, .teacher-section-head .btn, .online-journal-head .btn { width: 100%; }
-  .teacher-inline-form--student { grid-template-columns: 1fr; }
-  .teacher-inline-form--student .teacher-form-actions { grid-column: auto; }
   .admin-stat-grid { grid-template-columns: 1fr; }
   .class-code-box { width: 100%; }
   .class-summary-actions { width: 100%; }

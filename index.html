@@ -4,11 +4,33 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Математически игри за 3. клас</title>
-  <link rel="stylesheet" href="style.css?v=20260830-2" />
+  <link rel="stylesheet" href="style.css?v=20260830-9" />
 </head>
 <body>
   <header class="hero">
     <div class="hero__content">
+      <section class="access-bar" aria-label="Избор на достъп">
+        <nav class="access-role-nav" aria-label="Режим на сайта">
+          <button id="guestAccessBtn" class="access-role-button active" type="button" data-access-role="guest" aria-pressed="true">
+            <span aria-hidden="true">🎮</span>
+            <span><strong>Гост</strong><small>Свободна игра</small></span>
+          </button>
+          <button id="studentAccessBtn" class="access-role-button" type="button" data-access-role="student" aria-pressed="false">
+            <span aria-hidden="true">🎒</span>
+            <span><strong>Вход за ученик</strong><small>С код на класа</small></span>
+          </button>
+          <button id="teacherAccessBtn" class="access-role-button" type="button" data-access-role="teacher" aria-pressed="false">
+            <span aria-hidden="true">👨‍🏫</span>
+            <span><strong>Учителски панел</strong><small>Вход и регистрация</small></span>
+          </button>
+        </nav>
+        <div class="access-status" aria-live="polite">
+          <span class="access-status-kicker">Текущ достъп</span>
+          <strong id="accessStatusText">Режим: Гост</strong>
+          <div id="accessStatusActions" class="access-status-actions"></div>
+        </div>
+      </section>
+
       <p class="eyebrow">Умножение и деление • 3. клас</p>
       <h1>Математически игри след ваканцията</h1>
       <p class="subtitle">Весели математически мисии с точки, похвали и задачи за смели третокласници.</p>
@@ -19,6 +41,62 @@
       </div>
     </div>
   </header>
+
+  <dialog id="studentLoginDialog" class="student-login-dialog" aria-labelledby="student-login-title">
+    <div class="student-login-shell">
+      <div class="student-login-head">
+        <div>
+          <span class="student-login-kicker">Детски профил</span>
+          <h2 id="student-login-title">🎒 Вход за ученик</h2>
+        </div>
+        <button id="closeStudentLoginBtn" class="student-login-close" type="button" aria-label="Затвори">×</button>
+      </div>
+
+      <div class="student-login-progress" aria-label="Стъпки за вход">
+        <span data-student-step-indicator="1" class="active">1. Клас</span>
+        <span data-student-step-indicator="2">2. Ученик</span>
+        <span data-student-step-indicator="3">3. ПИН</span>
+      </div>
+
+      <section id="studentLoginStep1" class="student-login-step">
+        <form id="studentClassCodeForm" class="student-login-form" novalidate>
+          <label for="studentClassCode">Код на класа</label>
+          <input id="studentClassCode" type="text" inputmode="text" autocomplete="off" maxlength="24" placeholder="Напр. MAT-LTQ5YH" required />
+          <button class="btn" type="submit">Намери класа</button>
+        </form>
+      </section>
+
+      <section id="studentLoginStep2" class="student-login-step" hidden>
+        <div class="student-login-class">
+          <strong id="studentLoginClassName">Клас</strong>
+          <span id="studentLoginSchoolName"></span>
+        </div>
+        <p class="student-login-prompt">Избери своето име:</p>
+        <div id="studentLoginChoices" class="student-choice-list"></div>
+        <button id="backToClassCodeBtn" class="btn btn--ghost" type="button">Назад към кода</button>
+      </section>
+
+      <section id="studentLoginStep3" class="student-login-step" hidden>
+        <div class="student-selected-profile">
+          <span>Избран ученик</span>
+          <strong id="selectedStudentLoginName">Ученик</strong>
+        </div>
+        <form id="studentPinLoginForm" class="student-login-form" novalidate>
+          <label for="studentLoginPin">ПИН код <span>(4 цифри)</span></label>
+          <div class="student-login-pin-row">
+            <input id="studentLoginPin" type="password" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{4}" minlength="4" maxlength="4" placeholder="••••" required />
+            <button id="showStudentLoginPinBtn" class="teacher-pin-reveal" type="button" aria-label="Задръж, за да видиш ПИН кода" aria-pressed="false" title="Задръж, за да видиш ПИН кода">👁</button>
+          </div>
+          <div class="student-login-actions">
+            <button class="btn" type="submit">Влез</button>
+            <button id="backToStudentListBtn" class="btn btn--ghost" type="button">Назад</button>
+          </div>
+        </form>
+      </section>
+
+      <p id="studentLoginMessage" class="feedback student-login-message" aria-live="polite"></p>
+    </div>
+  </dialog>
 
   <main class="layout">
     <aside class="side-card">
@@ -283,19 +361,21 @@
                 <label for="teacherLoginEmail">Имейл</label>
                 <input id="teacherLoginEmail" type="email" autocomplete="email" required />
                 <label for="teacherLoginPassword">Парола</label>
-                <input id="teacherLoginPassword" type="password" autocomplete="current-password" minlength="6" required />
+                <input id="teacherLoginPassword" type="password" autocomplete="current-password" minlength="8" required />
+                <small class="teacher-form-help">Минимум 8 знака.</small>
                 <button class="btn" type="submit">Влез</button>
               </form>
 
               <form id="teacherRegisterForm" class="teacher-form" hidden>
-                <label for="teacherRegisterName">Име на учителя</label>
+                <label for="teacherRegisterName">Име и фамилия</label>
                 <input id="teacherRegisterName" type="text" autocomplete="name" required />
-                <label for="teacherRegisterSchool">Училище</label>
-                <input id="teacherRegisterSchool" type="text" autocomplete="organization" required />
+                <label for="teacherRegisterSchool">Училище и населено място</label>
+                <input id="teacherRegisterSchool" type="text" autocomplete="organization" placeholder="Напр. ОУ „Христо Ботев“, Пловдив" required />
                 <label for="teacherRegisterEmail">Имейл</label>
                 <input id="teacherRegisterEmail" type="email" autocomplete="email" required />
                 <label for="teacherRegisterPassword">Парола</label>
-                <input id="teacherRegisterPassword" type="password" autocomplete="new-password" minlength="6" required />
+                <input id="teacherRegisterPassword" type="password" autocomplete="new-password" minlength="8" required />
+                <small class="teacher-form-help">Минимум 8 знака.</small>
                 <button class="btn" type="submit">Създай профил</button>
               </form>
               <p id="teacherAuthMessage" class="feedback" aria-live="polite"></p>
@@ -391,8 +471,11 @@
                       <input id="newStudentName" type="text" placeholder="Напр. Алекс" required />
                     </div>
                     <div class="teacher-field">
-                      <label for="newStudentPin">ПИН код (точно 4 цифри)</label>
-                      <input id="newStudentPin" type="password" inputmode="numeric" pattern="[0-9]{4}" minlength="4" maxlength="4" placeholder="••••" required />
+                      <label for="newStudentPin">ПИН код<span class="teacher-pin-caption">(4 цифри)</span></label>
+                      <div class="teacher-pin-input">
+                        <input id="newStudentPin" type="password" inputmode="numeric" pattern="[0-9]{4}" minlength="4" maxlength="4" placeholder="••••" required />
+                        <button id="showStudentPinBtn" class="teacher-pin-reveal" type="button" aria-label="Задръж, за да видиш ПИН кода" aria-pressed="false" title="Задръж, за да видиш ПИН кода">👁</button>
+                      </div>
                     </div>
                     <div class="teacher-form-actions">
                       <button class="btn" type="submit">Добави</button>
@@ -478,9 +561,10 @@
 
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="supabase-config.js"></script>
-  <script defer src="auth-service.js"></script>
-  <script defer src="db-service.js"></script>
-  <script defer src="app.js?v=20260823-1"></script>
-  <script defer src="teacher-panel.js"></script>
+  <script defer src="auth-service.js?v=20260830-1"></script>
+  <script defer src="db-service.js?v=20260830-1"></script>
+  <script defer src="app.js?v=20260830-1"></script>
+  <script defer src="teacher-panel.js?v=20260830-1"></script>
+  <script defer src="access-control.js?v=20260830-1"></script>
 </body>
 </html>

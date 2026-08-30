@@ -1,4 +1,6 @@
 (() => {
+  const STUDENT_SESSION_KEY = 'mathStudentSession';
+
   function logWarning(message, error) {
     const detail = error && error.message ? ` ${error.message}` : '';
     console.warn(`[dbService] ${message}.${detail}`);
@@ -11,6 +13,22 @@
       skipped: !isConfigured,
       reason: isConfigured ? 'client_unavailable' : 'not_configured',
     };
+  }
+
+  function getStudentSession() {
+    try {
+      const rawSession = window.localStorage.getItem(STUDENT_SESSION_KEY);
+      const session = rawSession ? JSON.parse(rawSession) : null;
+      if (!session || !session.studentId || !session.classId || !session.studentName) return null;
+      return session;
+    } catch (error) {
+      window.localStorage.removeItem(STUDENT_SESSION_KEY);
+      return null;
+    }
+  }
+
+  function normalizeClassCode(value) {
+    return String(value || '').trim().toUpperCase().replace(/\s+/g, '');
   }
 
   async function checkConnection() {
@@ -37,13 +55,16 @@
 
   async function saveGameResult(resultData) {
     try {
+      const studentSession = getStudentSession();
+      if (!studentSession) return { ok: true, skipped: true, reason: 'guest_mode' };
       if (!window.supabaseClient) return unavailableStatus();
 
-      const studentName = (window.localStorage.getItem('mathStudent') || '').trim() || 'Гост';
       const rawTimeSpent = resultData.timeSpentSeconds ?? resultData.time_spent_seconds;
       const parsedTimeSpent = Number(rawTimeSpent);
       const payload = {
-        student_name: studentName,
+        student_id: studentSession.studentId,
+        class_id: studentSession.classId,
+        student_name: studentSession.studentName,
         game_key: String(resultData.gameKey || resultData.game_key || 'unknown'),
         score: Number(resultData.score) || 0,
         total_questions: Number(resultData.totalQuestions ?? resultData.total_questions) || 0,
@@ -102,6 +123,80 @@
 
     const suffix = Array.from(values, value => alphabet[value % alphabet.length]).join('');
     return `MAT-${suffix}`;
+  }
+
+  async function getClassByCode(classCode) {
+    try {
+      if (!window.supabaseClient) return unavailableStatus();
+      const cleanCode = normalizeClassCode(classCode);
+      if (!cleanCode) return { ok: false, reason: 'missing_class_code' };
+
+      const { data, error } = await window.supabaseClient
+        .from('classes')
+        .select('id, class_name, school_name, class_code')
+        .eq('class_code', cleanCode)
+        .maybeSingle();
+
+      if (error) {
+        logWarning('Class code lookup failed', error);
+        return { ok: false, error };
+      }
+      if (!data) return { ok: false, reason: 'class_not_found' };
+      return { ok: true, data };
+    } catch (error) {
+      logWarning('Class code lookup failed', error);
+      return { ok: false, error };
+    }
+  }
+
+  async function getStudentsForLogin(classId) {
+    try {
+      if (!window.supabaseClient) return unavailableStatus();
+      if (!classId) return { ok: false, reason: 'missing_fields' };
+
+      const { data, error } = await window.supabaseClient
+        .from('students')
+        .select('id, class_id, student_number, display_name')
+        .eq('class_id', classId)
+        .order('student_number', { ascending: true });
+
+      if (error) {
+        logWarning('Student login list could not be loaded', error);
+        return { ok: false, error };
+      }
+      return { ok: true, data: data || [] };
+    } catch (error) {
+      logWarning('Student login list could not be loaded', error);
+      return { ok: false, error };
+    }
+  }
+
+  async function verifyStudentPin(studentId, classId, pinCode) {
+    try {
+      if (!window.supabaseClient) return unavailableStatus();
+      const cleanPin = String(pinCode || '').trim();
+      if (!studentId || !classId || !/^\d{4}$/.test(cleanPin)) {
+        return { ok: false, reason: 'invalid_pin' };
+      }
+
+      const { data, error } = await window.supabaseClient
+        .from('students')
+        .select('id, class_id, student_number, display_name')
+        .eq('id', studentId)
+        .eq('class_id', classId)
+        .eq('pin_code', cleanPin)
+        .maybeSingle();
+
+      if (error) {
+        logWarning('Student PIN check failed', error);
+        return { ok: false, error };
+      }
+      if (!data) return { ok: false, reason: 'invalid_pin' };
+      return { ok: true, data };
+    } catch (error) {
+      logWarning('Student PIN check failed', error);
+      return { ok: false, error };
+    }
   }
 
   async function getTeacherClasses() {
@@ -344,6 +439,9 @@
     checkConnection,
     saveGameResult,
     getLocalResults,
+    getClassByCode,
+    getStudentsForLogin,
+    verifyStudentPin,
     getTeacherClasses,
     createClass,
     getStudentsByClass,

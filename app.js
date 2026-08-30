@@ -508,6 +508,22 @@ function resetStudentProgress(message = '') {
 
 function initStudent() {
   $('studentName').value = state.student;
+  window.addEventListener('math:student-access', event => {
+    const detail = event.detail || {};
+    const newStudent = String(detail.name || '').trim();
+    const oldStudent = state.student;
+    const locked = Boolean(detail.locked);
+    state.student = newStudent;
+    storage.setItem('mathStudent', state.student);
+    $('studentName').value = state.student;
+    $('studentName').readOnly = locked;
+    $('saveStudentBtn').hidden = locked;
+
+    if (detail.resetProgress && newStudent !== oldStudent) {
+      const label = newStudent || 'Гост';
+      resetStudentProgress(`${label} започва начисто. Успех! ⭐`);
+    }
+  });
   $('saveStudentBtn').addEventListener('click', () => {
     const newStudent = $('studentName').value.trim();
     const oldStudent = state.student;

@@ -1,5 +1,6 @@
 (() => {
   const PROFILE_FIELDS = 'id, email, full_name, school_name, role, created_at';
+  const MIN_PASSWORD_LENGTH = 8;
 
   function getClient() {
     return window.supabaseClient || null;
@@ -70,14 +71,16 @@
       const cleanEmail = normalizedText(email).toLowerCase();
       const cleanName = normalizedText(fullName);
       const cleanSchool = normalizedText(schoolName);
+      const cleanPassword = String(password || '');
 
-      if (!cleanEmail || !password || !cleanName || !cleanSchool) {
+      if (!cleanEmail || !cleanPassword || !cleanName || !cleanSchool) {
         return { ok: false, reason: 'missing_fields' };
       }
+      if (cleanPassword.length < MIN_PASSWORD_LENGTH) return { ok: false, reason: 'weak_password' };
 
       const { data, error } = await client.auth.signUp({
         email: cleanEmail,
-        password,
+        password: cleanPassword,
         options: {
           data: {
             full_name: cleanName,
@@ -112,10 +115,14 @@
     try {
       const client = getClient();
       if (!client) return { ok: false, reason: 'not_configured' };
+      const cleanEmail = normalizedText(email).toLowerCase();
+      const cleanPassword = String(password || '');
+      if (!cleanEmail || !cleanPassword) return { ok: false, reason: 'missing_fields' };
+      if (cleanPassword.length < MIN_PASSWORD_LENGTH) return { ok: false, reason: 'weak_password' };
 
       const { data, error } = await client.auth.signInWithPassword({
-        email: normalizedText(email).toLowerCase(),
-        password,
+        email: cleanEmail,
+        password: cleanPassword,
       });
 
       if (error) return failed('Teacher login', error);

@@ -43,7 +43,8 @@
     if (result.reason === 'not_configured') return 'Онлайн връзката още не е настроена.';
     if (result.reason === 'no_session') return 'Влезте в учителския си профил.';
     if (result.reason === 'missing_fields') return 'Попълнете всички полета.';
-    if (result.reason === 'invalid_student_data') return 'Попълнете номер в класа, име на ученика и ПИН код от точно 4 цифри.';
+    if (result.reason === 'weak_password') return 'Паролата трябва да съдържа поне 8 знака.';
+    if (result.reason === 'invalid_student_data') return 'Попълнете номер в класа, име на ученика и ПИН код от 4 цифри.';
     if (result.reason === 'forbidden') return 'Нямате достъп до тази информация.';
     if (result.reason === 'not_found') return 'Записът не беше намерен или нямате право да го изтриете.';
 
@@ -84,6 +85,10 @@
     setMessage('teacherAuthMessage', '');
   }
 
+  function announceTeacherAccess(profile) {
+    window.dispatchEvent(new CustomEvent('math:teacher-access', { detail: { profile: profile || null } }));
+  }
+
   function showSignedOut() {
     panelState.profile = null;
     panelState.classes = [];
@@ -92,6 +97,7 @@
     element('teacherDashboard').hidden = true;
     element('adminOverview').hidden = true;
     showAuthMode('login');
+    announceTeacherAccess(null);
   }
 
   function showSignedIn(profile) {
@@ -103,6 +109,7 @@
     element('teacherRoleBadge').textContent = profile.role === 'admin' ? 'Администратор' : 'Учител';
     element('newClassSchool').value = profile.school_name || '';
     element('adminOverview').hidden = profile.role !== 'admin';
+    announceTeacherAccess(profile);
   }
 
   async function refreshAuthState() {
@@ -271,12 +278,18 @@
 
     element('teacherLoginForm').addEventListener('submit', async event => {
       event.preventDefault();
+      const password = element('teacherLoginPassword').value;
+      if (password.length < 8) {
+        setMessage('teacherAuthMessage', 'Паролата трябва да съдържа поне 8 знака.', 'bad');
+        element('teacherLoginPassword').focus();
+        return;
+      }
       const button = event.currentTarget.querySelector('button[type="submit"]');
       setButtonBusy(button, true, 'Влизане...');
       setMessage('teacherAuthMessage', '');
       const result = await window.authService.loginTeacher(
         element('teacherLoginEmail').value,
-        element('teacherLoginPassword').value,
+        password,
       );
       setButtonBusy(button, false);
 
@@ -291,12 +304,18 @@
 
     element('teacherRegisterForm').addEventListener('submit', async event => {
       event.preventDefault();
+      const password = element('teacherRegisterPassword').value;
+      if (password.length < 8) {
+        setMessage('teacherAuthMessage', 'Паролата трябва да съдържа поне 8 знака.', 'bad');
+        element('teacherRegisterPassword').focus();
+        return;
+      }
       const button = event.currentTarget.querySelector('button[type="submit"]');
       setButtonBusy(button, true, 'Създаване...');
       setMessage('teacherAuthMessage', '');
       const result = await window.authService.registerTeacher(
         element('teacherRegisterEmail').value,
-        element('teacherRegisterPassword').value,
+        password,
         element('teacherRegisterName').value,
         element('teacherRegisterSchool').value,
       );
@@ -377,9 +396,41 @@
       setMessage('studentFormMessage', '');
     });
 
-    element('newStudentPin').addEventListener('input', event => {
+    const studentPinInput = element('newStudentPin');
+    const showStudentPinBtn = element('showStudentPinBtn');
+    const showStudentPin = () => {
+      studentPinInput.type = 'text';
+      showStudentPinBtn.setAttribute('aria-pressed', 'true');
+    };
+    const hideStudentPin = () => {
+      studentPinInput.type = 'password';
+      showStudentPinBtn.setAttribute('aria-pressed', 'false');
+    };
+
+    studentPinInput.addEventListener('input', event => {
       event.currentTarget.value = event.currentTarget.value.replace(/\D/g, '').slice(0, 4);
     });
+    showStudentPinBtn.addEventListener('pointerdown', event => {
+      event.preventDefault();
+      event.currentTarget.setPointerCapture?.(event.pointerId);
+      showStudentPin();
+    });
+    showStudentPinBtn.addEventListener('pointerup', hideStudentPin);
+    showStudentPinBtn.addEventListener('pointercancel', hideStudentPin);
+    showStudentPinBtn.addEventListener('lostpointercapture', hideStudentPin);
+    showStudentPinBtn.addEventListener('blur', hideStudentPin);
+    showStudentPinBtn.addEventListener('keydown', event => {
+      if (event.key !== ' ' && event.key !== 'Enter') return;
+      event.preventDefault();
+      showStudentPin();
+    });
+    showStudentPinBtn.addEventListener('keyup', event => {
+      if (event.key === ' ' || event.key === 'Enter') hideStudentPin();
+    });
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) hideStudentPin();
+    });
+    window.addEventListener('blur', hideStudentPin);
 
     element('addStudentForm').addEventListener('submit', async event => {
       event.preventDefault();
@@ -389,7 +440,7 @@
       const pinCode = element('newStudentPin').value.trim();
 
       if (!Number.isInteger(studentNumber) || studentNumber < 1 || !studentName || !/^\d{4}$/.test(pinCode)) {
-        setMessage('studentFormMessage', 'Попълнете номер в класа, име на ученика и ПИН код от точно 4 цифри.', 'bad');
+        setMessage('studentFormMessage', 'Попълнете номер в класа, име на ученика и ПИН код от 4 цифри.', 'bad');
         if (!Number.isInteger(studentNumber) || studentNumber < 1) element('newStudentNumber').focus();
         else if (!studentName) element('newStudentName').focus();
         else element('newStudentPin').focus();
