@@ -83,9 +83,218 @@
     }
   }
 
+  async function getAuthenticatedContext() {
+    if (!window.authService) return { ok: false, reason: 'auth_unavailable' };
+    return window.authService.getCurrentProfile();
+  }
+
+  function generateClassCode() {
+    const alphabet = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    const values = new Uint32Array(6);
+
+    if (window.crypto && typeof window.crypto.getRandomValues === 'function') {
+      window.crypto.getRandomValues(values);
+    } else {
+      for (let index = 0; index < values.length; index++) {
+        values[index] = Math.floor(Math.random() * alphabet.length);
+      }
+    }
+
+    const suffix = Array.from(values, value => alphabet[value % alphabet.length]).join('');
+    return `MAT-${suffix}`;
+  }
+
+  async function getTeacherClasses() {
+    try {
+      if (!window.supabaseClient) return unavailableStatus();
+      const auth = await getAuthenticatedContext();
+      if (!auth.ok) return auth;
+
+      let query = window.supabaseClient
+        .from('classes')
+        .select('id, teacher_id, class_name, school_name, class_code, created_at')
+        .order('created_at', { ascending: false });
+
+      if (auth.profile.role !== 'admin') {
+        query = query.eq('teacher_id', auth.user.id);
+      }
+
+      const { data, error } = await query;
+      if (error) {
+        logWarning('Classes could not be loaded', error);
+        return { ok: false, error };
+      }
+
+      return { ok: true, data: data || [] };
+    } catch (error) {
+      logWarning('Classes could not be loaded', error);
+      return { ok: false, error };
+    }
+  }
+
+  async function createClass(className, schoolName) {
+    try {
+      if (!window.supabaseClient) return unavailableStatus();
+      const auth = await getAuthenticatedContext();
+      if (!auth.ok) return auth;
+
+      const cleanName = String(className || '').trim();
+      const cleanSchool = String(schoolName || auth.profile.school_name || '').trim();
+      if (!cleanName || !cleanSchool) return { ok: false, reason: 'missing_fields' };
+
+      for (let attempt = 0; attempt < 5; attempt++) {
+        const payload = {
+          teacher_id: auth.user.id,
+          class_name: cleanName,
+          school_name: cleanSchool,
+          class_code: generateClassCode(),
+        };
+
+        const { data, error } = await window.supabaseClient
+          .from('classes')
+          .insert(payload)
+          .select('id, teacher_id, class_name, school_name, class_code, created_at')
+          .single();
+
+        if (!error) return { ok: true, data };
+        if (error.code !== '23505') {
+          logWarning('Class could not be created', error);
+          return { ok: false, error };
+        }
+      }
+
+      const error = new Error('Could not generate a unique class code');
+      logWarning('Class could not be created', error);
+      return { ok: false, error };
+    } catch (error) {
+      logWarning('Class could not be created', error);
+      return { ok: false, error };
+    }
+  }
+
+  async function getStudentsByClass(classId) {
+    try {
+      if (!window.supabaseClient) return unavailableStatus();
+      const { data, error } = await window.supabaseClient
+        .from('students')
+        .select('id, class_id, student_number, display_name, created_at')
+        .eq('class_id', classId)
+        .order('student_number', { ascending: true });
+
+      if (error) {
+        logWarning('Students could not be loaded', error);
+        return { ok: false, error };
+      }
+
+      return { ok: true, data: data || [] };
+    } catch (error) {
+      logWarning('Students could not be loaded', error);
+      return { ok: false, error };
+    }
+  }
+
+  async function addStudentToClass(classId, studentNumber, displayName, pinCode) {
+    try {
+      if (!window.supabaseClient) return unavailableStatus();
+      const parsedNumber = Number(studentNumber);
+      const cleanName = String(displayName || '').trim();
+      const cleanPin = String(pinCode || '').trim();
+
+      if (!classId || !Number.isInteger(parsedNumber) || parsedNumber < 1 || !cleanName || !/^\d{4,6}$/.test(cleanPin)) {
+        return { ok: false, reason: 'invalid_student_data' };
+      }
+
+      const { data, error } = await window.supabaseClient
+        .from('students')
+        .insert({
+          class_id: classId,
+          student_number: parsedNumber,
+          display_name: cleanName,
+          pin_code: cleanPin,
+        })
+        .select('id, class_id, student_number, display_name, created_at')
+        .single();
+
+      if (error) {
+        logWarning('Student could not be added', error);
+        return { ok: false, error };
+      }
+
+      return { ok: true, data };
+    } catch (error) {
+      logWarning('Student could not be added', error);
+      return { ok: false, error };
+    }
+  }
+
+  async function getClassResults(classId) {
+    try {
+      if (!window.supabaseClient) return unavailableStatus();
+      const { data, error } = await window.supabaseClient
+        .from('game_results')
+        .select('id, student_id, class_id, student_name, game_key, score, total_questions, stars, time_spent_seconds, played_at')
+        .eq('class_id', classId)
+        .order('played_at', { ascending: false })
+        .limit(200);
+
+      if (error) {
+        logWarning('Class results could not be loaded', error);
+        return { ok: false, error };
+      }
+
+      return { ok: true, data: data || [] };
+    } catch (error) {
+      logWarning('Class results could not be loaded', error);
+      return { ok: false, error };
+    }
+  }
+
+  async function getAdminOverview() {
+    try {
+      if (!window.supabaseClient) return unavailableStatus();
+      const auth = await getAuthenticatedContext();
+      if (!auth.ok) return auth;
+      if (auth.profile.role !== 'admin') return { ok: false, reason: 'forbidden' };
+
+      const teacherQuery = window.supabaseClient
+        .from('profiles')
+        .select('id', { count: 'exact', head: true })
+        .eq('role', 'teacher');
+      const classQuery = window.supabaseClient.from('classes').select('id', { count: 'exact', head: true });
+      const studentQuery = window.supabaseClient.from('students').select('id', { count: 'exact', head: true });
+      const resultQuery = window.supabaseClient.from('game_results').select('id', { count: 'exact', head: true });
+      const responses = await Promise.all([teacherQuery, classQuery, studentQuery, resultQuery]);
+      const failedResponse = responses.find(response => response.error);
+
+      if (failedResponse) {
+        logWarning('Admin overview could not be loaded', failedResponse.error);
+        return { ok: false, error: failedResponse.error };
+      }
+
+      return {
+        ok: true,
+        data: {
+          teachers: responses[0].count || 0,
+          classes: responses[1].count || 0,
+          students: responses[2].count || 0,
+          games: responses[3].count || 0,
+        },
+      };
+    } catch (error) {
+      logWarning('Admin overview could not be loaded', error);
+      return { ok: false, error };
+    }
+  }
+
   window.dbService = Object.freeze({
     checkConnection,
     saveGameResult,
     getLocalResults,
+    getTeacherClasses,
+    createClass,
+    getStudentsByClass,
+    addStudentToClass,
+    getClassResults,
+    getAdminOverview,
   });
 })();

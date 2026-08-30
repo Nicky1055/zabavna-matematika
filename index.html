@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Математически игри за 3. клас</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=20260830-1" />
 </head>
 <body>
   <header class="hero">
@@ -58,7 +58,7 @@
         <button class="tab" data-tab="treasure">🗺️ Съкровище</button>
         <button class="tab" data-tab="code">🔐 Таен код</button>
         <button class="tab" data-tab="balloons">🎈 Балони</button>
-        <button class="tab" data-tab="teacher">🧑‍🏫 За учителя</button>
+        <button class="tab" data-tab="teacher">🧑‍🏫 Учителски панел</button>
       </nav>
       <div class="mode-card wallpaper-card">
         <label for="wallpaperTheme">Тапет</label>
@@ -262,9 +262,168 @@
         <div class="panel-head">
           <div>
             <h2 id="teacher-title">🧑‍🏫 Панел за учителя</h2>
-            <p>Подготви бърз набор от задачи за упражнение, игра или работа по двойки.</p>
+            <p>Управлявай класовете и резултатите онлайн или използвай локалните инструменти без вход.</p>
           </div>
         </div>
+
+        <div class="teacher-online-shell">
+          <section id="teacherAuthPanel" class="teacher-auth-panel" aria-labelledby="teacher-auth-title">
+            <div class="teacher-auth-copy">
+              <span class="teacher-kicker">Онлайн пространство</span>
+              <h3 id="teacher-auth-title">Вход за учители</h3>
+              <p>Влезте, за да създавате класове, ученици и да следите резултатите им.</p>
+            </div>
+            <div class="teacher-auth-box">
+              <div class="teacher-auth-switch" role="tablist" aria-label="Вход или регистрация">
+                <button id="showTeacherLoginBtn" class="teacher-auth-tab active" type="button" role="tab" aria-selected="true">Вход</button>
+                <button id="showTeacherRegisterBtn" class="teacher-auth-tab" type="button" role="tab" aria-selected="false">Регистрация</button>
+              </div>
+
+              <form id="teacherLoginForm" class="teacher-form">
+                <label for="teacherLoginEmail">Имейл</label>
+                <input id="teacherLoginEmail" type="email" autocomplete="email" required />
+                <label for="teacherLoginPassword">Парола</label>
+                <input id="teacherLoginPassword" type="password" autocomplete="current-password" minlength="6" required />
+                <button class="btn" type="submit">Влез</button>
+              </form>
+
+              <form id="teacherRegisterForm" class="teacher-form" hidden>
+                <label for="teacherRegisterName">Име на учителя</label>
+                <input id="teacherRegisterName" type="text" autocomplete="name" required />
+                <label for="teacherRegisterSchool">Училище</label>
+                <input id="teacherRegisterSchool" type="text" autocomplete="organization" required />
+                <label for="teacherRegisterEmail">Имейл</label>
+                <input id="teacherRegisterEmail" type="email" autocomplete="email" required />
+                <label for="teacherRegisterPassword">Парола</label>
+                <input id="teacherRegisterPassword" type="password" autocomplete="new-password" minlength="6" required />
+                <button class="btn" type="submit">Създай профил</button>
+              </form>
+              <p id="teacherAuthMessage" class="feedback" aria-live="polite"></p>
+            </div>
+          </section>
+
+          <section id="teacherDashboard" class="teacher-dashboard" aria-labelledby="teacher-dashboard-title" hidden>
+            <div class="teacher-profile-bar">
+              <div>
+                <span id="teacherRoleBadge" class="teacher-role-badge">Учител</span>
+                <h3 id="teacher-dashboard-title"><span id="teacherProfileName">Учител</span></h3>
+                <p id="teacherProfileSchool">Училище</p>
+              </div>
+              <button id="teacherLogoutBtn" class="btn btn--ghost" type="button">Изход</button>
+            </div>
+
+            <section id="adminOverview" class="admin-overview" aria-labelledby="admin-overview-title" hidden>
+              <div class="teacher-section-head">
+                <div>
+                  <span class="teacher-kicker">Администратор</span>
+                  <h3 id="admin-overview-title">Общ преглед</h3>
+                </div>
+              </div>
+              <div class="admin-stat-grid">
+                <div class="admin-stat"><span>Учители</span><strong id="adminTeacherCount">0</strong></div>
+                <div class="admin-stat"><span>Класове</span><strong id="adminClassCount">0</strong></div>
+                <div class="admin-stat"><span>Ученици</span><strong id="adminStudentCount">0</strong></div>
+                <div class="admin-stat"><span>Изиграни игри</span><strong id="adminGameCount">0</strong></div>
+              </div>
+            </section>
+
+            <div class="teacher-workspace">
+              <section class="teacher-class-pane" aria-labelledby="teacher-classes-title">
+                <div class="teacher-section-head">
+                  <div>
+                    <span class="teacher-kicker">Моите групи</span>
+                    <h3 id="teacher-classes-title">Класове</h3>
+                  </div>
+                  <button id="showCreateClassBtn" class="btn btn--secondary" type="button">+ Нов клас</button>
+                </div>
+
+                <form id="createClassForm" class="teacher-inline-form" hidden>
+                  <label for="newClassName">Име на класа</label>
+                  <input id="newClassName" type="text" placeholder="Напр. 3. А клас" required />
+                  <label for="newClassSchool">Училище</label>
+                  <input id="newClassSchool" type="text" required />
+                  <div class="teacher-form-actions">
+                    <button class="btn" type="submit">Създай клас</button>
+                    <button id="cancelCreateClassBtn" class="btn btn--ghost" type="button">Отказ</button>
+                  </div>
+                </form>
+                <p id="classFormMessage" class="feedback" aria-live="polite"></p>
+                <div id="teacherClassList" class="teacher-class-list"></div>
+              </section>
+
+              <section class="teacher-detail-pane" aria-labelledby="selected-class-title">
+                <div id="classEmptyState" class="teacher-empty-state">
+                  <strong>Изберете клас</strong>
+                  <span>Тук ще се появят кодът, учениците и онлайн дневникът.</span>
+                </div>
+
+                <div id="classDetail" hidden>
+                  <div class="class-summary">
+                    <div>
+                      <span class="teacher-kicker">Избран клас</span>
+                      <h3 id="selected-class-title">Клас</h3>
+                      <p id="selectedClassSchool"></p>
+                    </div>
+                    <div class="class-code-box">
+                      <span>Код за учениците</span>
+                      <strong id="selectedClassCode">—</strong>
+                    </div>
+                  </div>
+
+                  <div class="teacher-section-head teacher-section-head--students">
+                    <div>
+                      <span class="teacher-kicker">Списък</span>
+                      <h3>Ученици</h3>
+                    </div>
+                    <button id="showAddStudentBtn" class="btn btn--secondary" type="button">+ Добави ученик</button>
+                  </div>
+
+                  <form id="addStudentForm" class="teacher-inline-form teacher-inline-form--student" hidden>
+                    <label for="newStudentNumber">Номер</label>
+                    <input id="newStudentNumber" type="text" inputmode="numeric" required />
+                    <label for="newStudentName">Име</label>
+                    <input id="newStudentName" type="text" required />
+                    <label for="newStudentPin">ПИН код</label>
+                    <input id="newStudentPin" type="password" inputmode="numeric" pattern="[0-9]{4,6}" minlength="4" maxlength="6" required />
+                    <div class="teacher-form-actions">
+                      <button class="btn" type="submit">Добави</button>
+                      <button id="cancelAddStudentBtn" class="btn btn--ghost" type="button">Отказ</button>
+                    </div>
+                  </form>
+                  <p id="studentFormMessage" class="feedback" aria-live="polite"></p>
+
+                  <div class="teacher-table-wrap">
+                    <table class="teacher-table">
+                      <thead><tr><th>№</th><th>Име</th></tr></thead>
+                      <tbody id="classStudentRows"></tbody>
+                    </table>
+                    <p id="studentEmptyState" class="teacher-empty-row">Все още няма добавени ученици.</p>
+                  </div>
+
+                  <div class="online-journal-head">
+                    <div>
+                      <span class="teacher-kicker">Резултати</span>
+                      <h3>Онлайн дневник</h3>
+                    </div>
+                    <button id="loadOnlineJournalBtn" class="btn" type="button">Отвори дневника</button>
+                  </div>
+                  <div id="onlineJournal" class="online-journal" hidden>
+                    <div class="teacher-table-wrap">
+                      <table class="teacher-table teacher-table--journal">
+                        <thead><tr><th>Дата</th><th>Ученик</th><th>Игра</th><th>Резултат</th><th>Звезди</th><th>Време</th></tr></thead>
+                        <tbody id="onlineJournalRows"></tbody>
+                      </table>
+                      <p id="onlineJournalEmpty" class="teacher-empty-row">Все още няма онлайн резултати за този клас.</p>
+                    </div>
+                  </div>
+                  <p id="onlineJournalMessage" class="feedback" aria-live="polite"></p>
+                </div>
+              </section>
+            </div>
+          </section>
+        </div>
+
+        <div class="teacher-tools-divider"><span>Локални инструменти без вход</span></div>
         <div class="teacher-grid">
           <div class="game-card">
             <h3>Генератор на задачи</h3>
@@ -310,7 +469,9 @@
 
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="supabase-config.js"></script>
+  <script defer src="auth-service.js"></script>
   <script defer src="db-service.js"></script>
   <script defer src="app.js?v=20260823-1"></script>
+  <script defer src="teacher-panel.js"></script>
 </body>
 </html>
