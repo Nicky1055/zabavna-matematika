@@ -200,7 +200,7 @@
       const cleanName = String(displayName || '').trim();
       const cleanPin = String(pinCode || '').trim();
 
-      if (!classId || !Number.isInteger(parsedNumber) || parsedNumber < 1 || !cleanName || !/^\d{4,6}$/.test(cleanPin)) {
+      if (!classId || !Number.isInteger(parsedNumber) || parsedNumber < 1 || !cleanName || !/^\d{4}$/.test(cleanPin)) {
         return { ok: false, reason: 'invalid_student_data' };
       }
 
@@ -223,6 +223,60 @@
       return { ok: true, data };
     } catch (error) {
       logWarning('Student could not be added', error);
+      return { ok: false, error };
+    }
+  }
+
+  async function deleteStudent(studentId) {
+    try {
+      if (!window.supabaseClient) return unavailableStatus();
+      const auth = await getAuthenticatedContext();
+      if (!auth.ok) return auth;
+      if (!studentId) return { ok: false, reason: 'missing_fields' };
+
+      const { data, error } = await window.supabaseClient
+        .from('students')
+        .delete()
+        .eq('id', studentId)
+        .select('id')
+        .maybeSingle();
+
+      if (error) {
+        logWarning('Student could not be deleted', error);
+        return { ok: false, error };
+      }
+      if (!data) return { ok: false, reason: 'not_found' };
+
+      return { ok: true, data };
+    } catch (error) {
+      logWarning('Student could not be deleted', error);
+      return { ok: false, error };
+    }
+  }
+
+  async function deleteClass(classId) {
+    try {
+      if (!window.supabaseClient) return unavailableStatus();
+      const auth = await getAuthenticatedContext();
+      if (!auth.ok) return auth;
+      if (!classId) return { ok: false, reason: 'missing_fields' };
+
+      const { data, error } = await window.supabaseClient
+        .from('classes')
+        .delete()
+        .eq('id', classId)
+        .select('id')
+        .maybeSingle();
+
+      if (error) {
+        logWarning('Class could not be deleted', error);
+        return { ok: false, error };
+      }
+      if (!data) return { ok: false, reason: 'not_found' };
+
+      return { ok: true, data };
+    } catch (error) {
+      logWarning('Class could not be deleted', error);
       return { ok: false, error };
     }
   }
@@ -294,6 +348,8 @@
     createClass,
     getStudentsByClass,
     addStudentToClass,
+    deleteStudent,
+    deleteClass,
     getClassResults,
     getAdminOverview,
   });

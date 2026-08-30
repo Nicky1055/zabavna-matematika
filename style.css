@@ -1659,10 +1659,38 @@ fieldset label, .game-card label { display: block; margin: 8px 0; }
 .class-code-box span, .class-code-box strong { display: block; }
 .class-code-box span { color: #755000; font-size: .78rem; font-weight: 850; }
 .class-code-box strong { margin-top: 4px; color: #3b2f86; font-size: 1.15rem; }
+.class-summary-actions {
+  display: grid;
+  justify-items: stretch;
+  gap: 8px;
+  flex: 0 0 auto;
+}
+.teacher-danger-button, .teacher-delete-button {
+  border: 2px solid #f3a7a7;
+  background: #fff1f1;
+  color: #9e2424;
+  font-weight: 950;
+}
+.teacher-danger-button:hover, .teacher-delete-button:hover {
+  border-color: #bd2b2b;
+  background: #ffe1e1;
+}
+.teacher-delete-button {
+  min-height: 38px;
+  padding: 7px 11px;
+  border-radius: 11px;
+  cursor: pointer;
+}
+.teacher-action-column {
+  width: 1%;
+  white-space: nowrap;
+  text-align: right !important;
+}
 .teacher-inline-form--student {
   grid-template-columns: minmax(80px, .6fr) minmax(150px, 1.4fr) minmax(110px, .8fr);
-  align-items: end;
+  align-items: start;
 }
+.teacher-field { display: grid; gap: 8px; align-content: start; }
 .teacher-inline-form--student .teacher-form-actions { grid-column: 1 / -1; }
 .teacher-table-wrap {
   width: 100%;
@@ -1754,6 +1782,7 @@ fieldset label, .game-card label { display: block; margin: 8px 0; }
   .teacher-inline-form--student .teacher-form-actions { grid-column: auto; }
   .admin-stat-grid { grid-template-columns: 1fr; }
   .class-code-box { width: 100%; }
+  .class-summary-actions { width: 100%; }
 }
 
 body.wallpaper-space { --wallpaper-image: url("assets/wallpapers/space.png"); }

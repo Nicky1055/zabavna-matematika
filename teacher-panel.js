@@ -43,8 +43,9 @@
     if (result.reason === 'not_configured') return 'Онлайн връзката още не е настроена.';
     if (result.reason === 'no_session') return 'Влезте в учителския си профил.';
     if (result.reason === 'missing_fields') return 'Попълнете всички полета.';
-    if (result.reason === 'invalid_student_data') return 'Проверете номера, името и ПИН кода от 4 до 6 цифри.';
+    if (result.reason === 'invalid_student_data') return 'Попълнете номер в класа, име на ученика и ПИН код от точно 4 цифри.';
     if (result.reason === 'forbidden') return 'Нямате достъп до тази информация.';
+    if (result.reason === 'not_found') return 'Записът не беше намерен или нямате право да го изтриете.';
 
     const message = result.error && result.error.message ? result.error.message.toLowerCase() : '';
     if (message.includes('invalid login credentials')) return 'Имейлът или паролата не са правилни.';
@@ -52,6 +53,9 @@
     if (message.includes('already registered')) return 'Вече има регистрация с този имейл.';
     if (message.includes('duplicate') || (result.error && result.error.code === '23505')) {
       return 'Вече има такъв запис. Проверете въведените данни.';
+    }
+    if (result.error && result.error.code === '23503') {
+      return 'Записът има свързани резултати и не може да бъде изтрит безопасно.';
     }
     return fallback;
   }
@@ -166,6 +170,9 @@
       '<tr>',
       `<td>${escapeText(student.student_number)}</td>`,
       `<td>${escapeText(student.display_name)}</td>`,
+      '<td class="teacher-action-column">',
+      `<button class="teacher-delete-button" type="button" data-delete-student-id="${escapeText(student.id)}" aria-label="Изтрий ${escapeText(student.display_name)}">Изтрий</button>`,
+      '</td>',
       '</tr>',
     ].join('')).join('');
   }
@@ -370,17 +377,33 @@
       setMessage('studentFormMessage', '');
     });
 
+    element('newStudentPin').addEventListener('input', event => {
+      event.currentTarget.value = event.currentTarget.value.replace(/\D/g, '').slice(0, 4);
+    });
+
     element('addStudentForm').addEventListener('submit', async event => {
       event.preventDefault();
       if (!panelState.selectedClass) return;
+      const studentNumber = Number(element('newStudentNumber').value);
+      const studentName = element('newStudentName').value.trim();
+      const pinCode = element('newStudentPin').value.trim();
+
+      if (!Number.isInteger(studentNumber) || studentNumber < 1 || !studentName || !/^\d{4}$/.test(pinCode)) {
+        setMessage('studentFormMessage', 'Попълнете номер в класа, име на ученика и ПИН код от точно 4 цифри.', 'bad');
+        if (!Number.isInteger(studentNumber) || studentNumber < 1) element('newStudentNumber').focus();
+        else if (!studentName) element('newStudentName').focus();
+        else element('newStudentPin').focus();
+        return;
+      }
+
       const button = event.currentTarget.querySelector('button[type="submit"]');
       setButtonBusy(button, true, 'Добавяне...');
       setMessage('studentFormMessage', '');
       const result = await window.dbService.addStudentToClass(
         panelState.selectedClass.id,
-        element('newStudentNumber').value,
-        element('newStudentName').value,
-        element('newStudentPin').value,
+        studentNumber,
+        studentName,
+        pinCode,
       );
       setButtonBusy(button, false);
 
@@ -393,6 +416,47 @@
       event.currentTarget.hidden = true;
       setMessage('studentFormMessage', 'Ученикът е добавен успешно.', 'good');
       await loadStudents();
+      if (panelState.profile.role === 'admin') await loadAdminOverview();
+    });
+
+    element('classStudentRows').addEventListener('click', async event => {
+      const button = event.target.closest('[data-delete-student-id]');
+      if (!button) return;
+      const student = panelState.students.find(item => item.id === button.dataset.deleteStudentId);
+      if (!student || !window.confirm(`Сигурни ли сте, че искате да изтриете ученика ${student.display_name}?`)) return;
+
+      setButtonBusy(button, true, 'Изтриване...');
+      setMessage('studentFormMessage', '');
+      const result = await window.dbService.deleteStudent(student.id);
+      setButtonBusy(button, false);
+      if (!result.ok) {
+        setMessage('studentFormMessage', friendlyError(result, 'Ученикът не можа да бъде изтрит.'), 'bad');
+        return;
+      }
+
+      setMessage('studentFormMessage', 'Ученикът е изтрит.', 'good');
+      await loadStudents();
+      if (panelState.profile.role === 'admin') await loadAdminOverview();
+    });
+
+    element('deleteClassBtn').addEventListener('click', async () => {
+      if (!panelState.selectedClass) return;
+      if (!window.confirm('Сигурни ли сте, че искате да изтриете класа?')) return;
+
+      const button = element('deleteClassBtn');
+      const deletedClassName = panelState.selectedClass.class_name;
+      setButtonBusy(button, true, 'Изтриване...');
+      setMessage('classFormMessage', '');
+      const result = await window.dbService.deleteClass(panelState.selectedClass.id);
+      setButtonBusy(button, false);
+      if (!result.ok) {
+        setMessage('studentFormMessage', friendlyError(result, 'Класът не можа да бъде изтрит.'), 'bad');
+        return;
+      }
+
+      panelState.selectedClass = null;
+      setMessage('classFormMessage', `Класът ${deletedClassName} е изтрит.`, 'good');
+      await loadClasses();
       if (panelState.profile.role === 'admin') await loadAdminOverview();
     });
 

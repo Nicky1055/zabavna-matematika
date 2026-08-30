@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Математически игри за 3. клас</title>
-  <link rel="stylesheet" href="style.css?v=20260830-1" />
+  <link rel="stylesheet" href="style.css?v=20260830-2" />
 </head>
 <body>
   <header class="hero">
@@ -364,9 +364,12 @@
                       <h3 id="selected-class-title">Клас</h3>
                       <p id="selectedClassSchool"></p>
                     </div>
-                    <div class="class-code-box">
-                      <span>Код за учениците</span>
-                      <strong id="selectedClassCode">—</strong>
+                    <div class="class-summary-actions">
+                      <div class="class-code-box">
+                        <span>Код за учениците</span>
+                        <strong id="selectedClassCode">—</strong>
+                      </div>
+                      <button id="deleteClassBtn" class="btn teacher-danger-button" type="button">Изтрий класа</button>
                     </div>
                   </div>
 
@@ -378,13 +381,19 @@
                     <button id="showAddStudentBtn" class="btn btn--secondary" type="button">+ Добави ученик</button>
                   </div>
 
-                  <form id="addStudentForm" class="teacher-inline-form teacher-inline-form--student" hidden>
-                    <label for="newStudentNumber">Номер</label>
-                    <input id="newStudentNumber" type="text" inputmode="numeric" required />
-                    <label for="newStudentName">Име</label>
-                    <input id="newStudentName" type="text" required />
-                    <label for="newStudentPin">ПИН код</label>
-                    <input id="newStudentPin" type="password" inputmode="numeric" pattern="[0-9]{4,6}" minlength="4" maxlength="6" required />
+                  <form id="addStudentForm" class="teacher-inline-form teacher-inline-form--student" novalidate hidden>
+                    <div class="teacher-field">
+                      <label for="newStudentNumber">Номер в класа</label>
+                      <input id="newStudentNumber" type="number" inputmode="numeric" min="1" step="1" placeholder="Напр. 1" required />
+                    </div>
+                    <div class="teacher-field">
+                      <label for="newStudentName">Име на ученика</label>
+                      <input id="newStudentName" type="text" placeholder="Напр. Алекс" required />
+                    </div>
+                    <div class="teacher-field">
+                      <label for="newStudentPin">ПИН код (точно 4 цифри)</label>
+                      <input id="newStudentPin" type="password" inputmode="numeric" pattern="[0-9]{4}" minlength="4" maxlength="4" placeholder="••••" required />
+                    </div>
                     <div class="teacher-form-actions">
                       <button class="btn" type="submit">Добави</button>
                       <button id="cancelAddStudentBtn" class="btn btn--ghost" type="button">Отказ</button>
@@ -394,7 +403,7 @@
 
                   <div class="teacher-table-wrap">
                     <table class="teacher-table">
-                      <thead><tr><th>№</th><th>Име</th></tr></thead>
+                      <thead><tr><th>№</th><th>Име</th><th class="teacher-action-column">Действие</th></tr></thead>
                       <tbody id="classStudentRows"></tbody>
                     </table>
                     <p id="studentEmptyState" class="teacher-empty-row">Все още няма добавени ученици.</p>
