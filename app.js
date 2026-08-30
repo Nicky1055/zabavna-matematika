@@ -414,7 +414,17 @@ function escapeHtml(value) {
     .replace(/'/g, '&#039;');
 }
 
-function saveResult(game, score, total) {
+const GAME_RESULT_KEYS = Object.freeze({
+  'Бърза тренировка': 'training',
+  'Математическо бинго': 'bingo',
+  'Открий семейството': 'families',
+  'Грешката на робота': 'robot',
+  'Лов на съкровище': 'treasure',
+  'Таен код': 'secret_code',
+  'Математически балони': 'balloons',
+});
+
+function saveResult(game, score, total, starsEarned = 0) {
   const log = readSavedList('mathLog');
   const student = state.student || 'Ученик';
   const date = new Date().toLocaleString('bg-BG', { dateStyle: 'short', timeStyle: 'short' });
@@ -424,7 +434,13 @@ function saveResult(game, score, total) {
   renderLog();
 
   if (window.dbService && typeof window.dbService.saveGameResult === 'function') {
-    void window.dbService.saveGameResult({ student, game, score, total, date, duration }).catch(() => {});
+    void window.dbService.saveGameResult({
+      gameKey: GAME_RESULT_KEYS[game] || game,
+      score,
+      totalQuestions: total,
+      stars: starsEarned,
+      timeSpentSeconds: Math.floor(currentElapsedMs() / 1000),
+    });
   }
 }
 
@@ -568,7 +584,7 @@ function renderTraining() {
     if (!t.completed) {
       t.completed = true;
       showTrainingCelebration(t.score, t.tasks.length);
-      saveResult('Бърза тренировка', t.score, t.tasks.length);
+      saveResult('Бърза тренировка', t.score, t.tasks.length, t.score * 2);
     }
     return;
   }
@@ -750,7 +766,7 @@ function nextBingoTask() {
     playBingoWinSound();
     showBingoCelebration();
     setFeedback($('bingoFeedback'), `${praise()} Попълни цялото бинго поле. ⭐`, 'good');
-    saveResult('Математическо бинго', 1, 1);
+    saveResult('Математическо бинго', 1, 1, state.bingo.marked.size * 2);
     return;
   }
   const answer = openCells[rand(0, openCells.length - 1)].num;
@@ -804,7 +820,7 @@ function clickBingoCell(idx) {
       playBingoWinSound();
       showBingoCelebration();
       setFeedback($('bingoFeedback'), `${praise()} БИНГО! Имаш ред, колона или диагонал. ⭐`, 'good');
-      saveResult('Математическо бинго', 1, 1);
+      saveResult('Математическо бинго', 1, 1, b.marked.size * 2);
     } else {
       renderBingoBoard();
       setFeedback($('bingoFeedback'), `${praise()} Това поле е точното. Продължаваме!`, 'good');
@@ -962,7 +978,7 @@ function checkFamily() {
     showFamilyCelebration();
     addStars(4);
     setFeedback($('familyFeedback'), praise() + ' Откри цялото математическо семейство. ⭐', 'good');
-    saveResult('Открий семейството', 4, 4);
+    saveResult('Открий семейството', 4, 4, 4);
   } else {
     hideFamilyCelebration();
     playFamilySound('error');
@@ -1083,7 +1099,7 @@ function answerRobot(isTrue) {
       playRobotSound('success');
       showRobotCelebration('БРАВО!', 'Роботът сметна вярно, а ти го разпозна отлично!');
       setFeedback($('robotFeedback'), praise() + ' Роботът този път не сгреши. ⭐', 'good');
-      saveResult('Грешката на робота', 1, 1);
+      saveResult('Грешката на робота', 1, 1, 2);
       setTimeout(newRobot, 4800);
     } else {
       setRobotMood('correcting');
@@ -1114,7 +1130,7 @@ function showRobotChoices() {
         playRobotSound('success');
         showRobotCelebration('СУПЕР!', 'Поправи робота като истински учител!');
         setFeedback($('robotFeedback'), praise() + ' Поправи робота като истински учител. ⭐', 'good');
-        saveResult('Грешката на робота', 1, 1);
+        saveResult('Грешката на робота', 1, 1, 5);
         setTimeout(newRobot, 4800);
       } else {
         btn.classList.add('robot-choice-wrong');
@@ -1228,7 +1244,7 @@ function renderTreasure() {
     showTreasureCelebration();
     setFeedback($('treasureFeedback'), praise() + ' Откри съкровището, математически откривателю! ⭐', 'good');
     addStars(8);
-    saveResult('Лов на съкровище', 6, 6);
+    saveResult('Лов на съкровище', 6, 6, 20);
     return;
   }
   $('treasureTask').textContent = task.text + ' = ?';
@@ -1429,7 +1445,8 @@ function renderCode() {
     setTimeout(playFanfare, 420);
     showCodeFireworks();
     addStars(6);
-    saveResult('Таен код', state.code.tasks.filter(Boolean).length, state.code.tasks.filter(Boolean).length);
+    const completedTasks = state.code.tasks.filter(Boolean).length;
+    saveResult('Таен код', completedTasks, completedTasks, completedTasks * 2 + 6);
     return;
   }
   $('codeTask').textContent = `${task.text} = ?`;
@@ -1486,7 +1503,7 @@ function nextBalloonTask() {
     $('balloonField').innerHTML = '';
     setFeedback($('balloonFeedback'), `${praise()} Пукна ${b.score} верни балона.`, 'good');
     playCheerfulApplause(4.8);
-    saveResult('Математически балони', b.score, b.total);
+    saveResult('Математически балони', b.score, b.total, b.score * 2);
     return;
   }
   b.task = makeTask(selectedTables(), 'mixed');
