@@ -55,6 +55,11 @@
 
   async function saveGameResult(resultData) {
     try {
+      const activeRole = window.accessControl && typeof window.accessControl.getCurrentRole === 'function'
+        ? window.accessControl.getCurrentRole()
+        : 'guest';
+      if (activeRole !== 'student') return { ok: true, skipped: true, reason: 'guest_mode' };
+
       const studentSession = getStudentSession();
       if (!studentSession) return { ok: true, skipped: true, reason: 'guest_mode' };
       if (!window.supabaseClient) return unavailableStatus();

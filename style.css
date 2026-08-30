@@ -596,6 +596,87 @@ h1 { margin: 0; font-size: clamp(2rem, 5vw, 4rem); line-height: 1; }
 .content { min-width: 0; }
 .panel { display: none; padding: 24px; }
 .panel.active { display: block; }
+.welcome-panel {
+  min-height: 560px;
+  padding: 38px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 96% 6%, rgba(255, 209, 102, .34), transparent 13rem),
+    radial-gradient(circle at 5% 96%, rgba(123, 223, 242, .3), transparent 14rem),
+    rgba(255, 255, 255, .97);
+}
+.welcome-heading {
+  max-width: 720px;
+  margin: 0 auto 30px;
+  text-align: center;
+}
+.welcome-sparkles {
+  display: block;
+  margin-bottom: 8px;
+  color: #f59e0b;
+  font-size: 1.35rem;
+  animation: welcome-sparkle 2.4s ease-in-out infinite;
+}
+.welcome-kicker {
+  margin: 0 0 7px;
+  color: #7257ff;
+  font-weight: 900;
+}
+.welcome-heading h2 {
+  margin: 0;
+  color: #3b2f86;
+  font-size: 2.75rem;
+  line-height: 1.12;
+}
+.welcome-heading > p:last-child {
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: 1.1rem;
+  line-height: 1.55;
+}
+.welcome-guide {
+  display: grid;
+  gap: 14px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+.welcome-guide-row {
+  display: grid;
+  grid-template-columns: 62px minmax(0, 1fr);
+  gap: 16px;
+  align-items: center;
+  padding: 18px 20px;
+  border-left: 7px solid var(--welcome-accent);
+  border-radius: 8px;
+  background: var(--welcome-bg);
+}
+.welcome-guide-row--guest { --welcome-accent: #f59e0b; --welcome-bg: #fff7df; }
+.welcome-guide-row--student { --welcome-accent: #0ea5b7; --welcome-bg: #e9fbff; }
+.welcome-guide-row--teacher { --welcome-accent: #7257ff; --welcome-bg: #f0edff; }
+.welcome-guide-icon {
+  display: grid;
+  width: 58px;
+  height: 58px;
+  place-items: center;
+  border-radius: 50%;
+  background: #fff;
+  font-size: 1.75rem;
+  box-shadow: 0 7px 16px rgba(54, 44, 96, .12);
+}
+.welcome-guide-row h3 {
+  margin: 0 0 5px;
+  color: #30276b;
+  font-size: 1.24rem;
+}
+.welcome-guide-row p {
+  margin: 0;
+  color: #4b5563;
+  line-height: 1.5;
+}
+@keyframes welcome-sparkle {
+  0%, 100% { transform: scale(1); opacity: .78; }
+  50% { transform: scale(1.08); opacity: 1; }
+}
 .panel-head {
   display: flex;
   justify-content: space-between;
@@ -2007,6 +2088,10 @@ fieldset label, .game-card label { display: block; margin: 8px 0; }
   .student-login-progress span { padding: 7px 3px; font-size: .74rem; }
   .layout { padding: 0 14px; }
   .panel { padding: 16px; border-radius: 20px; }
+  .welcome-panel { min-height: 0; padding: 24px 16px; }
+  .welcome-heading h2 { font-size: 2rem; }
+  .welcome-guide-row { grid-template-columns: 48px minmax(0, 1fr); gap: 12px; padding: 15px 13px; }
+  .welcome-guide-icon { width: 46px; height: 46px; font-size: 1.4rem; }
   .tabs { grid-template-columns: 1fr; }
   .bingo-board { gap: 6px; }
   .family-grid { font-size: 1.15rem; }

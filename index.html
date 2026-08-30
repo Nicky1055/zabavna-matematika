@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Математически игри за 3. клас</title>
-  <link rel="stylesheet" href="style.css?v=20260830-9" />
+  <link rel="stylesheet" href="style.css?v=20260830-10" />
 </head>
 <body>
   <header class="hero">
@@ -129,7 +129,7 @@
         </div>
       </div>
       <nav class="tabs" aria-label="Избор на игра">
-        <button class="tab active" data-tab="training">⚡ Тренировка</button>
+        <button class="tab" data-tab="training">⚡ Тренировка</button>
         <button class="tab" data-tab="bingo">🎯 Бинго</button>
         <button class="tab" data-tab="families">👨‍👩‍👧 Семейства</button>
         <button class="tab" data-tab="robot">🤖 Грешката на робота</button>
@@ -157,7 +157,40 @@
     </aside>
 
     <section class="content">
-      <section id="training" class="panel active" aria-labelledby="training-title">
+      <section id="welcome" class="panel welcome-panel active" aria-labelledby="welcome-title">
+        <div class="welcome-heading">
+          <span class="welcome-sparkles" aria-hidden="true">✦ ⭐ ✦</span>
+          <p class="welcome-kicker">Математическите приключения започват тук</p>
+          <h2 id="welcome-title">Добре дошли в Забавна Математика!</h2>
+          <p>Избери как искаш да играеш, а после отвори любима игра от менюто вляво.</p>
+        </div>
+
+        <div class="welcome-guide">
+          <section class="welcome-guide-row welcome-guide-row--guest">
+            <span class="welcome-guide-icon" aria-hidden="true">🎮</span>
+            <div>
+              <h3>Играй като Гост</h3>
+              <p>Избери число от таблицата вляво и кликни върху някоя от 7-те забавни игри за свободна тренировка.</p>
+            </div>
+          </section>
+          <section class="welcome-guide-row welcome-guide-row--student">
+            <span class="welcome-guide-icon" aria-hidden="true">🎒</span>
+            <div>
+              <h3>За ученици</h3>
+              <p>Натисни „Вход за ученик“ в горната лента, въведи кода на класа и своя ПИН, за да се записват точките и звездите ти в дневника.</p>
+            </div>
+          </section>
+          <section class="welcome-guide-row welcome-guide-row--teacher">
+            <span class="welcome-guide-icon" aria-hidden="true">👨‍🏫</span>
+            <div>
+              <h3>За учители</h3>
+              <p>Влез в „Учителски панел“, за да управляваш класовете си и да следиш напредъка на учениците.</p>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section id="training" class="panel" aria-labelledby="training-title">
         <div class="panel-head">
           <div>
             <h2 id="training-title">⚡ Бърза тренировка</h2>
@@ -562,9 +595,9 @@
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="supabase-config.js"></script>
   <script defer src="auth-service.js?v=20260830-1"></script>
-  <script defer src="db-service.js?v=20260830-1"></script>
+  <script defer src="db-service.js?v=20260830-2"></script>
   <script defer src="app.js?v=20260830-1"></script>
   <script defer src="teacher-panel.js?v=20260830-1"></script>
-  <script defer src="access-control.js?v=20260830-1"></script>
+  <script defer src="access-control.js?v=20260830-2"></script>
 </body>
 </html>

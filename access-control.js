@@ -26,11 +26,14 @@
       const rawSession = window.localStorage.getItem(STUDENT_SESSION_KEY);
       const session = rawSession ? JSON.parse(rawSession) : null;
       if (!session || !session.studentId || !session.classId || !session.studentName || !session.className) {
+        window.localStorage.removeItem(STUDENT_SESSION_KEY);
+        window.sessionStorage.removeItem(STUDENT_SESSION_KEY);
         return null;
       }
       return session;
     } catch (error) {
       window.localStorage.removeItem(STUDENT_SESSION_KEY);
+      window.sessionStorage.removeItem(STUDENT_SESSION_KEY);
       return null;
     }
   }
@@ -42,10 +45,18 @@
   }
 
   function clearStudentSession(clearName = true) {
-    const hadSession = Boolean(accessState.studentSession);
+    const hadSession = Boolean(
+      accessState.studentSession
+      || window.localStorage.getItem(STUDENT_SESSION_KEY)
+      || window.sessionStorage.getItem(STUDENT_SESSION_KEY)
+    );
     accessState.studentSession = null;
+    accessState.loginClass = null;
+    accessState.loginStudents = [];
+    accessState.selectedStudent = null;
     window.localStorage.removeItem(STUDENT_SESSION_KEY);
-    if (clearName && hadSession) window.localStorage.setItem('mathStudent', '');
+    window.sessionStorage.removeItem(STUDENT_SESSION_KEY);
+    if (clearName) window.localStorage.setItem('mathStudent', '');
     return hadSession;
   }
 
@@ -182,9 +193,10 @@
 
   async function switchToGuest() {
     if (!await logoutTeacher()) return;
+    const hadStudentName = Boolean(window.localStorage.getItem('mathStudent'));
     const hadStudent = clearStudentSession(true);
-    const guestName = hadStudent ? '' : (window.localStorage.getItem('mathStudent') || '');
-    announceStudentIdentity(guestName, false, hadStudent);
+    closeStudentLogin();
+    announceStudentIdentity('', false, hadStudent || hadStudentName);
     renderAccessStatus();
   }
 
@@ -195,8 +207,9 @@
   }
 
   function switchToTeacherPanel() {
+    const hadStudentName = Boolean(window.localStorage.getItem('mathStudent'));
     const hadStudent = clearStudentSession(true);
-    if (hadStudent) announceStudentIdentity('', false, true);
+    if (hadStudent || hadStudentName) announceStudentIdentity('', false, true);
     renderAccessStatus();
     openTeacherPanel();
   }
@@ -385,8 +398,9 @@
       const profile = event.detail && event.detail.profile ? event.detail.profile : null;
       accessState.teacherProfile = profile;
       if (profile) {
+        const hadStudentName = Boolean(window.localStorage.getItem('mathStudent'));
         const hadStudent = clearStudentSession(true);
-        if (hadStudent) announceStudentIdentity('', false, true);
+        if (hadStudent || hadStudentName) announceStudentIdentity('', false, true);
       }
       renderAccessStatus();
     });
@@ -413,6 +427,10 @@
       }
     }
   }
+
+  window.accessControl = Object.freeze({
+    getCurrentRole: currentRole,
+  });
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initAccessControl, { once: true });
