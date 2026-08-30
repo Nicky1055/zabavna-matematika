@@ -422,6 +422,10 @@ function saveResult(game, score, total) {
   log.unshift({ student, game, score, total, date, duration });
   storage.setItem('mathLog', JSON.stringify(log.slice(0, 200)));
   renderLog();
+
+  if (window.dbService && typeof window.dbService.saveGameResult === 'function') {
+    void window.dbService.saveGameResult({ student, game, score, total, date, duration }).catch(() => {});
+  }
 }
 
 function renderLog() {
