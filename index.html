@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Забавна математика • Начален етап</title>
-  <link rel="stylesheet" href="style.css?v=20260831-4" />
+  <link rel="stylesheet" href="style.css?v=20260831-7" />
 </head>
 <body>
   <header class="hero">
@@ -132,6 +132,7 @@
         <button class="tab" data-tab="code">🔐 Таен код</button>
         <button class="tab" data-tab="balloons">🎈 Балони</button>
         <button class="tab" data-tab="teacher">🧑‍🏫 Учителски панел</button>
+        <button id="deviceResultsTab" class="tab" type="button" data-tab="deviceResults" hidden>Резултати на това устройство</button>
       </nav>
       <div class="mode-card wallpaper-card">
         <label for="wallpaperTheme">Тапет</label>
@@ -548,6 +549,8 @@
                     </div>
                     <button id="loadOnlineJournalBtn" class="btn" type="button">Отвори дневника</button>
                   </div>
+                  <p id="onlineJournalMessage" class="feedback" role="status" aria-live="polite" aria-atomic="true"></p>
+                  <p id="onlineJournalUpdatedAt" class="hint" hidden></p>
                   <div id="onlineJournal" class="online-journal" hidden>
                     <div class="teacher-table-wrap">
                       <table class="teacher-table teacher-table--journal">
@@ -557,7 +560,6 @@
                       <p id="onlineJournalEmpty" class="teacher-empty-row">Все още няма онлайн резултати за този клас.</p>
                     </div>
                   </div>
-                  <p id="onlineJournalMessage" class="feedback" aria-live="polite"></p>
                 </div>
               </section>
             </div>
@@ -592,14 +594,20 @@
             <p class="hint">Учениците могат да решават задачите в „Бърза тренировка“, а този списък е удобен за диктовка, работа по двойки или проектор.</p>
           </div>
         </div>
-        <div class="game-card">
-          <h3>Учителски дневник с резултати</h3>
-          <p class="hint">Тук се пазят завършените игри на децата в този браузър. Родителят може да ги види вкъщи, ако отвори същата страница без изчистване.</p>
-          <p id="teacherLogSummary" class="log-summary">Все още няма записани резултати.</p>
-          <div id="localLog" class="local-log"></div>
-          <button class="btn btn--secondary" id="clearLogBtn">Изчисти учителския дневник</button>
-          <p id="teacherLogMessage" class="feedback"></p>
+      </section>
+
+      <section id="deviceResults" class="panel" aria-labelledby="device-results-title" hidden>
+        <div class="panel-head">
+          <div>
+            <h2 id="device-results-title">Резултати на това устройство</h2>
+            <p>Свободна игра като гост · Само в този браузър</p>
+          </div>
         </div>
+        <p class="hint">Тези резултати не са част от класния онлайн дневник.</p>
+        <p id="teacherLogSummary" class="log-summary" aria-live="polite"></p>
+        <div id="localLog" class="local-log"></div>
+        <button class="btn btn--secondary" id="clearLogBtn" type="button" hidden>Изчисти резултатите на гостите</button>
+        <p id="teacherLogMessage" class="feedback" aria-live="polite"></p>
       </section>
     </section>
   </main>
@@ -612,8 +620,8 @@
   <script defer src="supabase-config.js"></script>
   <script defer src="auth-service.js?v=20260831-6"></script>
   <script defer src="db-service.js?v=20260831-6"></script>
-  <script defer src="app.js?v=20260831-4"></script>
-  <script defer src="teacher-panel.js?v=20260831-5"></script>
-  <script defer src="access-control.js?v=20260831-6"></script>
+  <script defer src="app.js?v=20260831-7"></script>
+  <script defer src="teacher-panel.js?v=20260831-8"></script>
+  <script defer src="access-control.js?v=20260831-7"></script>
 </body>
 </html>

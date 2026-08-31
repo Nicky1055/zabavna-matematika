@@ -1706,6 +1706,9 @@ fieldset label, .game-card label { display: block; margin: 8px 0; }
   border: 1px solid #ebe6ff;
 }
 
+#deviceResults .log-item { flex-wrap: wrap; }
+#deviceResults .log-item > span { min-width: 0; overflow-wrap: anywhere; }
+
 .teacher-online-shell {
   margin: 0 0 26px;
   border: 2px solid #d8d0ff;

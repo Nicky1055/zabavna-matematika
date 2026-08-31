@@ -2,6 +2,7 @@
   const STUDENT_SESSION_KEY = 'mathStudentSession';
   const accessState = {
     teacherProfile: null,
+    guestResultsReady: false,
     authRevision: 0,
     studentLoginRevision: 0,
     studentSession: readStudentSession(),
@@ -83,6 +84,23 @@
     return 'guest';
   }
 
+  function canViewDeviceResults() {
+    return accessState.guestResultsReady && currentRole() === 'guest';
+  }
+
+  function updateDeviceResultsAccess() {
+    const allowed = canViewDeviceResults();
+    const tab = element('deviceResultsTab');
+    const panel = element('deviceResults');
+    tab.hidden = !allowed;
+    panel.hidden = !allowed;
+    if (!allowed) {
+      tab.classList.remove('active');
+      if (panel.classList.contains('active')) showWelcomeScreen();
+    }
+    window.dispatchEvent(new CustomEvent('math:device-results-access'));
+  }
+
   function updateRoleButtons(role) {
     document.querySelectorAll('[data-access-role]').forEach(button => {
       const active = button.dataset.accessRole === role;
@@ -98,6 +116,7 @@
     document.body.classList.remove('access-mode-guest', 'access-mode-student', 'access-mode-teacher');
     document.body.classList.add(`access-mode-${role}`);
     updateRoleButtons(role);
+    updateDeviceResultsAccess();
 
     if (role === 'student') {
       const session = accessState.studentSession;
@@ -225,6 +244,7 @@
     resetStudentLogin();
     showWelcomeScreen();
     if (!await logoutTeacher()) return false;
+    accessState.guestResultsReady = true;
     const hadStudentName = Boolean(window.localStorage.getItem('mathStudent'));
     const hadStudent = clearStudentSession(true);
     closeStudentLogin();
@@ -484,13 +504,21 @@
     if (window.authService) {
       const revision = accessState.authRevision;
       const teacher = await window.authService.getCurrentProfile();
+      // Keep local results hidden while the initial teacher session is unresolved.
+      if (teacher.ok || ['no_session', 'not_configured'].includes(teacher.reason)) {
+        accessState.guestResultsReady = true;
+      }
       if (teacher.ok && revision === accessState.authRevision) {
         accessState.teacherProfile = teacher.profile;
         const hadStudent = clearStudentSession(true);
         if (hadStudent) announceStudentIdentity('', false, true);
         renderAccessStatus();
       }
+    } else {
+      accessState.guestResultsReady = true;
     }
+
+    renderAccessStatus();
 
     const restoredSession = accessState.studentSession;
     if (restoredSession && window.dbService.validateStudentSession) {
@@ -509,6 +537,7 @@
 
   window.accessControl = Object.freeze({
     getCurrentRole: currentRole,
+    canViewDeviceResults,
     switchToGuest,
   });
 
