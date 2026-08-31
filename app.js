@@ -474,12 +474,17 @@ function initTabs() {
   document.querySelectorAll('[data-game-home]').forEach(button => button.addEventListener('click', returnToWelcome));
   document.querySelectorAll('.tab').forEach(btn => {
     btn.addEventListener('click', () => {
+      if (btn.hidden || (btn.dataset.tab === 'deviceResults' && !window.accessControl?.canViewDeviceResults())) return;
       document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
       document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
       btn.classList.add('active');
       $(btn.dataset.tab).classList.add('active');
+      if (btn.dataset.tab === 'deviceResults') {
+        $('deviceResults').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     });
   });
+  window.addEventListener('math:device-results-access', renderLog);
 }
 
 function escapeHtml(value) {
@@ -522,16 +527,25 @@ function saveResult(game, score, total, starsEarned = 0) {
 }
 
 function renderLog() {
-  const log = readSavedList('mathLog');
   const box = $('localLog');
   const summary = $('teacherLogSummary');
+  const clearButton = $('clearLogBtn');
+  if (!window.accessControl?.canViewDeviceResults()) {
+    box.innerHTML = '';
+    if (summary) summary.textContent = '';
+    clearButton.hidden = true;
+    setFeedback($('teacherLogMessage'), '');
+    return;
+  }
+  const log = readSavedList('mathLog').filter(item => item?.student === 'Гост');
+  clearButton.hidden = !log.length;
   if (summary) {
     summary.textContent = log.length
-      ? `Записани резултати: ${log.length}. Те ще останат тук, докато учителят не ги изтрие.`
-      : 'Все още няма записани резултати.';
+      ? `Завършени игри като гост: ${log.length}`
+      : 'Все още няма резултати от игри като гост на това устройство.';
   }
   if (!log.length) {
-    box.innerHTML = '<p class="hint">Все още няма записани резултати.</p>';
+    box.innerHTML = '';
     return;
   }
   box.innerHTML = log.map(item => `
@@ -543,11 +557,16 @@ function renderLog() {
 }
 
 function clearTeacherResults() {
-  if (!window.confirm('Да се изтрият ли всички записани резултати от учителския дневник?')) return;
-  storage.removeItem('mathLog');
+  if (!window.accessControl?.canViewDeviceResults()) return;
+  const log = readSavedList('mathLog');
+  if (!log.some(item => item?.student === 'Гост')) return;
+  if (!window.confirm('Да се изтрият ли резултатите на гостите от този браузър? Онлайн дневникът няма да бъде променен.')) return;
+  const retained = log.filter(item => item?.student !== 'Гост');
+  if (retained.length) storage.setItem('mathLog', JSON.stringify(retained));
+  else storage.removeItem('mathLog');
   renderLog();
   const message = $('teacherLogMessage');
-  if (message) setFeedback(message, 'Учителският дневник е изчистен.', 'good');
+  if (message) setFeedback(message, 'Резултатите на гостите от този браузър са изчистени.', 'good');
 }
 
 function resetStudentProgress(message = '') {

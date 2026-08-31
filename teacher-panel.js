@@ -15,6 +15,7 @@
     selectedClass: null,
     students: [],
     results: [],
+    journalUpdatedAt: null,
     authRevision: 0,
     classesRequest: 0,
     studentsRequest: 0,
@@ -118,6 +119,9 @@
     panelState.selectedClass = null;
     panelState.students = [];
     panelState.results = [];
+    panelState.journalUpdatedAt = null;
+    element('onlineJournalUpdatedAt').textContent = '';
+    element('onlineJournalUpdatedAt').hidden = true;
     ['teacherClassList', 'classStudentRows', 'onlineJournalRows'].forEach(id => { element(id).innerHTML = ''; });
     ['selected-class-title', 'selectedClassSchool', 'selectedClassCode',
       'teacherProfileName', 'teacherProfileSchool', 'teacherRoleBadge',
@@ -269,6 +273,9 @@
     panelState.journalRequest += 1;
     panelState.students = [];
     panelState.results = [];
+    panelState.journalUpdatedAt = null;
+    element('onlineJournalUpdatedAt').textContent = '';
+    element('onlineJournalUpdatedAt').hidden = true;
     renderStudents();
     renderOnlineJournal();
     setButtonBusy(element('loadOnlineJournalBtn'), false);
@@ -333,10 +340,24 @@
       return;
     }
 
+    const previousIds = new Set(panelState.results.map(item => item.id));
+    const newCount = result.data.filter(item => !previousIds.has(item.id)).length;
+    const message = !panelState.journalUpdatedAt
+      ? 'Дневникът е зареден.'
+      : newCount === 0
+        ? 'Дневникът е обновен. Няма нови резултати.'
+        : newCount === 1
+          ? 'Дневникът е обновен. Добавен е 1 нов резултат.'
+          : `Дневникът е обновен. Добавени са ${newCount} нови резултата.`;
     panelState.results = result.data;
+    panelState.journalUpdatedAt = new Date();
     renderOnlineJournal();
     element('onlineJournal').hidden = false;
     button.textContent = 'Обнови дневника';
+    setMessage('onlineJournalMessage', message, 'good');
+    const updatedAt = element('onlineJournalUpdatedAt');
+    updatedAt.textContent = `Последно успешно обновяване: ${panelState.journalUpdatedAt.toLocaleString('bg-BG', { dateStyle: 'short', timeStyle: 'medium' })}`;
+    updatedAt.hidden = false;
   }
 
   async function loadAdminOverview() {

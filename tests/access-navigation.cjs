@@ -79,8 +79,10 @@ async function environment(initialProfile = null, initialStudent = null, options
   }
   function node(id) { if (!nodes.has(id)) nodes.set(id, new Element(id)); return nodes.get(id); }
   for (const match of html.matchAll(/\bid="([^"]+)"/g)) node(match[1]);
-  const panels = ['welcome', 'training', 'bingo', 'families', 'robot', 'treasure', 'code', 'balloons', 'teacher'].map(node);
-  const tabs = panels.slice(1).map(panel => { const tab = node('tab-' + panel.id); tab.dataset.tab = panel.id; return tab; });
+  const panels = ['welcome', 'training', 'bingo', 'families', 'robot', 'treasure', 'code', 'balloons', 'teacher', 'deviceResults'].map(node);
+  const tabs = panels.slice(1).map(panel => { const tab = node(panel.id === 'deviceResults' ? 'deviceResultsTab' : 'tab-' + panel.id); tab.dataset.tab = panel.id; return tab; });
+  node('deviceResults').hidden = true;
+  node('deviceResultsTab').hidden = true;
   const roles = ['guest', 'student', 'teacher'].map(role => { const button = node(role + 'AccessBtn'); button.dataset.accessRole = role; return button; });
   const homeButtons = panels.slice(1, 8).map(panel => node('home-' + panel.id));
   const familyInputs = [...nodes.values()].filter(item => /^f[1-4][abc]$/.test(item.id));
@@ -126,6 +128,7 @@ async function environment(initialProfile = null, initialStudent = null, options
     dispatchEvent(event) { for (const fn of windowEvents.get(event.type) || []) fn(event); },
     authService: {
       async getCurrentProfile() {
+        options.inspectAuthPending?.(node);
         const result = currentProfile ? { ok: true, profile: currentProfile } : { ok: false, reason: 'no_session' };
         const delay = profileReadDelay;
         profileReadDelay = null;
