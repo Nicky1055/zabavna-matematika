@@ -376,6 +376,21 @@ button, input, select { font: inherit; }
 .student-login-message { min-height: 24px; margin-bottom: 0; }
 .eyebrow { margin: 0 0 10px; text-transform: uppercase; letter-spacing: .12em; font-weight: 800; opacity: .9; }
 h1 { margin: 0; font-size: clamp(2rem, 5vw, 4rem); line-height: 1; }
+.site-home-button {
+  display: block;
+  max-width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: inherit;
+  cursor: pointer;
+}
+.site-home-button:focus-visible, .btn--home:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: 4px;
+}
 .subtitle { font-size: 1.15rem; max-width: 760px; line-height: 1.5; }
 
 .answer-row input, select, .family-input {
@@ -670,6 +685,7 @@ h1 { margin: 0; font-size: clamp(2rem, 5vw, 4rem); line-height: 1; }
 }
 .panel-head {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: flex-start;
   gap: 16px;
@@ -677,6 +693,15 @@ h1 { margin: 0; font-size: clamp(2rem, 5vw, 4rem); line-height: 1; }
 }
 .panel-head h2 { margin: 0 0 6px; font-size: 1.65rem; }
 .panel-head p { margin: 0; color: var(--muted); line-height: 1.5; }
+.panel-head > :first-child { flex: 1 1 260px; min-width: 0; }
+.panel-head-actions {
+  display: flex;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+  justify-content: flex-end;
+  gap: 10px;
+  max-width: 100%;
+}
 
 .btn {
   border: 0;
@@ -2059,6 +2084,8 @@ fieldset label, .game-card label { display: block; margin: 8px 0; }
   .side-card { position: static; }
   .tabs { grid-template-columns: repeat(2, 1fr); }
   .panel-head, .progress-line { flex-direction: column; }
+  .panel-head > :first-child { flex-basis: auto; }
+  .panel-head-actions { align-self: stretch; justify-content: flex-start; }
   .settings-grid, .teacher-grid { grid-template-columns: 1fr; }
   .choice-grid { grid-template-columns: repeat(2, 1fr); }
   .balloon-field { grid-template-columns: repeat(3, 1fr); }
@@ -2079,6 +2106,8 @@ fieldset label, .game-card label { display: block; margin: 8px 0; }
   .student-login-progress span { padding: 7px 3px; font-size: .74rem; }
   .layout { padding: 0 14px; }
   .panel { padding: 16px; border-radius: 20px; }
+  .panel-head-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .panel-head-actions .btn { min-width: 0; padding: 12px 10px; font-size: 1rem; }
   .welcome-panel { min-height: 0; padding: 24px 16px; }
   .welcome-heading h2 { font-size: 2rem; }
   .welcome-guide-row { grid-template-columns: 48px minmax(0, 1fr); gap: 12px; padding: 15px 13px; }

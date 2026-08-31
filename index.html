@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Забавна математика • Начален етап</title>
-  <link rel="stylesheet" href="style.css?v=20260831-1" />
+  <link rel="stylesheet" href="style.css?v=20260831-4" />
 </head>
 <body>
   <header class="hero">
@@ -32,7 +32,7 @@
       </section>
 
       <p class="eyebrow">Умножение и деление • Начален етап</p>
-      <h1>Математически игри след ваканцията</h1>
+      <h1><button id="siteHomeBtn" class="site-home-button" type="button" title="Към началото в режим Гост">Математически игри след ваканцията</button></h1>
       <p class="subtitle">Весели математически мисии с точки, похвали и задачи за смели ученици и млади математици.</p>
     </div>
   </header>
@@ -156,7 +156,7 @@
         <div class="welcome-heading">
           <span class="welcome-sparkles" aria-hidden="true">✦ ⭐ ✦</span>
           <p class="welcome-kicker">Математическите приключения започват тук</p>
-          <h2 id="welcome-title">Добре дошли в Забавна Математика!</h2>
+          <h2 id="welcome-title" tabindex="-1">Добре дошли в Забавна Математика!</h2>
           <p>Избери как искаш да играеш, а после отвори любима игра от менюто вляво.</p>
         </div>
 
@@ -191,7 +191,10 @@
             <h2 id="training-title">⚡ Бърза тренировка</h2>
             <p>Избери режим от менюто и събери звезди с бързи, весели задачи.</p>
           </div>
-          <button class="btn" id="startTrainingBtn">Хайде, старт</button>
+          <div class="panel-head-actions">
+            <button class="btn" id="startTrainingBtn">Хайде, старт</button>
+            <button class="btn btn--ghost btn--home" type="button" data-game-home>🏠 Начало</button>
+          </div>
         </div>
 
         <div class="settings-grid settings-grid--compact">
@@ -234,7 +237,10 @@
             <h2 id="bingo-title">🎯 Математическо бинго</h2>
             <p>Реши задачата, намери числото и направи весел бинго ред.</p>
           </div>
-          <button class="btn" id="newBingoBtn">Играй бинго</button>
+          <div class="panel-head-actions">
+            <button class="btn" id="newBingoBtn">Играй бинго</button>
+            <button class="btn btn--ghost btn--home" type="button" data-game-home>🏠 Начало</button>
+          </div>
         </div>
         <div class="game-card">
           <div class="progress-line"><span id="bingoCall">Натисни „Ново бинго“.</span><span id="bingoMoves"></span></div>
@@ -251,7 +257,10 @@
             <h2 id="families-title">👨‍👩‍👧 Открий семейството</h2>
             <p>Три числа са едно семейство. Подреди ги в четири верни равенства.</p>
           </div>
-          <button class="btn" id="newFamilyBtn">Ново семейство</button>
+          <div class="panel-head-actions">
+            <button class="btn" id="newFamilyBtn">Ново семейство</button>
+            <button class="btn btn--ghost btn--home" type="button" data-game-home>🏠 Начало</button>
+          </div>
         </div>
         <div class="game-card family-card">
           <div class="family-sky" aria-hidden="true"><span>✦</span><span>★</span><span>✦</span></div>
@@ -277,7 +286,10 @@
             <h2 id="robot-title">🤖 Грешката на робота</h2>
             <p>Роботът се учи. Помогни му да разбере кога е сметнал правилно.</p>
           </div>
-          <button class="btn" id="newRobotBtn">Нов опит</button>
+          <div class="panel-head-actions">
+            <button class="btn" id="newRobotBtn">Нов опит</button>
+            <button class="btn btn--ghost btn--home" type="button" data-game-home>🏠 Начало</button>
+          </div>
         </div>
         <div class="game-card robot-card" id="robotCard">
           <div class="robot-lights" aria-hidden="true"><span></span><span></span><span></span></div>
@@ -309,7 +321,10 @@
             <h2 id="treasure-title">🗺️ Лов на съкровище</h2>
             <p>Всяка вярна задача отключва следа. Напред към съкровището.</p>
           </div>
-          <button class="btn" id="startTreasureBtn">Тръгваме</button>
+          <div class="panel-head-actions">
+            <button class="btn" id="startTreasureBtn">Тръгваме</button>
+            <button class="btn btn--ghost btn--home" type="button" data-game-home>🏠 Начало</button>
+          </div>
         </div>
         <div class="game-card treasure-card" id="treasureCard">
           <div class="treasure-scene" aria-hidden="true">
@@ -335,7 +350,10 @@
             <h2 id="code-title">🔐 Кодът на тайното съобщение</h2>
             <p>Решавай задачи и разкривай буквите една по една.</p>
           </div>
-          <button class="btn" id="newCodeBtn">Нов таен код</button>
+          <div class="panel-head-actions">
+            <button class="btn" id="newCodeBtn">Нов таен код</button>
+            <button class="btn btn--ghost btn--home" type="button" data-game-home>🏠 Начало</button>
+          </div>
         </div>
         <div class="game-card code-card">
           <div id="secretMessage" class="secret-message">_ _ _ _ _</div>
@@ -354,7 +372,10 @@
             <h2 id="balloons-title">🎈 Математически балони</h2>
             <p>Реши задачата и пукни балона с правилния отговор.</p>
           </div>
-          <button class="btn" id="newBalloonsBtn">Пусни балоните</button>
+          <div class="panel-head-actions">
+            <button class="btn" id="newBalloonsBtn">Пусни балоните</button>
+            <button class="btn btn--ghost btn--home" type="button" data-game-home>🏠 Начало</button>
+          </div>
         </div>
         <div class="game-card balloon-card">
           <div class="progress-line"><span id="balloonProgress">Натисни „Нова игра“.</span><span id="balloonScore"></span></div>
@@ -589,10 +610,10 @@
 
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="supabase-config.js"></script>
-  <script defer src="auth-service.js?v=20260830-1"></script>
+  <script defer src="auth-service.js?v=20260831-3"></script>
   <script defer src="db-service.js?v=20260830-2"></script>
-  <script defer src="app.js?v=20260831-1"></script>
-  <script defer src="teacher-panel.js?v=20260831-2"></script>
-  <script defer src="access-control.js?v=20260831-2"></script>
+  <script defer src="app.js?v=20260831-4"></script>
+  <script defer src="teacher-panel.js?v=20260831-3"></script>
+  <script defer src="access-control.js?v=20260831-4"></script>
 </body>
 </html>

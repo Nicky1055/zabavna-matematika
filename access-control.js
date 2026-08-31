@@ -2,6 +2,8 @@
   const STUDENT_SESSION_KEY = 'mathStudentSession';
   const accessState = {
     teacherProfile: null,
+    authRevision: 0,
+    studentLoginRevision: 0,
     studentSession: readStudentSession(),
     loginClass: null,
     loginStudents: [],
@@ -140,6 +142,7 @@
   }
 
   function resetStudentLogin() {
+    accessState.studentLoginRevision += 1;
     accessState.loginClass = null;
     accessState.loginStudents = [];
     accessState.selectedStudent = null;
@@ -164,6 +167,7 @@
   }
 
   function closeStudentLogin() {
+    accessState.studentLoginRevision += 1;
     const dialog = element('studentLoginDialog');
     element('studentPinLoginForm').reset();
     element('studentLoginPin').type = 'password';
@@ -181,6 +185,10 @@
   }
 
   function showWelcomeScreen() {
+    if (window.mathGamesNavigation) {
+      window.mathGamesNavigation.returnToWelcome();
+      return;
+    }
     document.querySelectorAll('.tab').forEach(button => button.classList.remove('active'));
     document.querySelectorAll('.panel').forEach(panel => {
       panel.classList.toggle('active', panel.id === 'welcome');
@@ -188,17 +196,25 @@
   }
 
   async function logoutTeacher() {
-    if (!accessState.teacherProfile || !window.authService) return true;
+    accessState.authRevision += 1;
+    window.dispatchEvent(new CustomEvent('math:teacher-logout-start'));
+    if (!window.authService && !accessState.teacherProfile) return true;
+    if (!window.authService) return false;
     const result = await window.authService.logoutTeacher();
+    if (result.reason === 'not_configured' && !accessState.teacherProfile) return true;
     if (!result.ok) {
       element('accessStatusText').textContent = 'Изходът не беше успешен. Опитайте отново.';
       return false;
     }
     accessState.teacherProfile = null;
+    window.dispatchEvent(new CustomEvent('math:teacher-signed-out'));
     return true;
   }
 
   async function switchToGuest() {
+    closeStudentLogin();
+    resetStudentLogin();
+    showWelcomeScreen();
     if (!await logoutTeacher()) return false;
     const hadStudentName = Boolean(window.localStorage.getItem('mathStudent'));
     const hadStudent = clearStudentSession(true);
@@ -244,6 +260,7 @@
 
   async function findStudentClass(event) {
     event.preventDefault();
+    const revision = accessState.studentLoginRevision;
     const codeInput = element('studentClassCode');
     const classCode = codeInput.value.trim().toUpperCase().replace(/\s+/g, '');
     codeInput.value = classCode;
@@ -257,6 +274,10 @@
     setButtonBusy(button, true, 'Търсене...');
     setStudentLoginMessage('');
     const classResult = await window.dbService.getClassByCode(classCode);
+    if (revision !== accessState.studentLoginRevision) {
+      setButtonBusy(button, false);
+      return;
+    }
     if (!classResult.ok) {
       setButtonBusy(button, false);
       setStudentLoginMessage(studentLoginError(classResult, 'Класът не можа да се зареди.'), 'bad');
@@ -265,6 +286,7 @@
 
     const studentsResult = await window.dbService.getStudentsForLogin(classResult.data.id);
     setButtonBusy(button, false);
+    if (revision !== accessState.studentLoginRevision) return;
     if (!studentsResult.ok) {
       setStudentLoginMessage(studentLoginError(studentsResult, 'Списъкът с ученици не можа да се зареди.'), 'bad');
       return;
@@ -295,6 +317,8 @@
   async function completeStudentLogin(event) {
     event.preventDefault();
     if (!accessState.loginClass || !accessState.selectedStudent) return setStudentLoginStep(1);
+    const revision = accessState.studentLoginRevision;
+    const loginClass = accessState.loginClass;
     const pinInput = element('studentLoginPin');
     const pinCode = pinInput.value.trim();
     if (!/^\d{4}$/.test(pinCode)) {
@@ -311,6 +335,10 @@
       accessState.loginClass.id,
       pinCode,
     );
+    if (revision !== accessState.studentLoginRevision) {
+      setButtonBusy(button, false);
+      return;
+    }
     if (!result.ok) {
       setButtonBusy(button, false);
       setStudentLoginMessage(studentLoginError(result, 'Входът не беше успешен.'), 'bad');
@@ -324,14 +352,18 @@
       setStudentLoginMessage('Първо излезте от учителския профил.', 'bad');
       return;
     }
+    if (revision !== accessState.studentLoginRevision) {
+      setButtonBusy(button, false);
+      return;
+    }
 
     const session = {
       studentId: result.data.id,
-      classId: accessState.loginClass.id,
+      classId: loginClass.id,
       studentNumber: result.data.student_number,
       studentName: result.data.display_name,
-      className: accessState.loginClass.class_name,
-      classCode: accessState.loginClass.class_code,
+      className: loginClass.class_name,
+      classCode: loginClass.class_code,
     };
     saveStudentSession(session);
     setButtonBusy(button, false);
@@ -380,6 +412,7 @@
 
   function bindAccessEvents() {
     element('guestAccessBtn').addEventListener('click', () => void switchToGuest());
+    element('siteHomeBtn')?.addEventListener('click', () => void switchToGuest());
     element('studentAccessBtn').addEventListener('click', () => void switchToStudentLogin());
     element('teacherAccessBtn').addEventListener('click', switchToTeacherPanel);
     element('closeStudentLoginBtn').addEventListener('click', closeStudentLogin);
@@ -407,6 +440,8 @@
     });
     window.addEventListener('math:teacher-access', event => {
       const profile = event.detail && event.detail.profile ? event.detail.profile : null;
+      const hadTeacher = Boolean(accessState.teacherProfile);
+      accessState.authRevision += 1;
       accessState.teacherProfile = profile;
       if (profile) {
         const hadStudentName = Boolean(window.localStorage.getItem('mathStudent'));
@@ -414,6 +449,7 @@
         if (hadStudent || hadStudentName) announceStudentIdentity('', false, true);
       }
       renderAccessStatus();
+      if (hadTeacher && !profile) showWelcomeScreen();
     });
     bindPinReveal();
   }
@@ -429,7 +465,9 @@
     }
 
     if (window.authService) {
+      const revision = accessState.authRevision;
       const teacher = await window.authService.getCurrentProfile();
+      if (revision !== accessState.authRevision) return;
       if (teacher.ok) {
         accessState.teacherProfile = teacher.profile;
         const hadStudent = clearStudentSession(true);

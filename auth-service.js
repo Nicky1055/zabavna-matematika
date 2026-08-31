@@ -146,8 +146,15 @@
       const client = getClient();
       if (!client) return { ok: false, reason: 'not_configured' };
 
+      const { data: current, error: sessionError } = await client.auth.getSession();
+      if (sessionError) return failed('Session lookup before logout', sessionError);
+      if (!current.session) return { ok: true };
+
       const { error } = await client.auth.signOut();
       if (error) return failed('Teacher logout', error);
+      const { data: remaining, error: verificationError } = await client.auth.getSession();
+      if (verificationError) return failed('Logout verification', verificationError);
+      if (remaining.session) return { ok: false, reason: 'session_not_cleared' };
       return { ok: true };
     } catch (error) {
       return failed('Teacher logout', error);

@@ -15,7 +15,7 @@
     selectedClass: null,
     students: [],
     results: [],
-    refreshingAuth: false,
+    authRevision: 0,
   };
 
   function element(id) {
@@ -92,12 +92,22 @@
   function clearAuthForms() {
     ['teacherLoginForm', 'teacherRegisterForm'].forEach(id => {
       const form = element(id);
+      form.querySelectorAll('input').forEach(input => {
+        input.defaultValue = '';
+        input.removeAttribute('value');
+        input.value = '';
+      });
       form.reset();
-      form.querySelectorAll('input').forEach(input => { input.value = ''; });
     });
   }
 
+  function invalidateAuthState() {
+    panelState.authRevision += 1;
+    clearAuthForms();
+  }
+
   function showSignedOut() {
+    invalidateAuthState();
     panelState.profile = null;
     panelState.classes = [];
     panelState.selectedClass = null;
@@ -111,6 +121,7 @@
   }
 
   function showSignedIn(profile) {
+    clearAuthForms();
     panelState.profile = profile;
     element('teacherAuthPanel').hidden = true;
     element('teacherDashboard').hidden = false;
@@ -123,22 +134,19 @@
   }
 
   async function refreshAuthState() {
-    if (panelState.refreshingAuth || !window.authService) return;
-    panelState.refreshingAuth = true;
-
-    try {
-      const result = await window.authService.getCurrentProfile();
-      if (!result.ok) {
-        showSignedOut();
-        return;
-      }
-
-      showSignedIn(result.profile);
-      await loadClasses();
-      if (result.profile.role === 'admin') await loadAdminOverview();
-    } finally {
-      panelState.refreshingAuth = false;
+    if (!window.authService) return;
+    const revision = ++panelState.authRevision;
+    const result = await window.authService.getCurrentProfile();
+    // A response started before logout must not restore the previous account.
+    if (revision !== panelState.authRevision) return;
+    if (!result.ok) {
+      showSignedOut();
+      return;
     }
+
+    showSignedIn(result.profile);
+    await loadClasses();
+    if (revision === panelState.authRevision && result.profile.role === 'admin') await loadAdminOverview();
   }
 
   function renderClassList() {
@@ -283,6 +291,9 @@
   }
 
   function bindAuthEvents() {
+    document.querySelector('.tab[data-tab="teacher"]')?.addEventListener('click', () => {
+      if (!panelState.profile) clearAuthForms();
+    });
     element('showTeacherLoginBtn').addEventListener('click', () => showAuthMode('login'));
     element('showTeacherRegisterBtn').addEventListener('click', () => showAuthMode('register'));
 
@@ -309,7 +320,7 @@
         return;
       }
 
-      form.reset();
+      clearAuthForms();
       await refreshAuthState();
     });
 
@@ -338,7 +349,7 @@
         return;
       }
 
-      form.reset();
+      clearAuthForms();
       if (result.requiresEmailConfirmation) {
         showAuthMode('login');
         setMessage('teacherAuthMessage', 'Регистрацията е готова. Проверете имейла си и потвърдете профила.', 'good');
@@ -528,16 +539,22 @@
     if (!window.authService || !window.dbService || !element('teacherAuthPanel')) return;
     bindAuthEvents();
     bindClassEvents();
-    window.addEventListener('math:guest-access', () => {
-      clearAuthForms();
-      showSignedOut();
-    });
-    const authListener = window.authService.onAuthStateChange(() => {
+    window.addEventListener('math:teacher-logout-start', invalidateAuthState);
+    window.addEventListener('math:teacher-signed-out', showSignedOut);
+    window.addEventListener('math:guest-access', showSignedOut);
+    window.authService.onAuthStateChange(event => {
+      if (event === 'SIGNED_OUT') {
+        showSignedOut();
+        return;
+      }
       window.setTimeout(refreshAuthState, 0);
     });
-    if (authListener && authListener.data && authListener.data.subscription) {
-      window.addEventListener('pagehide', () => authListener.data.subscription.unsubscribe(), { once: true });
-    }
+    window.addEventListener('pagehide', clearAuthForms);
+    window.addEventListener('pageshow', event => {
+      if (!event.persisted) return;
+      clearAuthForms();
+      void refreshAuthState();
+    });
     void refreshAuthState();
   }
 
