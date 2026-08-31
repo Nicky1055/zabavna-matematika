@@ -271,7 +271,6 @@ button, input, select { font: inherit; }
   cursor: pointer;
 }
 .access-status-action:hover, .access-status-action:focus-visible { background: rgba(255, 255, 255, .28); outline: none; }
-body.access-mode-student .student-row, body.access-mode-teacher .student-row { display: none; }
 
 .student-login-dialog {
   width: min(650px, calc(100% - 24px));
@@ -379,15 +378,7 @@ body.access-mode-student .student-row, body.access-mode-teacher .student-row { d
 h1 { margin: 0; font-size: clamp(2rem, 5vw, 4rem); line-height: 1; }
 .subtitle { font-size: 1.15rem; max-width: 760px; line-height: 1.5; }
 
-.student-row {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  align-items: center;
-  margin-top: 20px;
-}
-
-.student-row input, .answer-row input, select, .family-input {
+.answer-row input, select, .family-input {
   border: 2px solid rgba(32, 33, 36, .12);
   border-radius: 18px;
   padding: 14px 16px;
@@ -395,7 +386,7 @@ h1 { margin: 0; font-size: clamp(2rem, 5vw, 4rem); line-height: 1; }
   outline: none;
   background: white;
 }
-.student-row input:focus, .answer-row input:focus, select:focus, .family-input:focus { border-color: var(--primary); }
+.answer-row input:focus, select:focus, .family-input:focus { border-color: var(--primary); }
 
 .layout {
   display: grid;

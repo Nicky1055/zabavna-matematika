@@ -414,7 +414,7 @@
     if (accessState.studentSession) {
       announceStudentIdentity(accessState.studentSession.studentName, true, false);
     } else {
-      announceStudentIdentity(window.localStorage.getItem('mathStudent') || '', false, false);
+      announceStudentIdentity('', false, false);
     }
 
     if (window.authService) {

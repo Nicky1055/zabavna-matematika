@@ -38,7 +38,7 @@ function readSavedList(key) {
 
 const state = {
   stars: Number(storage.getItem('mathStars') || 0),
-  student: storage.getItem('mathStudent') || '',
+  student: 'Гост',
   timerStartedAt: Number(storage.getItem('mathTimerStartedAt') || 0),
   timerElapsedMs: Number(storage.getItem('mathTimerElapsedMs') || 0),
   timerRunning: storage.getItem('mathTimerRunning') === 'true',
@@ -426,7 +426,7 @@ const GAME_RESULT_KEYS = Object.freeze({
 
 function saveResult(game, score, total, starsEarned = 0) {
   const log = readSavedList('mathLog');
-  const student = state.student || 'Ученик';
+  const student = state.student || 'Гост';
   const date = new Date().toLocaleString('bg-BG', { dateStyle: 'short', timeStyle: 'short' });
   const duration = currentElapsedTime();
   log.unshift({ student, game, score, total, date, duration });
@@ -507,33 +507,17 @@ function resetStudentProgress(message = '') {
 }
 
 function initStudent() {
-  $('studentName').value = state.student;
+  storage.setItem('mathStudent', state.student);
   window.addEventListener('math:student-access', event => {
     const detail = event.detail || {};
-    const newStudent = String(detail.name || '').trim();
+    const newStudent = detail.locked ? String(detail.name || '').trim() || 'Гост' : 'Гост';
     const oldStudent = state.student;
-    const locked = Boolean(detail.locked);
     state.student = newStudent;
     storage.setItem('mathStudent', state.student);
-    $('studentName').value = state.student;
-    $('studentName').readOnly = locked;
-    $('saveStudentBtn').hidden = locked;
 
     if (detail.resetProgress && newStudent !== oldStudent) {
       const label = newStudent || 'Гост';
       resetStudentProgress(`${label} започва начисто. Успех! ⭐`);
-    }
-  });
-  $('saveStudentBtn').addEventListener('click', () => {
-    const newStudent = $('studentName').value.trim();
-    const oldStudent = state.student;
-    state.student = newStudent;
-    storage.setItem('mathStudent', state.student);
-    if (newStudent !== oldStudent) {
-      const label = newStudent || 'Нов ученик';
-      resetStudentProgress(`${label} започва начисто. Успех! ⭐`);
-    } else {
-      setFeedback($('trainingFeedback'), 'Името е запазено. Продължаваме смело!', 'good');
     }
   });
 }
