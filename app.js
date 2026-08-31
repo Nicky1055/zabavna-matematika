@@ -38,7 +38,7 @@ function readSavedList(key) {
 
 const state = {
   stars: Number(storage.getItem('mathStars') || 0),
-  student: storage.getItem('mathStudent') || '',
+  student: 'Гост',
   timerStartedAt: Number(storage.getItem('mathTimerStartedAt') || 0),
   timerElapsedMs: Number(storage.getItem('mathTimerElapsedMs') || 0),
   timerRunning: storage.getItem('mathTimerRunning') === 'true',
@@ -58,7 +58,78 @@ let applausePlayer = null;
 let applauseStopId = null;
 let applauseFadeStartId = null;
 let applauseFadeId = null;
+let applausePlaybackRevision = 0;
 let lastWrongSoundAt = -Infinity;
+const pendingGameTimeouts = new Set();
+
+function scheduleGameTimeout(callback, delay) {
+  const id = setTimeout(() => {
+    pendingGameTimeouts.delete(id);
+    callback();
+  }, delay);
+  pendingGameTimeouts.add(id);
+  return id;
+}
+
+function stopGameActivity() {
+  clearTrainingAdvance();
+  pendingGameTimeouts.forEach(id => clearTimeout(id));
+  pendingGameTimeouts.clear();
+  pauseTimer(state.timerPausedManually);
+  stopApplausePlayback();
+  const audio = sharedAudio;
+  sharedAudio = null;
+  if (audio && audio.state !== 'closed') void audio.close().catch(() => {});
+  document.querySelectorAll('.code-fireworks-screen').forEach(overlay => overlay.remove());
+}
+
+function clearGameSession() {
+  state.training = { tasks: [], index: 0, score: 0, checked: false, completed: false, autoAdvanceId: null };
+  state.bingo = { board: [], marked: new Set(), current: null, moves: 0, wrongs: 0, won: false, lost: false };
+  state.family = null;
+  state.robot = null;
+  state.treasure = { tasks: [], index: 0 };
+  state.code = { tasks: [], index: 0, letters: [] };
+  state.balloons = { task: null, round: 0, score: 0, total: 8, answered: false };
+
+  ['trainingTask', 'trainingScore', 'trainingHint', 'bingoMoves', 'familyNumbers', 'robotSpeech',
+    'treasureTask', 'codeTask', 'balloonTask', 'balloonScore'].forEach(id => { $(id).textContent = ''; });
+  ['bingoBoard', 'robotChoices', 'treasureTrack', 'secretMessage', 'balloonField'].forEach(id => { $(id).innerHTML = ''; });
+  ['trainingFeedback', 'bingoFeedback', 'familyFeedback', 'robotFeedback', 'treasureFeedback',
+    'codeFeedback', 'balloonFeedback'].forEach(id => setFeedback($(id), ''));
+  document.querySelectorAll('.family-input, #trainingAnswer, #treasureAnswer, #codeAnswer').forEach(input => {
+    input.value = '';
+    input.disabled = false;
+  });
+  $('trainingProgress').textContent = 'Натисни „Хайде, старт“.';
+  $('trainingTask').textContent = '🌟';
+  $('trainingTask').classList.remove('is-hidden');
+  $('checkTrainingBtn').disabled = true;
+  $('bingoCall').textContent = 'Натисни „Играй бинго“.';
+  $('robotSpeech').textContent = 'Натисни „Нов опит“.';
+  $('balloonProgress').textContent = 'Натисни „Пусни балоните“.';
+  hideTrainingCelebration();
+  hideBingoCelebration();
+  hideFamilyCelebration();
+  hideRobotCelebration();
+  hideTreasureCelebration();
+  setRobotMood('');
+  setTreasureMood('');
+  document.querySelector('.family-grid')?.classList.remove('family-success', 'family-shake');
+  $('familyNumbers').classList.remove('family-pop');
+  $('secretMessage').classList.remove('celebrate');
+}
+
+function returnToWelcome() {
+  stopGameActivity();
+  clearGameSession();
+  document.querySelectorAll('.tab').forEach(button => button.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(panel => panel.classList.toggle('active', panel.id === 'welcome'));
+  $('welcome-title').focus({ preventScroll: true });
+  $('welcome').scrollIntoView({ block: 'start', behavior: 'auto' });
+}
+
+window.mathGamesNavigation = Object.freeze({ returnToWelcome });
 
 function getAudio() {
   const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -117,6 +188,7 @@ function clearApplauseTimers() {
 }
 
 function stopApplausePlayback() {
+  applausePlaybackRevision += 1;
   clearApplauseTimers();
   if (applausePlayer) {
     applausePlayer.pause();
@@ -127,6 +199,7 @@ function stopApplausePlayback() {
 
 function playCheerfulApplause(duration = 4.8) {
   try {
+    const revision = ++applausePlaybackRevision;
     const sound = getApplausePlayer();
     clearApplauseTimers();
     sound.pause();
@@ -139,6 +212,7 @@ function playCheerfulApplause(duration = 4.8) {
 
     const playPromise = sound.play();
     const stopAfterCelebration = () => {
+      if (revision !== applausePlaybackRevision) return;
       applauseFadeStartId = setTimeout(() => {
         const steps = 32;
         let step = 0;
@@ -154,7 +228,9 @@ function playCheerfulApplause(duration = 4.8) {
       applauseStopId = setTimeout(stopApplausePlayback, totalDuration * 1000 + 80);
     };
     if (playPromise && playPromise.then) {
-      playPromise.then(stopAfterCelebration).catch(stopApplausePlayback);
+      playPromise.then(stopAfterCelebration).catch(() => {
+        if (revision === applausePlaybackRevision) stopApplausePlayback();
+      });
     } else {
       stopAfterCelebration();
     }
@@ -395,6 +471,7 @@ function initTables() {
 }
 
 function initTabs() {
+  document.querySelectorAll('[data-game-home]').forEach(button => button.addEventListener('click', returnToWelcome));
   document.querySelectorAll('.tab').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
@@ -414,14 +491,34 @@ function escapeHtml(value) {
     .replace(/'/g, '&#039;');
 }
 
-function saveResult(game, score, total) {
+const GAME_RESULT_KEYS = Object.freeze({
+  'Бърза тренировка': 'training',
+  'Математическо бинго': 'bingo',
+  'Открий семейството': 'families',
+  'Грешката на робота': 'robot',
+  'Лов на съкровище': 'treasure',
+  'Таен код': 'secret_code',
+  'Математически балони': 'balloons',
+});
+
+function saveResult(game, score, total, starsEarned = 0) {
   const log = readSavedList('mathLog');
-  const student = state.student || 'Ученик';
+  const student = state.student || 'Гост';
   const date = new Date().toLocaleString('bg-BG', { dateStyle: 'short', timeStyle: 'short' });
   const duration = currentElapsedTime();
   log.unshift({ student, game, score, total, date, duration });
   storage.setItem('mathLog', JSON.stringify(log.slice(0, 200)));
   renderLog();
+
+  if (window.dbService && typeof window.dbService.saveGameResult === 'function') {
+    void window.dbService.saveGameResult({
+      gameKey: GAME_RESULT_KEYS[game] || game,
+      score,
+      totalQuestions: total,
+      stars: starsEarned,
+      timeSpentSeconds: Math.floor(currentElapsedMs() / 1000),
+    });
+  }
 }
 
 function renderLog() {
@@ -454,6 +551,7 @@ function clearTeacherResults() {
 }
 
 function resetStudentProgress(message = '') {
+  stopGameActivity();
   setStars(0);
   resetTimer();
 
@@ -487,17 +585,17 @@ function resetStudentProgress(message = '') {
 }
 
 function initStudent() {
-  $('studentName').value = state.student;
-  $('saveStudentBtn').addEventListener('click', () => {
-    const newStudent = $('studentName').value.trim();
+  storage.setItem('mathStudent', state.student);
+  window.addEventListener('math:student-access', event => {
+    const detail = event.detail || {};
+    const newStudent = detail.locked ? String(detail.name || '').trim() || 'Гост' : 'Гост';
     const oldStudent = state.student;
     state.student = newStudent;
     storage.setItem('mathStudent', state.student);
-    if (newStudent !== oldStudent) {
-      const label = newStudent || 'Нов ученик';
+
+    if (detail.resetProgress && newStudent !== oldStudent) {
+      const label = newStudent || 'Гост';
       resetStudentProgress(`${label} започва начисто. Успех! ⭐`);
-    } else {
-      setFeedback($('trainingFeedback'), 'Името е запазено. Продължаваме смело!', 'good');
     }
   });
 }
@@ -564,7 +662,7 @@ function renderTraining() {
     if (!t.completed) {
       t.completed = true;
       showTrainingCelebration(t.score, t.tasks.length);
-      saveResult('Бърза тренировка', t.score, t.tasks.length);
+      saveResult('Бърза тренировка', t.score, t.tasks.length, t.score * 2);
     }
     return;
   }
@@ -592,10 +690,10 @@ function advanceTrainingAfterCorrect() {
 }
 
 function checkTraining() {
-  startTimer();
   const t = state.training;
   const task = t.tasks[t.index];
   if (!task || t.checked) return;
+  startTimer();
   const ans = Number($('trainingAnswer').value);
   if ($('trainingAnswer').value === '') {
     setFeedback($('trainingFeedback'), 'Напиши отговор и после натисни бутона. Аз чакам смело!', 'bad');
@@ -746,7 +844,7 @@ function nextBingoTask() {
     playBingoWinSound();
     showBingoCelebration();
     setFeedback($('bingoFeedback'), `${praise()} Попълни цялото бинго поле. ⭐`, 'good');
-    saveResult('Математическо бинго', 1, 1);
+    saveResult('Математическо бинго', 1, 1, state.bingo.marked.size * 2);
     return;
   }
   const answer = openCells[rand(0, openCells.length - 1)].num;
@@ -800,7 +898,7 @@ function clickBingoCell(idx) {
       playBingoWinSound();
       showBingoCelebration();
       setFeedback($('bingoFeedback'), `${praise()} БИНГО! Имаш ред, колона или диагонал. ⭐`, 'good');
-      saveResult('Математическо бинго', 1, 1);
+      saveResult('Математическо бинго', 1, 1, b.marked.size * 2);
     } else {
       renderBingoBoard();
       setFeedback($('bingoFeedback'), `${praise()} Това поле е точното. Продължаваме!`, 'good');
@@ -917,7 +1015,7 @@ function animateFamilyGrid(className) {
   grid.classList.remove('family-success', 'family-shake');
   void grid.offsetWidth;
   grid.classList.add(className);
-  if (className === 'family-shake') setTimeout(() => grid.classList.remove('family-shake'), 620);
+  if (className === 'family-shake') scheduleGameTimeout(() => grid.classList.remove('family-shake'), 620);
 }
 
 function familyEquations() {
@@ -958,7 +1056,7 @@ function checkFamily() {
     showFamilyCelebration();
     addStars(4);
     setFeedback($('familyFeedback'), praise() + ' Откри цялото математическо семейство. ⭐', 'good');
-    saveResult('Открий семейството', 4, 4);
+    saveResult('Открий семейството', 4, 4, 4);
   } else {
     hideFamilyCelebration();
     playFamilySound('error');
@@ -1079,8 +1177,8 @@ function answerRobot(isTrue) {
       playRobotSound('success');
       showRobotCelebration('БРАВО!', 'Роботът сметна вярно, а ти го разпозна отлично!');
       setFeedback($('robotFeedback'), praise() + ' Роботът този път не сгреши. ⭐', 'good');
-      saveResult('Грешката на робота', 1, 1);
-      setTimeout(newRobot, 4800);
+      saveResult('Грешката на робота', 1, 1, 2);
+      scheduleGameTimeout(newRobot, 4800);
     } else {
       setRobotMood('correcting');
       playRobotSound('choice');
@@ -1092,7 +1190,7 @@ function answerRobot(isTrue) {
     playRobotSound('error');
     hideRobotCelebration();
     setFeedback($('robotFeedback'), encourage('Верният отговор на ' + r.task.text + ' е ' + r.task.answer + '. Роботът ще опита пак с теб.'), 'bad');
-    setTimeout(newRobot, 1500);
+    scheduleGameTimeout(newRobot, 1500);
   }
 }
 
@@ -1110,8 +1208,8 @@ function showRobotChoices() {
         playRobotSound('success');
         showRobotCelebration('СУПЕР!', 'Поправи робота като истински учител!');
         setFeedback($('robotFeedback'), praise() + ' Поправи робота като истински учител. ⭐', 'good');
-        saveResult('Грешката на робота', 1, 1);
-        setTimeout(newRobot, 4800);
+        saveResult('Грешката на робота', 1, 1, 5);
+        scheduleGameTimeout(newRobot, 4800);
       } else {
         btn.classList.add('robot-choice-wrong');
         setRobotMood('error');
@@ -1224,7 +1322,7 @@ function renderTreasure() {
     showTreasureCelebration();
     setFeedback($('treasureFeedback'), praise() + ' Откри съкровището, математически откривателю! ⭐', 'good');
     addStars(8);
-    saveResult('Лов на съкровище', 6, 6);
+    saveResult('Лов на съкровище', 6, 6, 20);
     return;
   }
   $('treasureTask').textContent = task.text + ' = ?';
@@ -1250,7 +1348,7 @@ function checkTreasure() {
     playTreasureSound('step');
     addStars(2);
     state.treasure.index++;
-    setTimeout(renderTreasure, 520);
+    scheduleGameTimeout(renderTreasure, 520);
   } else {
     setTreasureMood('error');
     playTreasureSound('error');
@@ -1390,7 +1488,7 @@ function showCodeFireworks() {
   box.classList.remove('celebrate');
   void box.offsetWidth;
   box.classList.add('celebrate');
-  setTimeout(() => {
+  scheduleGameTimeout(() => {
     box.classList.remove('celebrate');
     overlay.remove();
   }, 8200);
@@ -1422,10 +1520,11 @@ function renderCode() {
     $('codeTask').textContent = '🔓';
     setFeedback($('codeFeedback'), `${praise()} Разкри тайното съобщение!`, 'good');
     playCheerfulApplause(5.2);
-    setTimeout(playFanfare, 420);
+    scheduleGameTimeout(playFanfare, 420);
     showCodeFireworks();
     addStars(6);
-    saveResult('Таен код', state.code.tasks.filter(Boolean).length, state.code.tasks.filter(Boolean).length);
+    const completedTasks = state.code.tasks.filter(Boolean).length;
+    saveResult('Таен код', completedTasks, completedTasks, completedTasks * 2 + 6);
     return;
   }
   $('codeTask').textContent = `${task.text} = ?`;
@@ -1482,7 +1581,7 @@ function nextBalloonTask() {
     $('balloonField').innerHTML = '';
     setFeedback($('balloonFeedback'), `${praise()} Пукна ${b.score} верни балона.`, 'good');
     playCheerfulApplause(4.8);
-    saveResult('Математически балони', b.score, b.total);
+    saveResult('Математически балони', b.score, b.total, b.score * 2);
     return;
   }
   b.task = makeTask(selectedTables(), 'mixed');
@@ -1540,7 +1639,7 @@ function clickBalloon(btn) {
     document.querySelectorAll('#balloonField .balloon').forEach(x => x.disabled = true);
     setFeedback($('balloonFeedback'), `${praise()} Пук! Това беше точният балон. ⭐`, 'good');
     b.round++;
-    setTimeout(nextBalloonTask, 1500);
+    scheduleGameTimeout(nextBalloonTask, 1500);
   } else {
     btn.disabled = true;
     playWrongAnswerSound();

@@ -1,0 +1,6404 @@
+{
+  "column_grants": [
+    {
+      "column_name": "academic_year",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "academic_year",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "academic_year",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "academic_year",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_code",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_code",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_code",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_code",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_id",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_id",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_id",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_id",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_id",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_id",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_id",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_id",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_name",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_name",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_name",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_name",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "created_at",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "created_at",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "created_at",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "created_at",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "created_at",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "created_at",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "created_at",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "created_at",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "created_at",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "created_at",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "created_at",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "created_at",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "display_name",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "display_name",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "display_name",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "display_name",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "email",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "email",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "email",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "email",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "full_name",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "full_name",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "full_name",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "full_name",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "game_key",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "game_key",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "game_key",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "game_key",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "is_active",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "is_active",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "is_active",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "is_active",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "pin_code",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "pin_code",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "pin_code",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "pin_code",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "played_at",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "played_at",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "played_at",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "played_at",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "role",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "role",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "role",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "role",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "school_name",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "school_name",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "school_name",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "school_name",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "school_name",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "school_name",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "school_name",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "school_name",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "score",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "score",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "score",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "score",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "stars",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "stars",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "stars",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "stars",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "student_id",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "student_id",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "student_id",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "student_id",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "student_name",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "student_name",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "student_name",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "student_name",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "student_number",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "student_number",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "student_number",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "student_number",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "teacher_id",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "teacher_id",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "teacher_id",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "teacher_id",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "time_spent_seconds",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "time_spent_seconds",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "time_spent_seconds",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "time_spent_seconds",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "total_questions",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "total_questions",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "total_questions",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "total_questions",
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "academic_year",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "academic_year",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "academic_year",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "academic_year",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_code",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_code",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_code",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_code",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_id",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_id",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_id",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_id",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_id",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_id",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_id",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_id",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_name",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_name",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_name",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_name",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "created_at",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "created_at",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "created_at",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "created_at",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "created_at",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "created_at",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "created_at",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "created_at",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "created_at",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "created_at",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "created_at",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "created_at",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "display_name",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "display_name",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "display_name",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "display_name",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "email",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "email",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "email",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "email",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "full_name",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "full_name",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "full_name",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "full_name",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "game_key",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "game_key",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "game_key",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "game_key",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "is_active",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "is_active",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "is_active",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "is_active",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "pin_code",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "pin_code",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "pin_code",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "pin_code",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "played_at",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "played_at",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "played_at",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "played_at",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "role",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "role",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "role",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "role",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "school_name",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "school_name",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "school_name",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "school_name",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "school_name",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "school_name",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "school_name",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "school_name",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "score",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "score",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "score",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "score",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "stars",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "stars",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "stars",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "stars",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "student_id",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "student_id",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "student_id",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "student_id",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "student_name",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "student_name",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "student_name",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "student_name",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "student_number",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "student_number",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "student_number",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "student_number",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "teacher_id",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "teacher_id",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "teacher_id",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "teacher_id",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "time_spent_seconds",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "time_spent_seconds",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "time_spent_seconds",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "time_spent_seconds",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "total_questions",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "total_questions",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "total_questions",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "total_questions",
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "academic_year",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "academic_year",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "academic_year",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "academic_year",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_code",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_code",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_code",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_code",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_id",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_id",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_id",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_id",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_id",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_id",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_id",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_id",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_name",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_name",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_name",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_name",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "created_at",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "created_at",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "created_at",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "created_at",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "created_at",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "created_at",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "created_at",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "created_at",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "created_at",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "created_at",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "created_at",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "created_at",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "display_name",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "display_name",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "display_name",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "display_name",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "email",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "email",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "email",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "email",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "full_name",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "full_name",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "full_name",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "full_name",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "game_key",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "game_key",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "game_key",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "game_key",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "is_active",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "is_active",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "is_active",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "is_active",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "pin_code",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "pin_code",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "pin_code",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "pin_code",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "played_at",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "played_at",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "played_at",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "played_at",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "role",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "role",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "role",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "role",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "school_name",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "school_name",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "school_name",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "school_name",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "school_name",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "school_name",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "school_name",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "school_name",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "score",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "score",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "score",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "score",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "stars",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "stars",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "stars",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "stars",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "student_id",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "student_id",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "student_id",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "student_id",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "student_name",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "student_name",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "student_name",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "student_name",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "student_number",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "student_number",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "student_number",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "student_number",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "teacher_id",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "teacher_id",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "teacher_id",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "teacher_id",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "time_spent_seconds",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "time_spent_seconds",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "time_spent_seconds",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "time_spent_seconds",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "total_questions",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "total_questions",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "total_questions",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "total_questions",
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "academic_year",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "academic_year",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "academic_year",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "academic_year",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_code",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_code",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_code",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_code",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_id",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_id",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_id",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_id",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_id",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_id",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_id",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_id",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_name",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_name",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_name",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "class_name",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "created_at",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "created_at",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "created_at",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "created_at",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "created_at",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "created_at",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "created_at",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "created_at",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "created_at",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "created_at",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "created_at",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "created_at",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "display_name",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "display_name",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "display_name",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "display_name",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "email",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "email",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "email",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "email",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "full_name",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "full_name",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "full_name",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "full_name",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "game_key",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "game_key",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "game_key",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "game_key",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "id",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "is_active",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "is_active",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "is_active",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "is_active",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "pin_code",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "pin_code",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "pin_code",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "pin_code",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "played_at",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "played_at",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "played_at",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "played_at",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "role",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "role",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "role",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "role",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "school_name",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "school_name",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "school_name",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "school_name",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "school_name",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "school_name",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "school_name",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "school_name",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "score",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "score",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "score",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "score",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "stars",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "stars",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "stars",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "stars",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "student_id",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "student_id",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "student_id",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "student_id",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "student_name",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "student_name",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "student_name",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "student_name",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "student_number",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "student_number",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "student_number",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "student_number",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "teacher_id",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "teacher_id",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "teacher_id",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "teacher_id",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "time_spent_seconds",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "time_spent_seconds",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "time_spent_seconds",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "time_spent_seconds",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "total_questions",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "total_questions",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "total_questions",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    },
+    {
+      "column_name": "total_questions",
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public"
+    }
+  ],
+  "columns": [
+    {
+      "character_maximum_length": null,
+      "column_default": "gen_random_uuid()",
+      "column_name": "id",
+      "data_type": "uuid",
+      "is_nullable": "NO",
+      "table_name": "classes",
+      "udt_name": "uuid"
+    },
+    {
+      "character_maximum_length": null,
+      "column_default": null,
+      "column_name": "teacher_id",
+      "data_type": "uuid",
+      "is_nullable": "NO",
+      "table_name": "classes",
+      "udt_name": "uuid"
+    },
+    {
+      "character_maximum_length": null,
+      "column_default": null,
+      "column_name": "class_name",
+      "data_type": "text",
+      "is_nullable": "NO",
+      "table_name": "classes",
+      "udt_name": "text"
+    },
+    {
+      "character_maximum_length": null,
+      "column_default": null,
+      "column_name": "school_name",
+      "data_type": "text",
+      "is_nullable": "YES",
+      "table_name": "classes",
+      "udt_name": "text"
+    },
+    {
+      "character_maximum_length": null,
+      "column_default": "'2026/2027'::text",
+      "column_name": "academic_year",
+      "data_type": "text",
+      "is_nullable": "NO",
+      "table_name": "classes",
+      "udt_name": "text"
+    },
+    {
+      "character_maximum_length": null,
+      "column_default": null,
+      "column_name": "class_code",
+      "data_type": "text",
+      "is_nullable": "NO",
+      "table_name": "classes",
+      "udt_name": "text"
+    },
+    {
+      "character_maximum_length": null,
+      "column_default": "now()",
+      "column_name": "created_at",
+      "data_type": "timestamp with time zone",
+      "is_nullable": "YES",
+      "table_name": "classes",
+      "udt_name": "timestamptz"
+    },
+    {
+      "character_maximum_length": null,
+      "column_default": "gen_random_uuid()",
+      "column_name": "id",
+      "data_type": "uuid",
+      "is_nullable": "NO",
+      "table_name": "game_results",
+      "udt_name": "uuid"
+    },
+    {
+      "character_maximum_length": null,
+      "column_default": null,
+      "column_name": "student_id",
+      "data_type": "uuid",
+      "is_nullable": "YES",
+      "table_name": "game_results",
+      "udt_name": "uuid"
+    },
+    {
+      "character_maximum_length": null,
+      "column_default": null,
+      "column_name": "class_id",
+      "data_type": "uuid",
+      "is_nullable": "YES",
+      "table_name": "game_results",
+      "udt_name": "uuid"
+    },
+    {
+      "character_maximum_length": null,
+      "column_default": null,
+      "column_name": "student_name",
+      "data_type": "text",
+      "is_nullable": "YES",
+      "table_name": "game_results",
+      "udt_name": "text"
+    },
+    {
+      "character_maximum_length": null,
+      "column_default": null,
+      "column_name": "game_key",
+      "data_type": "text",
+      "is_nullable": "NO",
+      "table_name": "game_results",
+      "udt_name": "text"
+    },
+    {
+      "character_maximum_length": null,
+      "column_default": "0",
+      "column_name": "score",
+      "data_type": "integer",
+      "is_nullable": "NO",
+      "table_name": "game_results",
+      "udt_name": "int4"
+    },
+    {
+      "character_maximum_length": null,
+      "column_default": "0",
+      "column_name": "total_questions",
+      "data_type": "integer",
+      "is_nullable": "NO",
+      "table_name": "game_results",
+      "udt_name": "int4"
+    },
+    {
+      "character_maximum_length": null,
+      "column_default": "0",
+      "column_name": "stars",
+      "data_type": "integer",
+      "is_nullable": "NO",
+      "table_name": "game_results",
+      "udt_name": "int4"
+    },
+    {
+      "character_maximum_length": null,
+      "column_default": "0",
+      "column_name": "time_spent_seconds",
+      "data_type": "integer",
+      "is_nullable": "YES",
+      "table_name": "game_results",
+      "udt_name": "int4"
+    },
+    {
+      "character_maximum_length": null,
+      "column_default": "now()",
+      "column_name": "played_at",
+      "data_type": "timestamp with time zone",
+      "is_nullable": "YES",
+      "table_name": "game_results",
+      "udt_name": "timestamptz"
+    },
+    {
+      "character_maximum_length": null,
+      "column_default": null,
+      "column_name": "id",
+      "data_type": "uuid",
+      "is_nullable": "NO",
+      "table_name": "profiles",
+      "udt_name": "uuid"
+    },
+    {
+      "character_maximum_length": null,
+      "column_default": null,
+      "column_name": "email",
+      "data_type": "text",
+      "is_nullable": "NO",
+      "table_name": "profiles",
+      "udt_name": "text"
+    },
+    {
+      "character_maximum_length": null,
+      "column_default": null,
+      "column_name": "full_name",
+      "data_type": "text",
+      "is_nullable": "YES",
+      "table_name": "profiles",
+      "udt_name": "text"
+    },
+    {
+      "character_maximum_length": null,
+      "column_default": null,
+      "column_name": "school_name",
+      "data_type": "text",
+      "is_nullable": "YES",
+      "table_name": "profiles",
+      "udt_name": "text"
+    },
+    {
+      "character_maximum_length": null,
+      "column_default": "'teacher'::text",
+      "column_name": "role",
+      "data_type": "text",
+      "is_nullable": "NO",
+      "table_name": "profiles",
+      "udt_name": "text"
+    },
+    {
+      "character_maximum_length": null,
+      "column_default": "now()",
+      "column_name": "created_at",
+      "data_type": "timestamp with time zone",
+      "is_nullable": "YES",
+      "table_name": "profiles",
+      "udt_name": "timestamptz"
+    },
+    {
+      "character_maximum_length": null,
+      "column_default": "gen_random_uuid()",
+      "column_name": "id",
+      "data_type": "uuid",
+      "is_nullable": "NO",
+      "table_name": "students",
+      "udt_name": "uuid"
+    },
+    {
+      "character_maximum_length": null,
+      "column_default": null,
+      "column_name": "class_id",
+      "data_type": "uuid",
+      "is_nullable": "NO",
+      "table_name": "students",
+      "udt_name": "uuid"
+    },
+    {
+      "character_maximum_length": null,
+      "column_default": null,
+      "column_name": "student_number",
+      "data_type": "integer",
+      "is_nullable": "YES",
+      "table_name": "students",
+      "udt_name": "int4"
+    },
+    {
+      "character_maximum_length": null,
+      "column_default": null,
+      "column_name": "display_name",
+      "data_type": "text",
+      "is_nullable": "NO",
+      "table_name": "students",
+      "udt_name": "text"
+    },
+    {
+      "character_maximum_length": null,
+      "column_default": null,
+      "column_name": "pin_code",
+      "data_type": "text",
+      "is_nullable": "YES",
+      "table_name": "students",
+      "udt_name": "text"
+    },
+    {
+      "character_maximum_length": null,
+      "column_default": "true",
+      "column_name": "is_active",
+      "data_type": "boolean",
+      "is_nullable": "YES",
+      "table_name": "students",
+      "udt_name": "bool"
+    },
+    {
+      "character_maximum_length": null,
+      "column_default": "now()",
+      "column_name": "created_at",
+      "data_type": "timestamp with time zone",
+      "is_nullable": "YES",
+      "table_name": "students",
+      "udt_name": "timestamptz"
+    }
+  ],
+  "constraints": [
+    {
+      "conname": "profiles_id_fkey",
+      "contype": "f",
+      "definition": "FOREIGN KEY (id) REFERENCES auth.users(id) ON DELETE CASCADE",
+      "table_name": "profiles"
+    },
+    {
+      "conname": "profiles_pkey",
+      "contype": "p",
+      "definition": "PRIMARY KEY (id)",
+      "table_name": "profiles"
+    },
+    {
+      "conname": "profiles_role_check",
+      "contype": "c",
+      "definition": "CHECK ((role = ANY (ARRAY['teacher'::text, 'admin'::text])))",
+      "table_name": "profiles"
+    },
+    {
+      "conname": "classes_class_code_key",
+      "contype": "u",
+      "definition": "UNIQUE (class_code)",
+      "table_name": "classes"
+    },
+    {
+      "conname": "classes_pkey",
+      "contype": "p",
+      "definition": "PRIMARY KEY (id)",
+      "table_name": "classes"
+    },
+    {
+      "conname": "classes_teacher_id_fkey",
+      "contype": "f",
+      "definition": "FOREIGN KEY (teacher_id) REFERENCES profiles(id) ON DELETE CASCADE",
+      "table_name": "classes"
+    },
+    {
+      "conname": "students_class_id_fkey",
+      "contype": "f",
+      "definition": "FOREIGN KEY (class_id) REFERENCES classes(id) ON DELETE CASCADE",
+      "table_name": "students"
+    },
+    {
+      "conname": "students_pkey",
+      "contype": "p",
+      "definition": "PRIMARY KEY (id)",
+      "table_name": "students"
+    },
+    {
+      "conname": "game_results_class_id_fkey",
+      "contype": "f",
+      "definition": "FOREIGN KEY (class_id) REFERENCES classes(id) ON DELETE SET NULL",
+      "table_name": "game_results"
+    },
+    {
+      "conname": "game_results_pkey",
+      "contype": "p",
+      "definition": "PRIMARY KEY (id)",
+      "table_name": "game_results"
+    },
+    {
+      "conname": "game_results_student_id_fkey",
+      "contype": "f",
+      "definition": "FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE SET NULL",
+      "table_name": "game_results"
+    }
+  ],
+  "extensions": [
+    {
+      "name": "pgcrypto",
+      "schema": "extensions"
+    }
+  ],
+  "functions": [
+    {
+      "definition": "CREATE OR REPLACE FUNCTION public.rls_auto_enable()\n RETURNS event_trigger\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO 'pg_catalog'\nAS $function$\nDECLARE\n  cmd record;\nBEGIN\n  FOR cmd IN\n    SELECT *\n    FROM pg_event_trigger_ddl_commands()\n    WHERE command_tag IN ('CREATE TABLE', 'CREATE TABLE AS', 'SELECT INTO')\n      AND object_type IN ('table','partitioned table')\n  LOOP\n     IF cmd.schema_name IS NOT NULL AND cmd.schema_name IN ('public') AND cmd.schema_name NOT IN ('pg_catalog','information_schema') AND cmd.schema_name NOT LIKE 'pg_toast%' AND cmd.schema_name NOT LIKE 'pg_temp%' THEN\n      BEGIN\n        EXECUTE format('alter table if exists %s enable row level security', cmd.object_identity);\n        RAISE LOG 'rls_auto_enable: enabled RLS on %', cmd.object_identity;\n      EXCEPTION\n        WHEN OTHERS THEN\n          RAISE LOG 'rls_auto_enable: failed to enable RLS on %', cmd.object_identity;\n      END;\n     ELSE\n        RAISE LOG 'rls_auto_enable: skip % (either system schema or not in enforced list: %.)', cmd.object_identity, cmd.schema_name;\n     END IF;\n  END LOOP;\nEND;\n$function$\n",
+      "name": "rls_auto_enable()",
+      "privileges": "{=X/postgres,postgres=X/postgres,anon=X/postgres,authenticated=X/postgres,service_role=X/postgres}",
+      "schema_name": "public",
+      "security_definer": true
+    },
+    {
+      "definition": "CREATE OR REPLACE FUNCTION public.is_admin(user_id uuid)\n RETURNS boolean\n LANGUAGE plpgsql\n SECURITY DEFINER\nAS $function$\r\nBEGIN\r\n    RETURN EXISTS (\r\n        SELECT 1 FROM public.profiles\r\n        WHERE id = user_id AND role = 'admin'\r\n    );\r\nEND;\r\n$function$\n",
+      "name": "is_admin(uuid)",
+      "privileges": "{=X/postgres,postgres=X/postgres,anon=X/postgres,authenticated=X/postgres,service_role=X/postgres}",
+      "schema_name": "public",
+      "security_definer": true
+    },
+    {
+      "definition": "CREATE OR REPLACE FUNCTION public.handle_new_user()\n RETURNS trigger\n LANGUAGE plpgsql\n SECURITY DEFINER\nAS $function$\r\nBEGIN\r\n    INSERT INTO public.profiles (id, email, full_name, school_name, role)\r\n    VALUES (\r\n        NEW.id,\r\n        NEW.email,\r\n        COALESCE(NEW.raw_user_meta_data->>'full_name', 'Учител'),\r\n        COALESCE(NEW.raw_user_meta_data->>'school_name', NEW.raw_user_meta_data->>'schoolName', NULL),\r\n        COALESCE(NEW.raw_user_meta_data->>'role', 'teacher')\r\n    )\r\n    ON CONFLICT (id) DO UPDATE SET\r\n        full_name = EXCLUDED.full_name,\r\n        school_name = EXCLUDED.school_name;\r\n    RETURN NEW;\r\nEND;\r\n$function$\n",
+      "name": "handle_new_user()",
+      "privileges": "{=X/postgres,postgres=X/postgres,anon=X/postgres,authenticated=X/postgres,service_role=X/postgres}",
+      "schema_name": "public",
+      "security_definer": true
+    }
+  ],
+  "grants": [
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public",
+      "with_hierarchy": "YES"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "DELETE",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "TRUNCATE",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "TRIGGER",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public",
+      "with_hierarchy": "YES"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "DELETE",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "TRUNCATE",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "TRIGGER",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public",
+      "with_hierarchy": "YES"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "DELETE",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "TRUNCATE",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "TRIGGER",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public",
+      "with_hierarchy": "YES"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "DELETE",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "TRUNCATE",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "TRIGGER",
+      "table_catalog": "postgres",
+      "table_name": "profiles",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public",
+      "with_hierarchy": "YES"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "DELETE",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "TRUNCATE",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "TRIGGER",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public",
+      "with_hierarchy": "YES"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "DELETE",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "TRUNCATE",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "TRIGGER",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public",
+      "with_hierarchy": "YES"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "DELETE",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "TRUNCATE",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "TRIGGER",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public",
+      "with_hierarchy": "YES"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "DELETE",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "TRUNCATE",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "TRIGGER",
+      "table_catalog": "postgres",
+      "table_name": "classes",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public",
+      "with_hierarchy": "YES"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "DELETE",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "TRUNCATE",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "TRIGGER",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public",
+      "with_hierarchy": "YES"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "DELETE",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "TRUNCATE",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "TRIGGER",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public",
+      "with_hierarchy": "YES"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "DELETE",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "TRUNCATE",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "TRIGGER",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public",
+      "with_hierarchy": "YES"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "DELETE",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "TRUNCATE",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "TRIGGER",
+      "table_catalog": "postgres",
+      "table_name": "students",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public",
+      "with_hierarchy": "YES"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "DELETE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "TRUNCATE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "postgres",
+      "grantor": "postgres",
+      "is_grantable": "YES",
+      "privilege_type": "TRIGGER",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public",
+      "with_hierarchy": "YES"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "DELETE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "TRUNCATE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "anon",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "TRIGGER",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public",
+      "with_hierarchy": "YES"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "DELETE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "TRUNCATE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "authenticated",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "TRIGGER",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "INSERT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "SELECT",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public",
+      "with_hierarchy": "YES"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "UPDATE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "DELETE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "TRUNCATE",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "REFERENCES",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    },
+    {
+      "grantee": "service_role",
+      "grantor": "postgres",
+      "is_grantable": "NO",
+      "privilege_type": "TRIGGER",
+      "table_catalog": "postgres",
+      "table_name": "game_results",
+      "table_schema": "public",
+      "with_hierarchy": "NO"
+    }
+  ],
+  "policies": [
+    {
+      "cmd": "ALL",
+      "permissive": "PERMISSIVE",
+      "policyname": "Classes manage",
+      "qual": "((teacher_id = auth.uid()) OR is_admin(auth.uid()))",
+      "roles": [
+        "authenticated"
+      ],
+      "schemaname": "public",
+      "tablename": "classes",
+      "with_check": null
+    },
+    {
+      "cmd": "SELECT",
+      "permissive": "PERMISSIVE",
+      "policyname": "Classes select",
+      "qual": "true",
+      "roles": [
+        "anon",
+        "authenticated"
+      ],
+      "schemaname": "public",
+      "tablename": "classes",
+      "with_check": null
+    },
+    {
+      "cmd": "INSERT",
+      "permissive": "PERMISSIVE",
+      "policyname": "Game results insert",
+      "qual": null,
+      "roles": [
+        "anon",
+        "authenticated"
+      ],
+      "schemaname": "public",
+      "tablename": "game_results",
+      "with_check": "true"
+    },
+    {
+      "cmd": "SELECT",
+      "permissive": "PERMISSIVE",
+      "policyname": "Game results select",
+      "qual": "(is_admin(auth.uid()) OR (EXISTS ( SELECT 1\n   FROM classes c\n  WHERE ((c.id = game_results.class_id) AND (c.teacher_id = auth.uid())))))",
+      "roles": [
+        "authenticated"
+      ],
+      "schemaname": "public",
+      "tablename": "game_results",
+      "with_check": null
+    },
+    {
+      "cmd": "SELECT",
+      "permissive": "PERMISSIVE",
+      "policyname": "Profiles access",
+      "qual": "((id = auth.uid()) OR is_admin(auth.uid()))",
+      "roles": [
+        "authenticated"
+      ],
+      "schemaname": "public",
+      "tablename": "profiles",
+      "with_check": null
+    },
+    {
+      "cmd": "UPDATE",
+      "permissive": "PERMISSIVE",
+      "policyname": "Profiles update",
+      "qual": "(id = auth.uid())",
+      "roles": [
+        "authenticated"
+      ],
+      "schemaname": "public",
+      "tablename": "profiles",
+      "with_check": null
+    },
+    {
+      "cmd": "ALL",
+      "permissive": "PERMISSIVE",
+      "policyname": "Students manage",
+      "qual": "(EXISTS ( SELECT 1\n   FROM classes c\n  WHERE ((c.id = students.class_id) AND ((c.teacher_id = auth.uid()) OR is_admin(auth.uid())))))",
+      "roles": [
+        "authenticated"
+      ],
+      "schemaname": "public",
+      "tablename": "students",
+      "with_check": null
+    },
+    {
+      "cmd": "SELECT",
+      "permissive": "PERMISSIVE",
+      "policyname": "Students select",
+      "qual": "true",
+      "roles": [
+        "anon",
+        "authenticated"
+      ],
+      "schemaname": "public",
+      "tablename": "students",
+      "with_check": null
+    }
+  ],
+  "triggers": [
+    {
+      "definition": "CREATE TRIGGER on_auth_user_created AFTER INSERT ON auth.users FOR EACH ROW EXECUTE FUNCTION handle_new_user()",
+      "function_name": "handle_new_user()",
+      "table_name": "auth.users",
+      "tgname": "on_auth_user_created"
+    }
+  ]
+}
