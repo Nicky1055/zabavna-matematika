@@ -27,7 +27,8 @@
     try {
       const rawSession = window.localStorage.getItem(STUDENT_SESSION_KEY);
       const session = rawSession ? JSON.parse(rawSession) : null;
-      if (!session || !session.studentId || !session.classId || !session.studentName || !session.className) {
+      if (!session || !session.studentId || !session.classId || !session.studentName || !session.className
+        || !/^[a-f0-9]{64}$/.test(session.sessionToken || '') || !(Date.parse(session.expiresAt) > Date.now())) {
         window.localStorage.removeItem(STUDENT_SESSION_KEY);
         window.sessionStorage.removeItem(STUDENT_SESSION_KEY);
         return null;
@@ -47,6 +48,7 @@
   }
 
   function clearStudentSession(clearName = true) {
+    const token = accessState.studentSession?.sessionToken;
     const hadSession = Boolean(
       accessState.studentSession
       || window.localStorage.getItem(STUDENT_SESSION_KEY)
@@ -59,7 +61,14 @@
     window.localStorage.removeItem(STUDENT_SESSION_KEY);
     window.sessionStorage.removeItem(STUDENT_SESSION_KEY);
     if (clearName) window.localStorage.setItem('mathStudent', '');
+    revokeSessionToken(token);
     return hadSession;
+  }
+
+  function revokeSessionToken(token) {
+    if (token && window.dbService?.revokeStudentSession) {
+      void window.dbService.revokeStudentSession(token).catch(() => {});
+    }
   }
 
   function announceStudentIdentity(name, locked, resetProgress) {
@@ -255,6 +264,7 @@
     if (result.reason === 'missing_class_code') return 'Въведи кода на класа.';
     if (result.reason === 'class_not_found') return 'Не открихме клас с този код. Провери го внимателно.';
     if (result.reason === 'invalid_pin') return 'ПИН кодът не е правилен. Опитай отново.';
+    if (result.reason === 'rate_limited') return 'След няколко грешни опита входът е спрян за 15 минути. Потърси учителя си.';
     return fallback;
   }
 
@@ -284,7 +294,7 @@
       return;
     }
 
-    const studentsResult = await window.dbService.getStudentsForLogin(classResult.data.id);
+    const studentsResult = await window.dbService.getStudentsForLogin(classResult.data.id, classCode);
     setButtonBusy(button, false);
     if (revision !== accessState.studentLoginRevision) return;
     if (!studentsResult.ok) {
@@ -334,8 +344,10 @@
       accessState.selectedStudent.id,
       accessState.loginClass.id,
       pinCode,
+      loginClass.class_code,
     );
     if (revision !== accessState.studentLoginRevision) {
+      revokeSessionToken(result.data?.session_token);
       setButtonBusy(button, false);
       return;
     }
@@ -348,15 +360,18 @@
     }
 
     if (!await logoutTeacher()) {
+      revokeSessionToken(result.data?.session_token);
       setButtonBusy(button, false);
       setStudentLoginMessage('Първо излезте от учителския профил.', 'bad');
       return;
     }
     if (revision !== accessState.studentLoginRevision) {
+      revokeSessionToken(result.data?.session_token);
       setButtonBusy(button, false);
       return;
     }
 
+    clearStudentSession(false);
     const session = {
       studentId: result.data.id,
       classId: loginClass.id,
@@ -364,6 +379,8 @@
       studentName: result.data.display_name,
       className: loginClass.class_name,
       classCode: loginClass.class_code,
+      sessionToken: result.data.session_token,
+      expiresAt: result.data.expires_at,
     };
     saveStudentSession(session);
     setButtonBusy(button, false);
@@ -467,13 +484,26 @@
     if (window.authService) {
       const revision = accessState.authRevision;
       const teacher = await window.authService.getCurrentProfile();
-      if (revision !== accessState.authRevision) return;
-      if (teacher.ok) {
+      if (teacher.ok && revision === accessState.authRevision) {
         accessState.teacherProfile = teacher.profile;
         const hadStudent = clearStudentSession(true);
         if (hadStudent) announceStudentIdentity('', false, true);
         renderAccessStatus();
       }
+    }
+
+    const restoredSession = accessState.studentSession;
+    if (restoredSession && window.dbService.validateStudentSession) {
+      const result = await window.dbService.validateStudentSession(restoredSession.sessionToken);
+      if (accessState.studentSession !== restoredSession) return;
+      if (result.ok) {
+        saveStudentSession({ ...result.data, sessionToken: restoredSession.sessionToken });
+        announceStudentIdentity(result.data.studentName, true, false);
+      } else if (result.reason === 'session_expired') {
+        clearStudentSession(true);
+        announceStudentIdentity('', false, true);
+      }
+      renderAccessStatus();
     }
   }
 

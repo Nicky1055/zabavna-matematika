@@ -28,6 +28,8 @@ async function environment(initialProfile = null, initialStudent = null, options
     teacherRegisterForm: ['teacherRegisterName', 'teacherRegisterSchool', 'teacherRegisterEmail', 'teacherRegisterPassword'],
     studentClassCodeForm: ['studentClassCode'],
     studentPinLoginForm: ['studentLoginPin'],
+    createClassForm: ['newClassName', 'newClassSchool'],
+    addStudentForm: ['newStudentNumber', 'newStudentName', 'newStudentPin'],
   };
   class Element {
     constructor(id) {
@@ -111,7 +113,10 @@ async function environment(initialProfile = null, initialStudent = null, options
     },
   };
   const local = { mathStudent: 'Guest legacy name', mathLog: '[]' };
-  if (initialStudent) local.mathStudentSession = JSON.stringify(initialStudent);
+  if (initialStudent) local.mathStudentSession = JSON.stringify({
+    ...(options.legacyStudent ? {} : { sessionToken: 'a'.repeat(64), expiresAt: '2099-01-01T00:00:00Z' }),
+    ...initialStudent,
+  });
   const window = {
     localStorage: storage(local), sessionStorage: storage({}), ...timers,
     addEventListener(type, fn) {
@@ -140,7 +145,7 @@ async function environment(initialProfile = null, initialStudent = null, options
       },
       onAuthStateChange(callback) { authCallback = callback; return null; },
     },
-    dbService: { async getTeacherClasses() { return { ok: true, data: [] }; } },
+    dbService: { async getTeacherClasses() { return { ok: true, data: [] }; }, ...options.dbService },
   };
   const context = vm.createContext({
     window, document, console, ...timers, Date: options.Date || Date,

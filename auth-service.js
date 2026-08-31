@@ -36,7 +36,6 @@
         email: user.email || '',
         full_name: normalizedText(metadata.full_name) || 'Учител',
         school_name: normalizedText(metadata.school_name),
-        role: 'teacher',
       };
 
       const { data: createdProfile, error: createError } = await client
@@ -85,7 +84,6 @@
           data: {
             full_name: cleanName,
             school_name: cleanSchool,
-            role: 'teacher',
           },
         },
       });

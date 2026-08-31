@@ -19,10 +19,10 @@
     try {
       const rawSession = window.localStorage.getItem(STUDENT_SESSION_KEY);
       const session = rawSession ? JSON.parse(rawSession) : null;
-      if (!session || !session.studentId || !session.classId || !session.studentName) return null;
+      if (!session || !/^[a-f0-9]{64}$/.test(session.sessionToken || '')
+        || !(Date.parse(session.expiresAt) > Date.now())) return null;
       return session;
     } catch (error) {
-      window.localStorage.removeItem(STUDENT_SESSION_KEY);
       return null;
     }
   }
@@ -32,25 +32,31 @@
   }
 
   async function checkConnection() {
+    return callRpc('math_check_connection', {});
+  }
+
+  async function callRpc(name, args) {
     try {
       if (!window.supabaseClient) return unavailableStatus();
-
-      const { error } = await window.supabaseClient
-        .from('classes')
-        .select('*')
-        .limit(1);
-
+      const { data, error } = await window.supabaseClient.rpc(name, args);
       if (error) {
-        logWarning('Connection check failed', error);
-        return { ok: false, error };
+        // Do not include RPC arguments, PINs or session tokens in diagnostics.
+        logWarning(`${name} failed`);
+        return { ok: false, reason: 'network_or_database_error' };
       }
-
-      console.info('[dbService] Supabase connection is active.');
-      return { ok: true };
+      return data && typeof data.ok === 'boolean' ? data : { ok: false, reason: 'invalid_response' };
     } catch (error) {
-      logWarning('Connection check failed', error);
-      return { ok: false, error };
+      logWarning(`${name} unavailable`);
+      return { ok: false, reason: 'network_or_database_error' };
     }
+  }
+
+  async function validateStudentSession(sessionToken) {
+    return callRpc('math_student_session', { p_session_token: sessionToken });
+  }
+
+  async function revokeStudentSession(sessionToken) {
+    return callRpc('math_student_logout', { p_session_token: sessionToken });
   }
 
   async function saveGameResult(resultData) {
@@ -61,33 +67,24 @@
       if (activeRole !== 'student') return { ok: true, skipped: true, reason: 'guest_mode' };
 
       const studentSession = getStudentSession();
-      if (!studentSession) return { ok: true, skipped: true, reason: 'guest_mode' };
+      if (!studentSession) return { ok: false, reason: 'session_expired' };
       if (!window.supabaseClient) return unavailableStatus();
 
       const rawTimeSpent = resultData.timeSpentSeconds ?? resultData.time_spent_seconds;
       const parsedTimeSpent = Number(rawTimeSpent);
       const payload = {
-        student_id: studentSession.studentId,
-        class_id: studentSession.classId,
-        student_name: studentSession.studentName,
-        game_key: String(resultData.gameKey || resultData.game_key || 'unknown'),
-        score: Number(resultData.score) || 0,
-        total_questions: Number(resultData.totalQuestions ?? resultData.total_questions) || 0,
-        stars: Number(resultData.stars) || 0,
-        time_spent_seconds: Number.isFinite(parsedTimeSpent) ? Math.max(0, Math.floor(parsedTimeSpent)) : null,
+        p_session_token: studentSession.sessionToken,
+        p_game_key: String(resultData.gameKey || resultData.game_key || 'unknown'),
+        p_score: Number(resultData.score) || 0,
+        p_total_questions: Number(resultData.totalQuestions ?? resultData.total_questions) || 0,
+        p_stars: Number(resultData.stars) || 0,
+        p_time_spent_seconds: Number.isFinite(parsedTimeSpent) ? Math.max(0, Math.floor(parsedTimeSpent)) : null,
       };
 
-      const { data, error } = await window.supabaseClient
-        .from('game_results')
-        .insert(payload);
-
-      if (error) {
-        logWarning('Game result could not be synced', error);
-        return { ok: false, error };
-      }
-
-      console.info('[dbService] Game result synced successfully.');
-      return { ok: true, data, payload };
+      const result = await callRpc('math_save_game_result', payload);
+      if (result.ok) console.info('[dbService] Game result synced successfully.');
+      else logWarning('Game result remains in the local journal');
+      return result;
     } catch (error) {
       logWarning('Game result could not be synced', error);
       return { ok: false, error };
@@ -111,7 +108,26 @@
 
   async function getAuthenticatedContext() {
     if (!window.authService) return { ok: false, reason: 'auth_unavailable' };
-    return window.authService.getCurrentProfile();
+    const auth = await window.authService.getCurrentProfile();
+    if (!auth.ok) return auth;
+    if (!auth.user || !auth.profile || auth.profile.id !== auth.user.id
+      || !['teacher', 'admin'].includes(auth.profile.role)) {
+      return { ok: false, reason: 'forbidden' };
+    }
+    return auth;
+  }
+
+  // UI-side guard for clear errors; the database must enforce the same ownership with RLS.
+  async function getOwnedClass(classId) {
+    const auth = await getAuthenticatedContext();
+    if (!auth.ok) return auth;
+    if (!classId) return { ok: false, reason: 'missing_fields' };
+    let query = window.supabaseClient.from('classes').select('id, teacher_id').eq('id', classId);
+    if (auth.profile.role !== 'admin') query = query.eq('teacher_id', auth.user.id);
+    const { data, error } = await query.maybeSingle();
+    if (error) return { ok: false, error };
+    if (!data) return { ok: false, reason: 'forbidden' };
+    return { ok: true, data, auth };
   }
 
   function generateClassCode() {
@@ -136,47 +152,28 @@
       const cleanCode = normalizeClassCode(classCode);
       if (!cleanCode) return { ok: false, reason: 'missing_class_code' };
 
-      const { data, error } = await window.supabaseClient
-        .from('classes')
-        .select('id, class_name, school_name, class_code')
-        .eq('class_code', cleanCode)
-        .maybeSingle();
-
-      if (error) {
-        logWarning('Class code lookup failed', error);
-        return { ok: false, error };
-      }
-      if (!data) return { ok: false, reason: 'class_not_found' };
-      return { ok: true, data };
+      return callRpc('math_find_class', { p_class_code: cleanCode });
     } catch (error) {
       logWarning('Class code lookup failed', error);
       return { ok: false, error };
     }
   }
 
-  async function getStudentsForLogin(classId) {
+  async function getStudentsForLogin(classId, classCode) {
     try {
       if (!window.supabaseClient) return unavailableStatus();
       if (!classId) return { ok: false, reason: 'missing_fields' };
 
-      const { data, error } = await window.supabaseClient
-        .from('students')
-        .select('id, class_id, student_number, display_name')
-        .eq('class_id', classId)
-        .order('student_number', { ascending: true });
-
-      if (error) {
-        logWarning('Student login list could not be loaded', error);
-        return { ok: false, error };
-      }
-      return { ok: true, data: data || [] };
+      return callRpc('math_students_for_login', {
+        p_class_id: classId, p_class_code: normalizeClassCode(classCode),
+      });
     } catch (error) {
       logWarning('Student login list could not be loaded', error);
       return { ok: false, error };
     }
   }
 
-  async function verifyStudentPin(studentId, classId, pinCode) {
+  async function verifyStudentPin(studentId, classId, pinCode, classCode) {
     try {
       if (!window.supabaseClient) return unavailableStatus();
       const cleanPin = String(pinCode || '').trim();
@@ -184,20 +181,10 @@
         return { ok: false, reason: 'invalid_pin' };
       }
 
-      const { data, error } = await window.supabaseClient
-        .from('students')
-        .select('id, class_id, student_number, display_name')
-        .eq('id', studentId)
-        .eq('class_id', classId)
-        .eq('pin_code', cleanPin)
-        .maybeSingle();
-
-      if (error) {
-        logWarning('Student PIN check failed', error);
-        return { ok: false, error };
-      }
-      if (!data) return { ok: false, reason: 'invalid_pin' };
-      return { ok: true, data };
+      return callRpc('math_student_login', {
+        p_student_id: studentId, p_class_id: classId,
+        p_class_code: normalizeClassCode(classCode), p_pin: cleanPin,
+      });
     } catch (error) {
       logWarning('Student PIN check failed', error);
       return { ok: false, error };
@@ -239,7 +226,9 @@
       if (!auth.ok) return auth;
 
       const cleanName = String(className || '').trim();
-      const cleanSchool = String(schoolName || auth.profile.school_name || '').trim();
+      const cleanSchool = String(auth.profile.role === 'admin'
+        ? schoolName || auth.profile.school_name || ''
+        : auth.profile.school_name || '').trim();
       if (!cleanName || !cleanSchool) return { ok: false, reason: 'missing_fields' };
 
       for (let attempt = 0; attempt < 5; attempt++) {
@@ -275,6 +264,8 @@
   async function getStudentsByClass(classId) {
     try {
       if (!window.supabaseClient) return unavailableStatus();
+      const ownership = await getOwnedClass(classId);
+      if (!ownership.ok) return ownership;
       const { data, error } = await window.supabaseClient
         .from('students')
         .select('id, class_id, student_number, display_name, created_at')
@@ -303,6 +294,9 @@
       if (!classId || !Number.isInteger(parsedNumber) || parsedNumber < 1 || !cleanName || !/^\d{4}$/.test(cleanPin)) {
         return { ok: false, reason: 'invalid_student_data' };
       }
+
+      const ownership = await getOwnedClass(classId);
+      if (!ownership.ok) return ownership;
 
       const { data, error } = await window.supabaseClient
         .from('students')
@@ -334,10 +328,18 @@
       if (!auth.ok) return auth;
       if (!studentId) return { ok: false, reason: 'missing_fields' };
 
+      const student = await window.supabaseClient.from('students')
+        .select('id, class_id').eq('id', studentId).maybeSingle();
+      if (student.error) return { ok: false, error: student.error };
+      if (!student.data) return { ok: false, reason: 'forbidden' };
+      const ownership = await getOwnedClass(student.data.class_id);
+      if (!ownership.ok) return ownership;
+
       const { data, error } = await window.supabaseClient
         .from('students')
         .delete()
         .eq('id', studentId)
+        .eq('class_id', student.data.class_id)
         .select('id')
         .maybeSingle();
 
@@ -357,9 +359,8 @@
   async function deleteClass(classId) {
     try {
       if (!window.supabaseClient) return unavailableStatus();
-      const auth = await getAuthenticatedContext();
-      if (!auth.ok) return auth;
-      if (!classId) return { ok: false, reason: 'missing_fields' };
+      const ownership = await getOwnedClass(classId);
+      if (!ownership.ok) return ownership;
 
       const { data, error } = await window.supabaseClient
         .from('classes')
@@ -384,6 +385,8 @@
   async function getClassResults(classId) {
     try {
       if (!window.supabaseClient) return unavailableStatus();
+      const ownership = await getOwnedClass(classId);
+      if (!ownership.ok) return ownership;
       const { data, error } = await window.supabaseClient
         .from('game_results')
         .select('id, student_id, class_id, student_name, game_key, score, total_questions, stars, time_spent_seconds, played_at')
@@ -447,6 +450,8 @@
     getClassByCode,
     getStudentsForLogin,
     verifyStudentPin,
+    validateStudentSession,
+    revokeStudentSession,
     getTeacherClasses,
     createClass,
     getStudentsByClass,

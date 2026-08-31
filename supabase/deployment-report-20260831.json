@@ -1,0 +1,14 @@
+{
+  "date": "2026-08-31",
+  "project": "nzbsbofuvdiyooqljlvv",
+  "status": "committed",
+  "databaseTestsPassed": 58,
+  "classes": 1,
+  "hashed_pins": 9,
+  "migration": "teacher_isolation_20260831",
+  "profiles": 1,
+  "results": 4,
+  "rls_tables": 4,
+  "students": 9,
+  "test_users_remaining": 0
+}

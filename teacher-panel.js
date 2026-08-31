@@ -16,6 +16,9 @@
     students: [],
     results: [],
     authRevision: 0,
+    classesRequest: 0,
+    studentsRequest: 0,
+    journalRequest: 0,
   };
 
   function element(id) {
@@ -104,6 +107,41 @@
   function invalidateAuthState() {
     panelState.authRevision += 1;
     clearAuthForms();
+    clearWorkspace();
+  }
+
+  function clearWorkspace() {
+    panelState.classesRequest += 1;
+    panelState.studentsRequest += 1;
+    panelState.journalRequest += 1;
+    panelState.classes = [];
+    panelState.selectedClass = null;
+    panelState.students = [];
+    panelState.results = [];
+    ['teacherClassList', 'classStudentRows', 'onlineJournalRows'].forEach(id => { element(id).innerHTML = ''; });
+    ['selected-class-title', 'selectedClassSchool', 'selectedClassCode',
+      'teacherProfileName', 'teacherProfileSchool', 'teacherRoleBadge',
+      'adminTeacherCount', 'adminClassCount', 'adminStudentCount', 'adminGameCount'].forEach(id => {
+      element(id).textContent = '';
+    });
+    ['createClassForm', 'addStudentForm'].forEach(id => {
+      element(id).reset();
+      element(id).hidden = true;
+    });
+    element('newStudentPin').value = '';
+    element('newStudentPin').type = 'password';
+    element('showStudentPinBtn').setAttribute('aria-pressed', 'false');
+    element('classDetail').hidden = true;
+    element('classEmptyState').hidden = false;
+    element('onlineJournal').hidden = true;
+    element('adminOverview').hidden = true;
+    setButtonBusy(element('loadOnlineJournalBtn'), false);
+    ['classFormMessage', 'studentFormMessage', 'onlineJournalMessage'].forEach(id => setMessage(id, ''));
+  }
+
+  function isCurrentTeacher(revision, classId) {
+    return Boolean(panelState.profile) && revision === panelState.authRevision
+      && (classId === undefined || panelState.selectedClass?.id === classId);
   }
 
   function showSignedOut() {
@@ -122,6 +160,7 @@
 
   function showSignedIn(profile) {
     clearAuthForms();
+    if (panelState.profile?.id !== profile.id) clearWorkspace();
     panelState.profile = profile;
     element('teacherAuthPanel').hidden = true;
     element('teacherDashboard').hidden = false;
@@ -129,6 +168,7 @@
     element('teacherProfileSchool').textContent = profile.school_name || 'Без посочено училище';
     element('teacherRoleBadge').textContent = profile.role === 'admin' ? 'Администратор' : 'Учител';
     element('newClassSchool').value = profile.school_name || '';
+    element('newClassSchool').readOnly = profile.role !== 'admin';
     element('adminOverview').hidden = profile.role !== 'admin';
     announceTeacherAccess(profile);
   }
@@ -168,7 +208,11 @@
   }
 
   async function loadClasses(preferredClassId = null) {
+    const revision = panelState.authRevision;
+    const request = ++panelState.classesRequest;
+    if (!panelState.profile) return;
     const result = await window.dbService.getTeacherClasses();
+    if (!isCurrentTeacher(revision) || request !== panelState.classesRequest) return;
     if (!result.ok) {
       setMessage('classFormMessage', friendlyError(result, 'Класовете не можаха да се заредят.'), 'bad');
       return;
@@ -204,7 +248,11 @@
 
   async function loadStudents() {
     if (!panelState.selectedClass) return;
-    const result = await window.dbService.getStudentsByClass(panelState.selectedClass.id);
+    const revision = panelState.authRevision;
+    const classId = panelState.selectedClass.id;
+    const request = ++panelState.studentsRequest;
+    const result = await window.dbService.getStudentsByClass(classId);
+    if (!isCurrentTeacher(revision, classId) || request !== panelState.studentsRequest) return;
     if (!result.ok) {
       setMessage('studentFormMessage', friendlyError(result, 'Учениците не можаха да се заредят.'), 'bad');
       return;
@@ -218,6 +266,12 @@
     if (!selected) return;
 
     panelState.selectedClass = selected;
+    panelState.journalRequest += 1;
+    panelState.students = [];
+    panelState.results = [];
+    renderStudents();
+    renderOnlineJournal();
+    setButtonBusy(element('loadOnlineJournalBtn'), false);
     renderClassList();
     element('classEmptyState').hidden = true;
     element('classDetail').hidden = false;
@@ -264,11 +318,15 @@
 
   async function loadOnlineJournal() {
     if (!panelState.selectedClass) return;
+    const revision = panelState.authRevision;
+    const classId = panelState.selectedClass.id;
+    const request = ++panelState.journalRequest;
     const button = element('loadOnlineJournalBtn');
     setButtonBusy(button, true, 'Зареждане...');
     setMessage('onlineJournalMessage', '');
 
-    const result = await window.dbService.getClassResults(panelState.selectedClass.id);
+    const result = await window.dbService.getClassResults(classId);
+    if (!isCurrentTeacher(revision, classId) || request !== panelState.journalRequest) return;
     setButtonBusy(button, false);
     if (!result.ok) {
       setMessage('onlineJournalMessage', friendlyError(result, 'Онлайн дневникът не можа да се зареди.'), 'bad');
@@ -282,7 +340,10 @@
   }
 
   async function loadAdminOverview() {
+    const revision = panelState.authRevision;
+    if (panelState.profile?.role !== 'admin') return;
     const result = await window.dbService.getAdminOverview();
+    if (!isCurrentTeacher(revision) || panelState.profile.role !== 'admin') return;
     if (!result.ok) return;
     element('adminTeacherCount').textContent = result.data.teachers;
     element('adminClassCount').textContent = result.data.classes;
@@ -292,7 +353,8 @@
 
   function bindAuthEvents() {
     document.querySelector('.tab[data-tab="teacher"]')?.addEventListener('click', () => {
-      if (!panelState.profile) clearAuthForms();
+      if (panelState.profile) void refreshAuthState();
+      else clearAuthForms();
     });
     element('showTeacherLoginBtn').addEventListener('click', () => showAuthMode('login'));
     element('showTeacherRegisterBtn').addEventListener('click', () => showAuthMode('register'));
@@ -381,7 +443,9 @@
 
     element('createClassForm').addEventListener('submit', async event => {
       event.preventDefault();
-      const button = event.currentTarget.querySelector('button[type="submit"]');
+      const form = event.currentTarget;
+      const revision = panelState.authRevision;
+      const button = form.querySelector('button[type="submit"]');
       setButtonBusy(button, true, 'Създаване...');
       setMessage('classFormMessage', '');
       const result = await window.dbService.createClass(
@@ -390,17 +454,19 @@
       );
       setButtonBusy(button, false);
 
+      if (!isCurrentTeacher(revision)) return;
+
       if (!result.ok) {
         setMessage('classFormMessage', friendlyError(result, 'Класът не можа да се създаде.'), 'bad');
         return;
       }
 
-      event.currentTarget.reset();
+      form.reset();
       element('newClassSchool').value = panelState.profile.school_name || '';
-      event.currentTarget.hidden = true;
+      form.hidden = true;
       setMessage('classFormMessage', `Класът е създаден с код ${result.data.class_code}.`, 'good');
       await loadClasses(result.data.id);
-      if (panelState.profile.role === 'admin') await loadAdminOverview();
+      if (isCurrentTeacher(revision) && panelState.profile.role === 'admin') await loadAdminOverview();
     });
 
     element('teacherClassList').addEventListener('click', event => {
@@ -456,6 +522,9 @@
     element('addStudentForm').addEventListener('submit', async event => {
       event.preventDefault();
       if (!panelState.selectedClass) return;
+      const form = event.currentTarget;
+      const revision = panelState.authRevision;
+      const classId = panelState.selectedClass.id;
       const studentNumber = Number(element('newStudentNumber').value);
       const studentName = element('newStudentName').value.trim();
       const pinCode = element('newStudentPin').value.trim();
@@ -468,27 +537,29 @@
         return;
       }
 
-      const button = event.currentTarget.querySelector('button[type="submit"]');
+      const button = form.querySelector('button[type="submit"]');
       setButtonBusy(button, true, 'Добавяне...');
       setMessage('studentFormMessage', '');
       const result = await window.dbService.addStudentToClass(
-        panelState.selectedClass.id,
+        classId,
         studentNumber,
         studentName,
         pinCode,
       );
       setButtonBusy(button, false);
 
+      if (!isCurrentTeacher(revision, classId)) return;
+
       if (!result.ok) {
         setMessage('studentFormMessage', friendlyError(result, 'Ученикът не можа да се добави.'), 'bad');
         return;
       }
 
-      event.currentTarget.reset();
-      event.currentTarget.hidden = true;
+      form.reset();
+      form.hidden = true;
       setMessage('studentFormMessage', 'Ученикът е добавен успешно.', 'good');
       await loadStudents();
-      if (panelState.profile.role === 'admin') await loadAdminOverview();
+      if (isCurrentTeacher(revision, classId) && panelState.profile.role === 'admin') await loadAdminOverview();
     });
 
     element('classStudentRows').addEventListener('click', async event => {
@@ -496,11 +567,14 @@
       if (!button) return;
       const student = panelState.students.find(item => item.id === button.dataset.deleteStudentId);
       if (!student || !window.confirm(`Сигурни ли сте, че искате да изтриете ученика ${student.display_name}?`)) return;
+      const revision = panelState.authRevision;
+      const classId = panelState.selectedClass.id;
 
       setButtonBusy(button, true, 'Изтриване...');
       setMessage('studentFormMessage', '');
       const result = await window.dbService.deleteStudent(student.id);
       setButtonBusy(button, false);
+      if (!isCurrentTeacher(revision, classId)) return;
       if (!result.ok) {
         setMessage('studentFormMessage', friendlyError(result, 'Ученикът не можа да бъде изтрит.'), 'bad');
         return;
@@ -508,19 +582,22 @@
 
       setMessage('studentFormMessage', 'Ученикът е изтрит.', 'good');
       await loadStudents();
-      if (panelState.profile.role === 'admin') await loadAdminOverview();
+      if (isCurrentTeacher(revision, classId) && panelState.profile.role === 'admin') await loadAdminOverview();
     });
 
     element('deleteClassBtn').addEventListener('click', async () => {
       if (!panelState.selectedClass) return;
       if (!window.confirm('Сигурни ли сте, че искате да изтриете класа?')) return;
+      const revision = panelState.authRevision;
+      const classId = panelState.selectedClass.id;
 
       const button = element('deleteClassBtn');
       const deletedClassName = panelState.selectedClass.class_name;
       setButtonBusy(button, true, 'Изтриване...');
       setMessage('classFormMessage', '');
-      const result = await window.dbService.deleteClass(panelState.selectedClass.id);
+      const result = await window.dbService.deleteClass(classId);
       setButtonBusy(button, false);
+      if (!isCurrentTeacher(revision, classId)) return;
       if (!result.ok) {
         setMessage('studentFormMessage', friendlyError(result, 'Класът не можа да бъде изтрит.'), 'bad');
         return;
@@ -529,7 +606,7 @@
       panelState.selectedClass = null;
       setMessage('classFormMessage', `Класът ${deletedClassName} е изтрит.`, 'good');
       await loadClasses();
-      if (panelState.profile.role === 'admin') await loadAdminOverview();
+      if (isCurrentTeacher(revision) && panelState.profile.role === 'admin') await loadAdminOverview();
     });
 
     element('loadOnlineJournalBtn').addEventListener('click', loadOnlineJournal);
