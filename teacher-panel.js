@@ -89,10 +89,20 @@
     window.dispatchEvent(new CustomEvent('math:teacher-access', { detail: { profile: profile || null } }));
   }
 
+  function clearAuthForms() {
+    ['teacherLoginForm', 'teacherRegisterForm'].forEach(id => {
+      const form = element(id);
+      form.reset();
+      form.querySelectorAll('input').forEach(input => { input.value = ''; });
+    });
+  }
+
   function showSignedOut() {
     panelState.profile = null;
     panelState.classes = [];
     panelState.selectedClass = null;
+    panelState.students = [];
+    panelState.results = [];
     element('teacherAuthPanel').hidden = false;
     element('teacherDashboard').hidden = true;
     element('adminOverview').hidden = true;
@@ -278,13 +288,14 @@
 
     element('teacherLoginForm').addEventListener('submit', async event => {
       event.preventDefault();
+      const form = event.currentTarget;
       const password = element('teacherLoginPassword').value;
       if (password.length < 8) {
         setMessage('teacherAuthMessage', 'Паролата трябва да съдържа поне 8 знака.', 'bad');
         element('teacherLoginPassword').focus();
         return;
       }
-      const button = event.currentTarget.querySelector('button[type="submit"]');
+      const button = form.querySelector('button[type="submit"]');
       setButtonBusy(button, true, 'Влизане...');
       setMessage('teacherAuthMessage', '');
       const result = await window.authService.loginTeacher(
@@ -298,19 +309,20 @@
         return;
       }
 
-      event.currentTarget.reset();
+      form.reset();
       await refreshAuthState();
     });
 
     element('teacherRegisterForm').addEventListener('submit', async event => {
       event.preventDefault();
+      const form = event.currentTarget;
       const password = element('teacherRegisterPassword').value;
       if (password.length < 8) {
         setMessage('teacherAuthMessage', 'Паролата трябва да съдържа поне 8 знака.', 'bad');
         element('teacherRegisterPassword').focus();
         return;
       }
-      const button = event.currentTarget.querySelector('button[type="submit"]');
+      const button = form.querySelector('button[type="submit"]');
       setButtonBusy(button, true, 'Създаване...');
       setMessage('teacherAuthMessage', '');
       const result = await window.authService.registerTeacher(
@@ -326,7 +338,7 @@
         return;
       }
 
-      event.currentTarget.reset();
+      form.reset();
       if (result.requiresEmailConfirmation) {
         showAuthMode('login');
         setMessage('teacherAuthMessage', 'Регистрацията е готова. Проверете имейла си и потвърдете профила.', 'good');
@@ -338,13 +350,11 @@
     element('teacherLogoutBtn').addEventListener('click', async () => {
       const button = element('teacherLogoutBtn');
       setButtonBusy(button, true, 'Излизане...');
-      const result = await window.authService.logoutTeacher();
-      setButtonBusy(button, false);
-      if (!result.ok) {
-        setMessage('teacherAuthMessage', friendlyError(result, 'Изходът не беше успешен.'), 'bad');
-        return;
+      try {
+        await window.accessControl.switchToGuest();
+      } finally {
+        setButtonBusy(button, false);
       }
-      showSignedOut();
     });
   }
 
@@ -518,6 +528,10 @@
     if (!window.authService || !window.dbService || !element('teacherAuthPanel')) return;
     bindAuthEvents();
     bindClassEvents();
+    window.addEventListener('math:guest-access', () => {
+      clearAuthForms();
+      showSignedOut();
+    });
     const authListener = window.authService.onAuthStateChange(() => {
       window.setTimeout(refreshAuthState, 0);
     });

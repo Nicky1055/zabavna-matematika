@@ -180,6 +180,13 @@
     if (panel) panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
+  function showWelcomeScreen() {
+    document.querySelectorAll('.tab').forEach(button => button.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(panel => {
+      panel.classList.toggle('active', panel.id === 'welcome');
+    });
+  }
+
   async function logoutTeacher() {
     if (!accessState.teacherProfile || !window.authService) return true;
     const result = await window.authService.logoutTeacher();
@@ -192,12 +199,16 @@
   }
 
   async function switchToGuest() {
-    if (!await logoutTeacher()) return;
+    if (!await logoutTeacher()) return false;
     const hadStudentName = Boolean(window.localStorage.getItem('mathStudent'));
     const hadStudent = clearStudentSession(true);
     closeStudentLogin();
+    resetStudentLogin();
     announceStudentIdentity('', false, hadStudent || hadStudentName);
+    window.dispatchEvent(new CustomEvent('math:guest-access'));
     renderAccessStatus();
+    showWelcomeScreen();
+    return true;
   }
 
   async function switchToStudentLogin() {
@@ -430,6 +441,7 @@
 
   window.accessControl = Object.freeze({
     getCurrentRole: currentRole,
+    switchToGuest,
   });
 
   if (document.readyState === 'loading') {

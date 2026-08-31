@@ -385,11 +385,11 @@
                 <button id="showTeacherRegisterBtn" class="teacher-auth-tab" type="button" role="tab" aria-selected="false">Регистрация</button>
               </div>
 
-              <form id="teacherLoginForm" class="teacher-form">
+              <form id="teacherLoginForm" class="teacher-form" autocomplete="off">
                 <label for="teacherLoginEmail">Имейл</label>
-                <input id="teacherLoginEmail" type="email" autocomplete="email" required />
+                <input id="teacherLoginEmail" type="email" autocomplete="off" required />
                 <label for="teacherLoginPassword">Парола</label>
-                <input id="teacherLoginPassword" type="password" autocomplete="current-password" minlength="8" required />
+                <input id="teacherLoginPassword" type="password" autocomplete="off" minlength="8" required />
                 <small class="teacher-form-help">Минимум 8 знака.</small>
                 <button class="btn" type="submit">Влез</button>
               </form>
@@ -592,7 +592,7 @@
   <script defer src="auth-service.js?v=20260830-1"></script>
   <script defer src="db-service.js?v=20260830-2"></script>
   <script defer src="app.js?v=20260831-1"></script>
-  <script defer src="teacher-panel.js?v=20260830-1"></script>
-  <script defer src="access-control.js?v=20260831-1"></script>
+  <script defer src="teacher-panel.js?v=20260831-2"></script>
+  <script defer src="access-control.js?v=20260831-2"></script>
 </body>
 </html>
