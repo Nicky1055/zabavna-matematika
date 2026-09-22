@@ -1796,6 +1796,35 @@ fieldset label, .game-card label { display: block; margin: 8px 0; }
 }
 .teacher-form .btn { margin-top: 6px; }
 .teacher-form-help { margin-top: -4px; color: #655b98; font-weight: 750; }
+.teacher-auth-help-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px 18px;
+  margin-top: 2px;
+}
+.teacher-auth-link {
+  min-height: 34px;
+  padding: 3px 0;
+  border: 0;
+  background: transparent;
+  color: #563bd7;
+  font: inherit;
+  font-weight: 900;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.teacher-auth-link:hover, .teacher-auth-link:focus-visible { color: #2f1d9d; }
+.teacher-auth-link:disabled { color: #8f88b3; cursor: wait; }
+.teacher-auth-help-text {
+  margin-top: -4px;
+  color: var(--muted);
+  text-align: center;
+  line-height: 1.4;
+}
+.teacher-password-update-copy h4 { margin: 0 0 4px; color: #3b2f86; font-size: 1.15rem; }
+.teacher-password-update-copy p { margin: 0 0 8px; color: var(--muted); line-height: 1.45; }
 .teacher-dashboard { background: #fff; }
 .teacher-profile-bar {
   display: flex;

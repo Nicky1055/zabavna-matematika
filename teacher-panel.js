@@ -16,6 +16,7 @@
     students: [],
     results: [],
     journalUpdatedAt: null,
+    passwordRecoveryActive: false,
     authRevision: 0,
     classesRequest: 0,
     studentsRequest: 0,
@@ -47,6 +48,8 @@
     if (result.reason === 'not_configured') return 'Онлайн връзката още не е настроена.';
     if (result.reason === 'no_session') return 'Влезте в учителския си профил.';
     if (result.reason === 'missing_fields') return 'Попълнете всички полета.';
+    if (result.reason === 'missing_email') return 'Въведете имейла на учителския профил.';
+    if (result.reason === 'invalid_email') return 'Въведете валиден имейл адрес.';
     if (result.reason === 'weak_password') return 'Паролата трябва да съдържа поне 8 знака.';
     if (result.reason === 'invalid_student_data') return 'Попълнете номер в класа, име на ученика и ПИН код от 4 цифри.';
     if (result.reason === 'forbidden') return 'Нямате достъп до тази информация.';
@@ -56,6 +59,10 @@
     if (message.includes('invalid login credentials')) return 'Имейлът или паролата не са правилни.';
     if (message.includes('email not confirmed')) return 'Потвърдете имейла си и опитайте отново.';
     if (message.includes('already registered')) return 'Вече има регистрация с този имейл.';
+    if (message.includes('rate limit') || (result.error && result.error.status === 429)) {
+      return 'Изпратени са твърде много писма. Изчакайте няколко минути и опитайте отново.';
+    }
+    if (message.includes('same password')) return 'Новата парола трябва да е различна от досегашната.';
     if (message.includes('duplicate') || (result.error && result.error.code === '23505')) {
       return 'Вече има такъв запис. Проверете въведените данни.';
     }
@@ -80,8 +87,11 @@
 
   function showAuthMode(mode) {
     const isLogin = mode === 'login';
+    panelState.passwordRecoveryActive = false;
+    element('teacherAuthSwitch').hidden = false;
     element('teacherLoginForm').hidden = !isLogin;
     element('teacherRegisterForm').hidden = isLogin;
+    element('teacherPasswordUpdateForm').hidden = true;
     element('showTeacherLoginBtn').classList.toggle('active', isLogin);
     element('showTeacherRegisterBtn').classList.toggle('active', !isLogin);
     element('showTeacherLoginBtn').setAttribute('aria-selected', String(isLogin));
@@ -89,12 +99,29 @@
     setMessage('teacherAuthMessage', '');
   }
 
+  function showPasswordUpdateMode() {
+    panelState.passwordRecoveryActive = true;
+    panelState.profile = null;
+    clearWorkspace();
+    clearAuthForms();
+    element('teacherAuthPanel').hidden = false;
+    element('teacherDashboard').hidden = true;
+    element('teacherAuthSwitch').hidden = true;
+    element('teacherLoginForm').hidden = true;
+    element('teacherRegisterForm').hidden = true;
+    element('teacherPasswordUpdateForm').hidden = false;
+    announceTeacherAccess(null);
+    document.querySelector('.tab[data-tab="teacher"]')?.click();
+    setMessage('teacherAuthMessage', 'Връзката е потвърдена. Задайте нова парола.', 'good');
+    window.setTimeout(() => element('teacherNewPassword').focus(), 0);
+  }
+
   function announceTeacherAccess(profile) {
     window.dispatchEvent(new CustomEvent('math:teacher-access', { detail: { profile: profile || null } }));
   }
 
   function clearAuthForms() {
-    ['teacherLoginForm', 'teacherRegisterForm'].forEach(id => {
+    ['teacherLoginForm', 'teacherRegisterForm', 'teacherPasswordUpdateForm'].forEach(id => {
       const form = element(id);
       form.querySelectorAll('input').forEach(input => {
         input.defaultValue = '';
@@ -150,6 +177,7 @@
 
   function showSignedOut() {
     invalidateAuthState();
+    panelState.passwordRecoveryActive = false;
     panelState.profile = null;
     panelState.classes = [];
     panelState.selectedClass = null;
@@ -182,7 +210,7 @@
     const revision = ++panelState.authRevision;
     const result = await window.authService.getCurrentProfile();
     // A response started before logout must not restore the previous account.
-    if (revision !== panelState.authRevision) return;
+    if (revision !== panelState.authRevision || panelState.passwordRecoveryActive) return;
     if (!result.ok) {
       showSignedOut();
       return;
@@ -379,6 +407,77 @@
     });
     element('showTeacherLoginBtn').addEventListener('click', () => showAuthMode('login'));
     element('showTeacherRegisterBtn').addEventListener('click', () => showAuthMode('register'));
+
+    element('forgotTeacherPasswordBtn').addEventListener('click', async event => {
+      const button = event.currentTarget;
+      setButtonBusy(button, true, 'Изпращане...');
+      setMessage('teacherAuthMessage', '');
+      const result = await window.authService.requestPasswordReset(element('teacherLoginEmail').value);
+      setButtonBusy(button, false);
+      if (!result.ok) {
+        setMessage('teacherAuthMessage', friendlyError(result, 'Писмото за нова парола не можа да бъде изпратено.'), 'bad');
+        return;
+      }
+      setMessage('teacherAuthMessage', 'Ако има профил с този имейл, изпратихме връзка за задаване на нова парола. Проверете и папка „Спам“.', 'good');
+    });
+
+    element('resendTeacherConfirmationBtn').addEventListener('click', async event => {
+      const button = event.currentTarget;
+      setButtonBusy(button, true, 'Изпращане...');
+      setMessage('teacherAuthMessage', '');
+      const result = await window.authService.resendTeacherConfirmation(element('teacherLoginEmail').value);
+      setButtonBusy(button, false);
+      if (!result.ok) {
+        setMessage('teacherAuthMessage', friendlyError(result, 'Писмото за потвърждение не можа да бъде изпратено.'), 'bad');
+        return;
+      }
+      setMessage('teacherAuthMessage', 'Изпратихме ново писмо за потвърждение. Проверете входящата поща и папка „Спам“.', 'good');
+    });
+
+    element('teacherPasswordUpdateForm').addEventListener('submit', async event => {
+      event.preventDefault();
+      const form = event.currentTarget;
+      const password = element('teacherNewPassword').value;
+      const confirmation = element('teacherNewPasswordConfirm').value;
+      if (password.length < 8) {
+        setMessage('teacherAuthMessage', 'Новата парола трябва да съдържа поне 8 знака.', 'bad');
+        element('teacherNewPassword').focus();
+        return;
+      }
+      if (password !== confirmation) {
+        setMessage('teacherAuthMessage', 'Двете пароли не съвпадат.', 'bad');
+        element('teacherNewPasswordConfirm').focus();
+        return;
+      }
+
+      const button = form.querySelector('button[type="submit"]');
+      setButtonBusy(button, true, 'Запазване...');
+      setMessage('teacherAuthMessage', '');
+      const result = await window.authService.updateTeacherPassword(password);
+      setButtonBusy(button, false);
+      if (!result.ok) {
+        setMessage('teacherAuthMessage', friendlyError(result, 'Новата парола не можа да бъде запазена.'), 'bad');
+        return;
+      }
+
+      const logoutResult = await window.authService.logoutTeacher();
+      if (!logoutResult.ok) {
+        clearAuthForms();
+        setMessage('teacherAuthMessage', 'Паролата е сменена, но защитената сесия не можа да бъде затворена. Натиснете „Назад към входа“ и опитайте отново.', 'bad');
+        return;
+      }
+      showSignedOut();
+      setMessage('teacherAuthMessage', 'Паролата е сменена. Влезте с новата парола.', 'good');
+    });
+
+    element('cancelTeacherPasswordUpdateBtn').addEventListener('click', async () => {
+      const result = await window.authService.logoutTeacher();
+      if (!result.ok) {
+        setMessage('teacherAuthMessage', friendlyError(result, 'Защитената сесия не можа да бъде затворена. Опитайте отново.'), 'bad');
+        return;
+      }
+      showSignedOut();
+    });
 
     element('teacherLoginForm').addEventListener('submit', async event => {
       event.preventDefault();
@@ -643,6 +742,10 @@
     window.authService.onAuthStateChange(event => {
       if (event === 'SIGNED_OUT') {
         showSignedOut();
+        return;
+      }
+      if (event === 'PASSWORD_RECOVERY') {
+        showPasswordUpdateMode();
         return;
       }
       window.setTimeout(refreshAuthState, 0);
