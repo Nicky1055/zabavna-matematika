@@ -26,6 +26,7 @@ async function environment(initialProfile = null, initialStudent = null, options
   const formInputs = {
     teacherLoginForm: ['teacherLoginEmail', 'teacherLoginPassword'],
     teacherRegisterForm: ['teacherRegisterName', 'teacherRegisterSchool', 'teacherRegisterEmail', 'teacherRegisterPassword'],
+    teacherPasswordUpdateForm: ['teacherNewPassword', 'teacherNewPasswordConfirm'],
     studentClassCodeForm: ['studentClassCode'],
     studentPinLoginForm: ['studentLoginPin'],
     createClassForm: ['newClassName', 'newClassSchool'],
@@ -137,6 +138,13 @@ async function environment(initialProfile = null, initialStudent = null, options
       },
       async loginTeacher() { await tick(); currentProfile = profile; return { ok: true, profile }; },
       async registerTeacher() { await tick(); return { ok: true, requiresEmailConfirmation: true }; },
+      async requestPasswordReset(email) { await tick(); return email ? { ok: true } : { ok: false, reason: 'missing_email' }; },
+      async resendTeacherConfirmation(email) { await tick(); return email ? { ok: true } : { ok: false, reason: 'missing_email' }; },
+      async updateTeacherPassword(password) {
+        await tick();
+        if (password.length < 8) return { ok: false, reason: 'weak_password' };
+        return { ok: true };
+      },
       async logoutTeacher() {
         if (!currentProfile) return { ok: true };
         logoutCalls++;
@@ -167,6 +175,11 @@ async function environment(initialProfile = null, initialStudent = null, options
       currentProfile = null;
       authCallback?.('SIGNED_OUT');
       await new Promise(resolve => setTimeout(resolve, 10));
+    },
+    async authEvent(event) {
+      if (event === 'PASSWORD_RECOVERY') currentProfile = profile;
+      authCallback?.(event);
+      await tick(); await tick();
     },
     async delayProfileRead() {
       let release;

@@ -16,6 +16,23 @@
     return String(value || '').trim();
   }
 
+  function normalizedEmail(value) {
+    return normalizedText(value).toLowerCase();
+  }
+
+  function validEmail(value) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+  }
+
+  function recoveryRedirectUrl() {
+    try {
+      if (!window.location || !/^https?:$/.test(window.location.protocol)) return undefined;
+      return `${window.location.origin}${window.location.pathname}`;
+    } catch (error) {
+      return undefined;
+    }
+  }
+
   async function ensureTeacherProfile(user) {
     try {
       const client = getClient();
@@ -67,7 +84,7 @@
       const client = getClient();
       if (!client) return { ok: false, reason: 'not_configured' };
 
-      const cleanEmail = normalizedText(email).toLowerCase();
+      const cleanEmail = normalizedEmail(email);
       const cleanName = normalizedText(fullName);
       const cleanSchool = normalizedText(schoolName);
       const cleanPassword = String(password || '');
@@ -113,7 +130,7 @@
     try {
       const client = getClient();
       if (!client) return { ok: false, reason: 'not_configured' };
-      const cleanEmail = normalizedText(email).toLowerCase();
+      const cleanEmail = normalizedEmail(email);
       const cleanPassword = String(password || '');
       if (!cleanEmail || !cleanPassword) return { ok: false, reason: 'missing_fields' };
       if (cleanPassword.length < MIN_PASSWORD_LENGTH) return { ok: false, reason: 'weak_password' };
@@ -159,6 +176,62 @@
     }
   }
 
+  async function requestPasswordReset(email) {
+    try {
+      const client = getClient();
+      if (!client) return { ok: false, reason: 'not_configured' };
+      const cleanEmail = normalizedEmail(email);
+      if (!cleanEmail) return { ok: false, reason: 'missing_email' };
+      if (!validEmail(cleanEmail)) return { ok: false, reason: 'invalid_email' };
+
+      const redirectTo = recoveryRedirectUrl();
+      const options = redirectTo ? { redirectTo } : undefined;
+      const { error } = await client.auth.resetPasswordForEmail(cleanEmail, options);
+      if (error) return failed('Password reset request', error);
+      return { ok: true };
+    } catch (error) {
+      return failed('Password reset request', error);
+    }
+  }
+
+  async function resendTeacherConfirmation(email) {
+    try {
+      const client = getClient();
+      if (!client) return { ok: false, reason: 'not_configured' };
+      const cleanEmail = normalizedEmail(email);
+      if (!cleanEmail) return { ok: false, reason: 'missing_email' };
+      if (!validEmail(cleanEmail)) return { ok: false, reason: 'invalid_email' };
+
+      const emailRedirectTo = recoveryRedirectUrl();
+      const options = emailRedirectTo ? { emailRedirectTo } : undefined;
+      const { error } = await client.auth.resend({
+        type: 'signup',
+        email: cleanEmail,
+        ...(options ? { options } : {}),
+      });
+      if (error) return failed('Confirmation resend', error);
+      return { ok: true };
+    } catch (error) {
+      return failed('Confirmation resend', error);
+    }
+  }
+
+  async function updateTeacherPassword(password) {
+    try {
+      const client = getClient();
+      if (!client) return { ok: false, reason: 'not_configured' };
+      const cleanPassword = String(password || '');
+      if (!cleanPassword) return { ok: false, reason: 'missing_fields' };
+      if (cleanPassword.length < MIN_PASSWORD_LENGTH) return { ok: false, reason: 'weak_password' };
+
+      const { data, error } = await client.auth.updateUser({ password: cleanPassword });
+      if (error) return failed('Password update', error);
+      return { ok: true, user: data.user };
+    } catch (error) {
+      return failed('Password update', error);
+    }
+  }
+
   async function getCurrentProfile() {
     try {
       const client = getClient();
@@ -193,6 +266,9 @@
   window.authService = Object.freeze({
     registerTeacher,
     loginTeacher,
+    requestPasswordReset,
+    resendTeacherConfirmation,
+    updateTeacherPassword,
     logoutTeacher,
     getCurrentProfile,
     onAuthStateChange,
