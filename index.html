@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Забавна математика • Начален етап</title>
-  <link rel="stylesheet" href="style.css?v=20260921-1" />
+  <link rel="stylesheet" href="style.css?v=20261025-1" />
 </head>
 <body>
   <header class="hero">
@@ -552,6 +552,18 @@
                     </div>
                   </form>
                   <p id="studentFormMessage" class="feedback" aria-live="polite"></p>
+                  <form id="changeStudentPinForm" class="teacher-inline-form teacher-inline-form--pin" novalidate hidden>
+                    <strong id="changeStudentPinName"></strong>
+                    <div class="teacher-field">
+                      <label for="changedStudentPin">Нов ПИН код (4 цифри)</label>
+                      <input id="changedStudentPin" type="password" inputmode="numeric" autocomplete="new-password" pattern="[0-9]{4}" minlength="4" maxlength="4" required />
+                    </div>
+                    <div class="teacher-form-actions">
+                      <button class="btn" type="submit">Запази ПИН</button>
+                      <button id="cancelChangeStudentPinBtn" class="btn btn--ghost" type="button">Отказ</button>
+                    </div>
+                    <p id="changeStudentPinMessage" class="feedback" role="status" aria-live="polite"></p>
+                  </form>
 
                   <div class="teacher-table-wrap">
                     <table class="teacher-table">
@@ -638,9 +650,9 @@
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="supabase-config.js"></script>
   <script defer src="auth-service.js?v=20260921-1"></script>
-  <script defer src="db-service.js?v=20260831-6"></script>
+  <script defer src="db-service.js?v=20261025-1"></script>
   <script defer src="app.js?v=20260831-7"></script>
-  <script defer src="teacher-panel.js?v=20260921-1"></script>
+  <script defer src="teacher-panel.js?v=20261025-1"></script>
   <script defer src="access-control.js?v=20260831-7"></script>
 </body>
 </html>

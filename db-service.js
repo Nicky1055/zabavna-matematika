@@ -310,7 +310,10 @@
         .single();
 
       if (error) {
-        logWarning('Student could not be added', error);
+        if (error.code === '23505' && error.message === 'student_pin_in_use') {
+          return { ok: false, reason: 'pin_in_use' };
+        }
+        logWarning('Student could not be added');
         return { ok: false, error };
       }
 
@@ -318,6 +321,33 @@
     } catch (error) {
       logWarning('Student could not be added', error);
       return { ok: false, error };
+    }
+  }
+
+  async function changeStudentPin(classId, studentId, pinCode) {
+    try {
+      if (!window.supabaseClient) return unavailableStatus();
+      const cleanPin = String(pinCode || '').trim();
+      if (!classId || !studentId || !/^\d{4}$/.test(cleanPin)) {
+        return { ok: false, reason: 'invalid_pin' };
+      }
+      const ownership = await getOwnedClass(classId);
+      if (!ownership.ok) return ownership;
+      const { data, error } = await window.supabaseClient.from('students')
+        .update({ pin_code: cleanPin }).eq('id', studentId).eq('class_id', classId)
+        .select('id').maybeSingle();
+      if (error) {
+        if (error.code === '23505' && error.message === 'student_pin_in_use') {
+          return { ok: false, reason: 'pin_in_use' };
+        }
+        logWarning('Student PIN could not be changed');
+        return { ok: false, reason: 'network_or_database_error' };
+      }
+      if (!data) return { ok: false, reason: 'not_found' };
+      return { ok: true, data };
+    } catch (error) {
+      logWarning('Student PIN could not be changed');
+      return { ok: false, reason: 'network_or_database_error' };
     }
   }
 
@@ -456,6 +486,7 @@
     createClass,
     getStudentsByClass,
     addStudentToClass,
+    changeStudentPin,
     deleteStudent,
     deleteClass,
     getClassResults,

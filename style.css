@@ -1877,7 +1877,7 @@ fieldset label, .game-card label { display: block; margin: 8px 0; }
   grid-template-columns: minmax(250px, .75fr) minmax(0, 1.4fr);
   min-height: 460px;
 }
-.teacher-class-pane, .teacher-detail-pane { padding: 22px; }
+.teacher-class-pane, .teacher-detail-pane { min-width: 0; padding: 22px; }
 .teacher-class-pane {
   border-right: 1px solid #e7e2f7;
   background: #fbfaff;
@@ -1995,6 +1995,30 @@ fieldset label, .game-card label { display: block; margin: 8px 0; }
   white-space: nowrap;
   text-align: right !important;
 }
+.teacher-student-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+}
+.teacher-pin-change-button {
+  min-height: 38px;
+  padding: 7px 11px;
+  border: 2px solid #d8d0ff;
+  border-radius: 8px;
+  background: #f4f1ff;
+  color: #3b2f86;
+  font-weight: 850;
+  cursor: pointer;
+}
+.teacher-pin-change-button:hover, .teacher-pin-change-button:focus-visible {
+  border-color: var(--primary);
+  background: #ece8ff;
+}
+.teacher-inline-form--pin { border-radius: 8px; grid-template-columns: minmax(0, 1fr); }
+.teacher-inline-form--pin strong { overflow-wrap: anywhere; }
+.teacher-inline-form--pin .feedback { min-width: 0; overflow-wrap: anywhere; }
+.teacher-inline-form--pin input { width: 136px; max-width: 100%; }
 .teacher-inline-form--student {
   grid-template-columns: minmax(80px, .55fr) minmax(180px, 1fr) 136px;
   align-items: start;
@@ -2131,6 +2155,13 @@ fieldset label, .game-card label { display: block; margin: 8px 0; }
 }
 
 @media (max-width: 520px) {
+  .teacher-workspace { grid-template-columns: minmax(0, 1fr); }
+  .teacher-table:not(.teacher-table--journal) { min-width: 0; table-layout: fixed; }
+  .teacher-table:not(.teacher-table--journal) th,
+  .teacher-table:not(.teacher-table--journal) td { padding: 10px 6px; }
+  .teacher-table:not(.teacher-table--journal) th:first-child { width: 30px; }
+  .teacher-table:not(.teacher-table--journal) .teacher-action-column { width: 116px; }
+  .teacher-table:not(.teacher-table--journal) td:nth-child(2) { overflow-wrap: anywhere; }
   .hero { padding: 28px 16px; }
   .access-role-nav, .student-choice-list { grid-template-columns: 1fr; }
   .access-role-button { min-height: 58px; }
