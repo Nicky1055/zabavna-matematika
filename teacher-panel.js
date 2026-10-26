@@ -21,6 +21,8 @@
     classesRequest: 0,
     studentsRequest: 0,
     journalRequest: 0,
+    pinStudentId: null,
+    pinChangeRequest: 0,
   };
 
   function element(id) {
@@ -52,8 +54,10 @@
     if (result.reason === 'invalid_email') return 'Въведете валиден имейл адрес.';
     if (result.reason === 'weak_password') return 'Паролата трябва да съдържа поне 8 знака.';
     if (result.reason === 'invalid_student_data') return 'Попълнете номер в класа, име на ученика и ПИН код от 4 цифри.';
+    if (result.reason === 'invalid_pin') return 'Въведете ПИН код от 4 цифри.';
+    if (result.reason === 'pin_in_use') return 'Този ПИН код вече се използва от друг ученик в класа. Изберете различен.';
     if (result.reason === 'forbidden') return 'Нямате достъп до тази информация.';
-    if (result.reason === 'not_found') return 'Записът не беше намерен или нямате право да го изтриете.';
+    if (result.reason === 'not_found') return 'Записът не беше намерен или нямате достъп до него.';
 
     const message = result.error && result.error.message ? result.error.message.toLowerCase() : '';
     if (message.includes('invalid login credentials')) return 'Имейлът или паролата не са правилни.';
@@ -139,6 +143,7 @@
   }
 
   function clearWorkspace() {
+    closeStudentPinForm();
     panelState.classesRequest += 1;
     panelState.studentsRequest += 1;
     panelState.journalRequest += 1;
@@ -272,10 +277,23 @@
       `<td>${escapeText(student.student_number)}</td>`,
       `<td>${escapeText(student.display_name)}</td>`,
       '<td class="teacher-action-column">',
+      '<div class="teacher-student-actions">',
+      `<button class="teacher-pin-change-button" type="button" data-change-student-pin-id="${escapeText(student.id)}" aria-label="Смени ПИН на ${escapeText(student.display_name)}">Смени ПИН</button>`,
       `<button class="teacher-delete-button" type="button" data-delete-student-id="${escapeText(student.id)}" aria-label="Изтрий ${escapeText(student.display_name)}">Изтрий</button>`,
+      '</div>',
       '</td>',
       '</tr>',
     ].join('')).join('');
+  }
+
+  function closeStudentPinForm() {
+    panelState.pinStudentId = null;
+    panelState.pinChangeRequest += 1;
+    element('changeStudentPinForm').hidden = true;
+    element('changedStudentPin').value = '';
+    element('changeStudentPinName').textContent = '';
+    setMessage('changeStudentPinMessage', '');
+    setButtonBusy(element('changeStudentPinForm').querySelector('button[type="submit"]'), false);
   }
 
   async function loadStudents() {
@@ -297,6 +315,7 @@
     const selected = panelState.classes.find(item => item.id === classId);
     if (!selected) return;
 
+    closeStudentPinForm();
     panelState.selectedClass = selected;
     panelState.journalRequest += 1;
     panelState.students = [];
@@ -595,6 +614,7 @@
     });
 
     element('showAddStudentBtn').addEventListener('click', () => {
+      closeStudentPinForm();
       element('addStudentForm').hidden = false;
       element('newStudentNumber').focus();
     });
@@ -682,11 +702,61 @@
       if (isCurrentTeacher(revision, classId) && panelState.profile.role === 'admin') await loadAdminOverview();
     });
 
+    element('cancelChangeStudentPinBtn').addEventListener('click', closeStudentPinForm);
+    element('changedStudentPin').addEventListener('input', event => {
+      event.currentTarget.value = event.currentTarget.value.replace(/\D/g, '').slice(0, 4);
+    });
+    element('changeStudentPinForm').addEventListener('submit', async event => {
+      event.preventDefault();
+      if (!panelState.selectedClass || !panelState.pinStudentId) return;
+      const button = event.currentTarget.querySelector('button[type="submit"]');
+      if (button.disabled) return;
+      const pinCode = element('changedStudentPin').value.trim();
+      if (!/^\d{4}$/.test(pinCode)) {
+        setMessage('changeStudentPinMessage', 'Въведете ПИН код от 4 цифри.', 'bad');
+        element('changedStudentPin').focus();
+        return;
+      }
+      const revision = panelState.authRevision;
+      const classId = panelState.selectedClass.id;
+      const studentId = panelState.pinStudentId;
+      const request = ++panelState.pinChangeRequest;
+      setButtonBusy(button, true, 'Запазване...');
+      element('changedStudentPin').value = '';
+      setMessage('changeStudentPinMessage', '');
+      const result = await window.dbService.changeStudentPin(classId, studentId, pinCode);
+      if (!isCurrentTeacher(revision, classId) || request !== panelState.pinChangeRequest) return;
+      setButtonBusy(button, false);
+      if (!result.ok) {
+        setMessage('changeStudentPinMessage', friendlyError(result, 'ПИН кодът не можа да бъде сменен. Опитайте отново.'), 'bad');
+        element('changedStudentPin').focus();
+        return;
+      }
+      const student = panelState.students.find(item => item.id === studentId);
+      closeStudentPinForm();
+      setMessage('studentFormMessage', `ПИН кодът на ${student?.display_name || 'ученика'} е сменен.`, 'good');
+    });
+
     element('classStudentRows').addEventListener('click', async event => {
+      const pinButton = event.target.closest('[data-change-student-pin-id]');
+      if (pinButton) {
+        const student = panelState.students.find(item => item.id === pinButton.dataset.changeStudentPinId);
+        if (!student || !panelState.profile || !panelState.selectedClass) return;
+        closeStudentPinForm();
+        panelState.pinStudentId = student.id;
+        element('addStudentForm').hidden = true;
+        element('newStudentPin').value = '';
+        element('changeStudentPinName').textContent = student.display_name;
+        element('changeStudentPinForm').hidden = false;
+        setMessage('studentFormMessage', '');
+        element('changedStudentPin').focus();
+        return;
+      }
       const button = event.target.closest('[data-delete-student-id]');
       if (!button) return;
       const student = panelState.students.find(item => item.id === button.dataset.deleteStudentId);
       if (!student || !window.confirm(`Сигурни ли сте, че искате да изтриете ученика ${student.display_name}?`)) return;
+      if (panelState.pinStudentId === student.id) closeStudentPinForm();
       const revision = panelState.authRevision;
       const classId = panelState.selectedClass.id;
 
@@ -751,6 +821,7 @@
       window.setTimeout(refreshAuthState, 0);
     });
     window.addEventListener('pagehide', clearAuthForms);
+    window.addEventListener('pagehide', closeStudentPinForm);
     window.addEventListener('pageshow', event => {
       if (!event.persisted) return;
       clearAuthForms();
